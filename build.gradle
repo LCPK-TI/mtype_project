@@ -41,6 +41,11 @@ dependencies {
 	implementation 'com.oracle.database.security:oraclepki:23.9.0.25.07'
     implementation 'com.oracle.database.security:osdt_core:21.13.0.0'
     implementation 'com.oracle.database.security:osdt_cert:21.13.0.0'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.apache.commons:commons-pool2' // 커넥션 풀
+    implementation 'com.fasterxml.jackson.core:jackson-databind' // JSON 직렬화 
 }
 
 tasks.named('test') {
