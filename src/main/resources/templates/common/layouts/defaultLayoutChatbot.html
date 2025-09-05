@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--라이브러리 참조 : Thymeleaf & Thymeleaf Layout -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--공통 JS / CSS 영역을 관리하는 환경 영역-->
+
+<head th:replace="common/fragments/config :: ConfigFragment">
+	<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">MTYPE SHOP</title>
+</head>
+
+<body>
+	<!--Header 영역을 참조합니다.-->
+	<header th:replace="~{common/fragments/header :: HeaderFragment}"></header>
+
+	<!--<aside th:if="${showAside}" th:replace="fragments/aside :: AsideFragment"></aside>-->
+	<!--Content 내용 영역을 참조합니다-->
+	<th:block layout:fragment="Content"></th:block>
+
+	<!--Floating 버튼: 로그인 여부 상관없이 하단 고정 -->
+	<div th:replace="~{common/fragments/floatingBtns :: FloatingFragment}"></div>
+	<!--Footer 영역을 참조합니다.-->
+	<footer th:replace="~{common/fragments/footer :: FooterFragment}"></footer>
+</body>
+
+</html>

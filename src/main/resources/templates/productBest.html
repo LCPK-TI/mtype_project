@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayout}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/productBest.css}">
+  <body>
+    
+    <div class="content">
+      <aside class="top_categories">
+        <h1>베스트</h1>
+        <hr />
+        <p>상위 카테고리</p>
+        <p>상위 카테고리</p>
+        <p>상위 카테고리</p>
+        <p>상위 카테고리</p>
+      </aside>
+      <main>
+        <div class="product_list">
+          <div class="product_card">
+            <div class="product_img">
+              <div>1</div>
+              <img th:src="@{/img/product_img.png}" alt="상품이미지" />
+              <button class="wishlist_btn">
+                <img th:src="@{/img/heart_empty.png}" />
+              </button>
+            </div>
+            <div class="product_info">
+              <p class="store_name">스토어명 ></p>
+              <p class="product_name">상품명</p>
+              <p class="product_price">가격</p>
+            </div>
+          </div>
+        </div>
+        
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/index.css}">
+
+<body>
+	<main>
+		<!--mbti 콘텐츠 배너 영역-->
+		<div id="mbti_contents">
+			<div id="inner_list">
+				<div id="mbti_test" class="inner">
+					<a href="">
+						<img th:src="@{/img/banner1.png}" />
+					</a>
+				</div>
+				<div id="mbti_charact" class="inner">
+					<img th:src="@{/img/banner2.png}" />
+				</div>
+			</div>
+			<div id="button_list">
+				<button id="button_left">←</button>
+				<button id="button_right">→</button>
+			</div>
+		</div>
+		<div id="main_middle">
+			<div id="mbti_categories">
+				<div id="mbti_header">
+					<h1>MBTI 카테고리</h1>
+					<span>MBTI 성향에 맞는 선물을 찾아보세요</span>
+				</div>
+				<div id="mbti_main">
+					<a href=""><img th:src="@{/img/mbti-E.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-S.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-F.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-J.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-I.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-N.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-T.png}" /></a>
+					<a href=""><img th:src="@{/img/mbti-P.png}" /></a>
+				</div>
+			</div>
+			<div id="mbti_rank">
+				<h2>MBTI별 인기 선물 랭킹</h2>
+				<div id="mbti_list">
+					<ul>
+						<li><button>E</button></li>
+						<li><button>S</button></li>
+						<li><button>F</button></li>
+						<li><button>J</button></li>
+						<li><button>I</button></li>
+						<li><button>N</button></li>
+						<li><button>T</button></li>
+						<li><button>P</button></li>
+					</ul>
+				</div>
+				<div id="product_list">
+					<!--반복되는 상품 카드-->
+					<div class="product_card" th:each="i : ${#numbers.sequence(1,5)}">
+						<div class="product_img">
+							<div th:text="${i}">1</div>
+							<img th:src="@{/img/product_img.png}" alt="상품이미지" />
+							<button class="wishlist_btn">
+								<img th:src="@{/img/heart_empty.png}" />
+							</button>
+						</div>
+						<div class="product_info">
+							<a href="" class="store_name">스토어명</a>
+							<p class="product_name">상품명</p>
+							<p class="product_price">가격</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!--js 연결-->
+	<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+
+</html>

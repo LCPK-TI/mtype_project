@@ -1,0 +1,26 @@
+
+/*main css*/
+main {
+  min-height: 400px;
+  text-align: center;
+  padding: 100px;
+}
+main h2 {
+  font-size: 23pt;
+  margin-bottom: 6%;
+}
+.kakao_login {
+  height: 50px;
+  display: flex; /*내부 요소 가로 배치*/
+  align-items: center; /*수직 중앙*/
+  justify-content: center; /*가로 중앙*/
+  width: 30%;
+  margin: 20px auto;
+  background-color: #fce309;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#kakao_logo{
+	width: 30px;
+}
