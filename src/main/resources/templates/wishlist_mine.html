@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>위시리스트</title>
+  <link rel="stylesheet" href="./wishlist.css" />
+</head>
+<body>
+  <main class="page">
+    <h1 class="page_title">위시리스트</h1>
+
+    <nav class="tabs" aria-label="위시리스트 탭">
+      <form action="./wishlist_mine.html" method="get">
+        <button type="submit" class="tab is_active" aria-current="page">위시리스트</button>
+      </form>
+      <form action="./wishlist_friends.html" method="get">
+        <button type="submit" class="tab">친구의 위시리스트</button>
+      </form>
+    </nav>
+    <hr class="tabs_divider" aria-hidden="true" />
+
+    <section class="product_grid" aria-label="상품 목록">
+      <article class="product_card">
+        <figure class="product_img">
+          <img alt="상품 이미지" src="." />
+          <button type="button" class="wishlist_btn" aria-label="위시 해제">♥</button>
+        </figure>
+        <div class="product_info">
+          <p class="store_name">스토어명</p>
+          <p class="product_name">상품명</p>
+          <p class="price">가격</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
