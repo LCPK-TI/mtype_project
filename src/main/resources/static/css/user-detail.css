@@ -1,0 +1,128 @@
+/*메인*/
+.main_mypage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.member_info {
+  max-width: 800px;
+  background: white;
+  padding: 20px;
+}
+.page_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+.info_list {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.info {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info_label {
+  width: 120px;
+  font-weight: bold;
+  color: black;
+  flex-shrink: 0;
+}
+.info_value {
+  color: black;
+}
+.info_input {
+  width: 420px;
+  height: 30px;
+  padding: 6px 8px;
+  border: 1px solid silver;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+/*버튼*/
+.btn_info_edit {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: white;
+  border: 1px solid black;
+  background: black;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn_info_edit:hover:not(:disabled) {
+  font-weight: bold;
+}
+.btn_info_edit:disabled {
+  border-color: silver;
+  background: silver;
+  cursor: not-allowed;
+}
+
+/*주소*/
+.info_addr {
+  margin-top: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.addr_input {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.addr_postcode {
+  display: flex;
+  gap: 8px;
+}
+.postcode {
+  width: 120px;
+}
+
+.btn_chg_addr {
+  align-self: center;
+  margin-top: 8px;
+}
+
+/*탈퇴*/
+.user_delete {
+  display: flex;
+  justify-self: flex-end;
+  margin-top: 20px;
+}
+.btn_user_delete {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+.btn_user_delete:hover {
+  text-decoration: underline;
+}
+
+/*인증번호 단계에서 인풋 길이 줄임*/
+.info_input.shrink {
+  width: 200px;
+}
+/*인증번호 입력 인풋*/
+.verify_input {
+  width: 140px;
+}
+/*버튼, 인풋 정렬*/
+.info.verify_mode {
+  flex-wrap: wrap;
+}

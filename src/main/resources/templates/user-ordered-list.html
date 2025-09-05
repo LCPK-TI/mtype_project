@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTYPE</title>
+    <!-- <link rel="stylesheet" href="css/user-mypage-template-basicCss.css" />
+    <link rel="stylesheet" href="css/user-order-history.css" /> -->
+    <link
+      rel="stylesheet"
+      th:href="@{../static/css/user-mypage-template-basicCss.css}"
+    />
+    <link rel="stylesheet" th:href="@{../static/css/user-order-history.css}" />
+  </head>
+  <body>
+    <header>header</header>
+    <div class="layout_middle_mypage">
+      <aside class="side_mypage">
+        <div><b>이름</b>님<br />안녕하세요</div>
+
+        <!--마이페이지 메뉴 (세로)-->
+        <nav>
+          <ul>
+            <li>
+              <b>나의 쇼핑정보</b>
+              <ul>
+                <li><a href="#">주문배송조회</a></li>
+                <li><a href="#">취소/교환/반품 내역</a></li>
+                <li><a href="#">상품 리뷰</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>선물함</b>
+              <ul>
+                <li><a href="#">나의 선물함</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>나의 정보</b>
+              <ul>
+                <li><a href="#">회원정보 수정</a></li>
+                <li><a href="#">배송지 관리</a></li>
+                <li><a href="#">기념일 관리</a></li>
+                <li><a href="#">적립 내역</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>고객센터</b>
+              <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">상품 Q&A 내역</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main_mypage">
+        <section class="order_history">
+          <h2 class="page_title">주문배송조회</h2>
+
+          <!-- 주문내역 상단 헤더 -->
+          <div class="order_header">
+            <span></span>
+            <span class="order_info">상품정보</span>
+            <span class="order_price">주문금액</span>
+            <span class="order_status">진행상태</span>
+            <span></span>
+          </div>
+
+          <!-- 주문 헤더 아래 부분 -->
+          <div class="order_main">
+            <div class="order_date_row">
+              <span class="order_date">주문일 : 2025.08.19</span>
+              <button class="btn_order_detail">주문상세</button>
+            </div>
+
+            <!-- 상품 -->
+            <div class="order_item">
+              <div class="item_img">
+                <img src="./2.png" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 1</p>
+              </div>
+              <div class="item_price">00,000원</div>
+              <div class="item_status">상품준비중</div>
+              <div class="item_btn"></div>
+            </div>
+            <div class="order_item">
+              <div class="item_img">
+                <img src="./2.png" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 3</p>
+              </div>
+              <div class="item_price">00,000원</div>
+              <div class="item_status">배송준비중</div>
+              <div class="item_btn"></div>
+            </div>
+          </div>
+
+          <div class="order_main">
+            <div class="order_date_row">
+              <span class="order_date">주문일 : 2025.08.15</span>
+              <button class="btn_order_detail">주문상세</button>
+            </div>
+
+            <!-- 상품 -->
+            <div class="order_item">
+              <div class="item_img">
+                <img src="./2.png" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 2</p>
+              </div>
+              <div class="item_price">00,000원</div>
+              <div class="item_status">배송중</div>
+              <div class="item_btn"></div>
+            </div>
+            <div class="order_item">
+              <div class="item_img">
+                <img src="./2.png" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 1</p>
+              </div>
+              <div class="item_price">00,000원</div>
+              <div class="item_status">배송완료</div>
+              <div class="item_btn"></div>
+            </div>
+            <div class="order_item">
+              <div class="item_img">
+                <img src="./2.png" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 2</p>
+              </div>
+              <div class="item_price">00,000원</div>
+              <div class="item_status">구매확정</div>
+              <div class="item_btn"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer>footer</footer>
+
+    <!--모달-->
+    <div id="confirmModal" class="modal">
+      <div class="modal_content">
+        <p id="modalMsg">메시지</p>
+        <div class="modal_chk">
+          <button id="modalNo" class="btn_cancel">취소</button>
+          <button id="modalOk" class="btn_confirm">확인</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="./js/user-order-history.js"></script> -->
+    <script th:src="@{../static/js/user-order-history.js}"></script>
+  </body>
+</html>

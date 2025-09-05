@@ -1,0 +1,53 @@
+.main_mypage {
+  display: flex;
+  max-width: 1000px;
+  min-width: 700px;
+  width: 100%;
+}
+
+.page_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+
+/*표*/
+.canceled_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+/*취소내역 헤더*/
+.canceled_table thead th {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 8px;
+  border-bottom: 1px solid black;
+}
+/*취소내역*/
+.canceled_table tbody td {
+  padding: 10px 8px;
+  text-align: center;
+}
+.canceled_table tbody tr {
+  border-bottom: 1px solid silver;
+}
+.canceled_table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/*상품명*/
+.text_name {
+  text-align: left;
+}
+/*금액*/
+.text_price {
+  text-align: right;
+}
+.status {
+  font-weight: bold;
+}

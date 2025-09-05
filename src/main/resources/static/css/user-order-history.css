@@ -1,0 +1,158 @@
+.main_mypage {
+  flex: 1;
+  max-width: 800px;
+  min-width: 500px;
+  width: 100%;
+}
+
+.page_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+
+.order_header {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 120px 80px;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid black;
+}
+.order_header .order_info {
+  grid-column: 2;
+  text-align: left;
+  padding-left: 10px;
+}
+.order_main {
+  margin-bottom: 20px;
+}
+/*주문내역*/
+.order_date_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-weight: bold;
+  border-bottom: 1px solid silver;
+}
+
+/*주문 상세버튼*/
+.btn_order_detail {
+  padding: 3px 8px;
+  font-size: 13px;
+  background: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn_order_detail:hover {
+  font-weight: bold;
+}
+
+/*주문 상품*/
+.order_item {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 120px 80px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid silver;
+  font-size: 13px;
+}
+.order_item:last-child {
+  border-bottom: none;
+}
+.item_info {
+  padding-left: 10px;
+}
+
+/*상품이미지*/
+.item_img img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+/*상품 정보*/
+.item_info p {
+  margin: 2px 0;
+}
+.store_name {
+  font-weight: bold;
+  cursor: pointer;
+}
+.item_price,
+.item_status {
+  text-align: center;
+}
+
+.item_btn {
+  display: flex;
+  justify-content: center;
+}
+
+.item_btn button {
+  padding: 2px 5px;
+  font-size: 12px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+.item_btn button:hover {
+  font-weight: bold;
+}
+.delivery_no {
+  font-size: 12px;
+  color: grey;
+  margin-top: 4px;
+}
+
+/*모달*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(235, 235, 235, 0.5);
+
+  justify-content: center;
+  align-items: center;
+}
+.modal_content {
+  background: white;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+.modal_chk {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid silver;
+}
+.btn_confirm {
+  background: black;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn_cancel {
+  background: silver;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  margin-top: 10px;
+}
