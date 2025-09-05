@@ -1,0 +1,79 @@
+.main_mypage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/*적립 내역*/
+.point_history {
+  flex: 1;
+}
+
+.page_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+
+/*연도*/
+.year_history {
+  margin-top: 30px;
+}
+.year_title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/*날짜별 적립 내역*/
+.point_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.point_list li {
+  border-bottom: 1px solid silver;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.point_list li:last-child {
+  border-bottom: none;
+}
+.point_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*날짜*/
+.point_top .date {
+  color: grey;
+  width: 80px;
+}
+/*적립내용*/
+.point_top .point_title {
+  flex: 1;
+  font-weight: bold;
+}
+/*상품명*/
+.product_name {
+  margin-top: 4px;
+  color: black;
+  font-size: 13px;
+  padding-left: 80px;
+}
+/*포인트 증감*/
+.point_top .point_plus {
+  text-align: center;
+  font-weight: bold;
+  width: 60px;
+}
+.point_top .point_minus {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  width: 60px;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTYPE</title>
+    <!-- <link rel="stylesheet" href="css/user-mypage-template-basicCss.css" />
+    <link rel="stylesheet" href="css/user-order-detail.css" /> -->
+    <link
+      rel="stylesheet"
+      th:href="@{../static/css/user-mypage-template-basicCss.css}"
+    />
+    <link rel="stylesheet" th:href="@{../static/css/user-order-detail.css}" />
+  </head>
+  <body>
+    <header>header</header>
+    <div class="layout_middle_mypage">
+      <aside class="side_mypage">
+        <div><b>이름</b>님<br />안녕하세요</div>
+
+        <!--마이페이지 메뉴 (세로)-->
+        <nav>
+          <ul>
+            <li>
+              <b>나의 쇼핑정보</b>
+              <ul>
+                <li><a href="#">주문배송조회</a></li>
+                <li><a href="#">취소/교환/반품 내역</a></li>
+                <li><a href="#">상품 리뷰</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>선물함</b>
+              <ul>
+                <li><a href="#">나의 선물함</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>나의 정보</b>
+              <ul>
+                <li><a href="#">회원정보 수정</a></li>
+                <li><a href="#">배송지 관리</a></li>
+                <li><a href="#">기념일 관리</a></li>
+                <li><a href="#">적립 내역</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>고객센터</b>
+              <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">상품 Q&A 내역</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main_mypage">
+        <section class="order_detail">
+          <h2 class="page_title">주문상세</h2>
+
+          <!-- 기본 주문정보-->
+          <div class="order_basic">
+            <div><b>주문일자: </b> 2025.08.19</div>
+            <div><b>주문번호: </b> 123456789</div>
+          </div>
+
+          <!--진행상태-->
+          <!--구매확정도 배송완료에 포함-->
+          <div class="status_progress">
+            <ul class="status_steps">
+              <li class="step" data-step="결제완료">
+                <span class="count">0</span>
+                <span class="label">결제완료</span>
+              </li>
+              <li class="step" data-step="상품준비중">
+                <span class="count">0</span>
+                <span class="label">상품준비중</span>
+              </li>
+              <li class="step" data-step="배송준비중">
+                <span class="count">0</span>
+                <span class="label">배송준비중</span>
+              </li>
+              <li class="step" data-step="배송중">
+                <span class="count">0</span>
+                <span class="label">배송중</span>
+              </li>
+              <li class="step" data-step="배송완료">
+                <span class="count">0</span>
+                <span class="label">배송완료</span>
+              </li>
+            </ul>
+          </div>
+
+          <h2 class="page_title">주문상품</h2>
+          <!--상품정보 헤더-->
+          <div class="order_header">
+            <span class="space"></span>
+            <span class="order_info">상품정보</span>
+            <span class="order_price">상품가격</span>
+            <span class="order_status">진행상태</span>
+          </div>
+
+          <!--상품목록-->
+          <div class="order_items">
+            <!--상품1-->
+            <div
+              class="order_item"
+              data-status="배송완료"
+              data-tracking="2222-3333-4567"
+            >
+              <div class="item_img">
+                <img th:src="@{../static/img/2.png}" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 1</p>
+              </div>
+              <div class="item_price">0,000원</div>
+              <div class="item_status">
+                <div class="status_text">배송완료</div>
+              </div>
+            </div>
+
+            <div
+              class="order_item"
+              data-status="구매확정"
+              data-tracking="2222-3333-4567"
+            >
+              <div class="item_img">
+                <img th:src="@{../static/img/2.png}" alt="상품이미지" />
+              </div>
+              <div class="item_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="quantity">수량: 1</p>
+              </div>
+              <div class="item_price">0,000원</div>
+              <div class="item_status">
+                <div class="status_text">구매확정</div>
+              </div>
+            </div>
+          </div>
+
+          <section class="delivery_area">
+            <h2 class="page_title">배송지</h2>
+            <div class="delivery_rows">
+              <div><span>받는사람</span> 이름</div>
+              <div><span>휴대폰번호</span> 010-1234-5678</div>
+              <div>
+                <span>주소</span> 06258<br />
+                <span></span>서울시 서초구 도곡로 112<br />
+                <span></span>서한빌딩 3층 테크브루
+              </div>
+              <div><span>배송메모</span> 부재중시 문앞에 놓아주세요</div>
+            </div>
+          </section>
+
+          <section class="paid_area">
+            <h2 class="page_title">결제</h2>
+            <div><span>금액</span> 00,000원</div>
+            <div><span>배송비</span> 무료</div>
+            <div><span>사용적립금</span> 0,000원</div>
+            <div><span>최종금액</span> 00,000원</div>
+          </section>
+
+          <div class="page_back">
+            <button type="button" class="btn_back">목록으로</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer>footer</footer>
+
+    <!-- <script src="./js/user-order-detail.js"></script> -->
+    <script th:src="@{../static/js/user-order-detail.js}"></script>
+  </body>
+</html>

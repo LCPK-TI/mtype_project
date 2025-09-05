@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTYPE</title>
+    <!-- <link rel="stylesheet" href="css/user-mypage-template-basicCss.css" />
+    <link rel="stylesheet" href="css/user-recent-view.css" /> -->
+    <link
+      rel="stylesheet"
+      th:href="@{../static/css/user-mypage-template-basicCss.css}"
+    />
+    <link rel="stylesheet" th:href="@{../static/css/user-recent-view.css}" />
+  </head>
+  <body>
+    <header>header</header>
+    <div class="layout_middle_mypage">
+      <aside class="side_mypage">
+        <div><b>이름</b>님<br />안녕하세요</div>
+
+        <!--마이페이지 메뉴 (세로)-->
+        <nav>
+          <ul>
+            <li>
+              <b>나의 쇼핑정보</b>
+              <ul>
+                <li><a href="#">주문배송조회</a></li>
+                <li><a href="#">취소/교환/반품 내역</a></li>
+                <li><a href="#">상품 리뷰</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>선물함</b>
+              <ul>
+                <li><a href="#">나의 선물함</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>나의 정보</b>
+              <ul>
+                <li><a href="#">회원정보 수정</a></li>
+                <li><a href="#">배송지 관리</a></li>
+                <li><a href="#">기념일 관리</a></li>
+                <li><a href="#">적립 내역</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>고객센터</b>
+              <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">상품 Q&A 내역</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main_mypage">
+        <section class="recent_products">
+          <h2 class="page_title">최근 본 상품</h2>
+
+          <div class="products_grid">
+            <!--상품 반복-->
+            <div class="product_card">
+              <div class="product_img">
+                <img th:src="@{../static/img/2.png}" alt="상품이미지" />
+                <button class="wishlist_btn">
+                  <img th:src="@{../static/img/.}" />
+                </button>
+              </div>
+              <div class="product_info">
+                <p class="store_name">스토어명</p>
+                <p class="product_name">상품명</p>
+                <p class="product_price">가격</p>
+              </div>
+            </div>
+          </div>
+          <p class="recent_desc">
+            ※ 최근 본 상품 목록은 최대 20개의 상품만 저장되며, 20개를 초과한
+            경우, 오래된 순으로 상품이 삭제됩니다.
+          </p>
+        </section>
+      </main>
+    </div>
+    <footer>footer</footer>
+  </body>
+</html>

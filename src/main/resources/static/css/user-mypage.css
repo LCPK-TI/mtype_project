@@ -1,0 +1,248 @@
+/*메인 컨텐츠*/
+.main_mypage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/*포인트, 리뷰*/
+.user_stats {
+  display: flex;
+  gap: 20px;
+}
+.stat_box {
+  flex: 1;
+  background: white;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  max-width: 200px;
+}
+.stat_label {
+  display: block;
+  color: black;
+  margin-bottom: 8px;
+}
+.stat_value {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+/* 기념일 */
+.anniv_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.anniv_header h2 {
+  font-size: 20px;
+}
+.btn_add_anniv {
+  font-size: 13px;
+  padding: 2px 5px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s;
+}
+.btn_add_anniv:hover {
+  color: black;
+}
+.anniv_content {
+  display: flex;
+  gap: 20px;
+}
+/*기념일 달력*/
+.anniv_calendar_area {
+  flex: 1;
+  border: 1px solid silver;
+  padding: 10px;
+}
+.calendar {
+  height: 300px;
+  background: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+}
+/*기념일 목록*/
+.anniv_list {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.anniv_item {
+  position: relative;
+  background: white;
+  border: 1px solid silver;
+  border-left: 5px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 30px;
+  box-sizing: border-box;
+}
+.anniv_top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.anniv_keyword {
+  font-size: 12px;
+  color: black;
+}
+.anniv_when {
+  color: gray;
+  font-weight: bold;
+}
+.anniv_name {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.btn_anniv_gift {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  padding: 1px 5px;
+  border: 1px solid bisque;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  color: black;
+  transition: background 0.2s;
+}
+.btn_anniv_gift:hover {
+  background: whitesmoke;
+}
+
+/*요소별 공통 헤더*/
+.section_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+}
+.section_head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.btn_more {
+  font-size: 13px;
+  padding: 1px 5px;
+  border: none;
+  color: gray;
+  background: white;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btn_more:hover {
+  color: black;
+}
+
+/*상품 카드 리스트*/
+.product_list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.product_card {
+  width: 200px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.product_img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+.product_img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wishlist_btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.wishlist_btn img {
+  width: 32px;
+  height: 32px;
+}
+/*상품 정보*/
+.product_info {
+  padding: 0 8px 8px;
+}
+.product_info p {
+  margin: 2px 0;
+  font-size: 10pt;
+  line-height: 1.4;
+}
+.store_name {
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+.product_name {
+  color: #222;
+}
+.product_price {
+  color: #666;
+}
+
+/*최근 주문 내역*/
+.recent_order_list {
+  display: flex;
+  flex-direction: column;
+}
+.order_item {
+  display: grid;
+  grid-template-columns: 100px 60px 1fr 60px 100px;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  background: white;
+}
+.order_item:last-child {
+  border-bottom: none;
+}
+.order_date {
+  font-size: 14px;
+  color: #555;
+}
+.order_main_img {
+  width: 60px;
+  height: 60px;
+  background: whitesmoke;
+}
+.order_product_name {
+  font-size: 14px;
+}
+.order_cnt {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+}
+.order_price {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+}
