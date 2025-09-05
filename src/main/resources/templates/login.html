@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayout}" layout:fragment="Content">
+	
+	<link rel="stylesheet" th:href="@{/css/login.css}">
+  <body>
+    <main>
+      <h2>회원 로그인</h2>
+      <div class="kakao_login">
+        <img id="kakao_logo" th:src="@{/img/kakao_logo.png}" />
+        <h4>카카오로 로그인하기</h4>
+      </div>
+    </main>
+    <script type="text/javascript" src="../static/js/header.js"></script>
+  </body>
+</html>

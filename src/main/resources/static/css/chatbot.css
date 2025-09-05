@@ -1,0 +1,114 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border-bottom: 1px solid rgb(216, 216, 216);
+  margin-bottom: 30px;
+}
+header button {
+  font-size: 20pt;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+main {
+  display: flex;
+  flex-direction: column; /* 위에서 아래로 쌓이도록 */
+}
+.chatbot_text {
+  display: inline-block; /* 글 길이에 맞게 가로 길이 조절 */
+  background-color: rgb(83, 97, 122);
+  color: white;
+  line-height: 20px; /* 높이 자동 조절되도록 줄 높이 조절 */
+  font-size: 15pt;
+  border-radius: 50px 50px 50px 0px;
+  padding-inline: 5%;
+  overflow-wrap: break-word;
+  max-width: 80%;
+  margin-bottom: 5%;
+  align-self: flex-start; /* 왼쪽 정렬 */
+}
+
+.user_text {
+  display: inline-block; /* 글 길이에 맞게 가로 길이 조절 */
+  background-color: rgb(216, 216, 216);
+  line-height: 30px; /* 높이 자동 조절되도록 줄 높이 조절 */
+  font-size: 15pt;
+  border-radius: 50px 50px 0px 50px;
+  padding-inline: 5%;
+  overflow-wrap: break-word;
+  max-width: 80%;
+  margin-bottom: 5%;
+  align-self: flex-end; /* 오른쪽 정렬 */
+}
+
+.chatbot_product {
+  display: inline-block; /* 글 길이에 맞게 가로 길이 조절 */
+  background-color: rgb(214, 229, 252);
+  color: white;
+  line-height: 20px; /* 높이 자동 조절되도록 줄 높이 조절 */
+  font-size: 15pt;
+  border-radius: 60px 60px 60px 0px;
+  padding-inline: 5%;
+  overflow-wrap: break-word;
+  max-width: 80%;
+  margin-bottom: 5%;
+  align-self: flex-start; /* 왼쪽 정렬 */
+}
+/*상품정보*/
+.product_card {
+  padding: 10px;
+  padding-top: 20px;
+  width: 20%;
+}
+.product_img {
+  position: relative; /*하트 버튼의 부모태그*/
+  width: 100%;
+  height: 60%;
+}
+.product_img > img {
+  width: 100%;
+  height: 100%;
+}
+.wishlist_btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.product_info p {
+  margin: 2px;
+  font-size: 10pt;
+  color: black;
+}
+.product_info p:nth-child(1) {
+  font-weight: bold;
+  cursor: pointer;
+}
+.product_info p:nth-child(3) {
+  font-weight: bold;
+}
+.product_list {
+  display: flex;
+  gap: 10%;
+  align-items: center;
+}
+footer {
+  bottom: 0;
+  min-height: 70px;
+  position: sticky;
+  background-color: aliceblue;
+  border-top: 1px solid rgb(216, 216, 216);
+}
+footer input {
+  border: none;
+  width: 100%;
+  height: 70px;
+  font-size: large;
+}
+input:focus {
+  outline: none;
+}
