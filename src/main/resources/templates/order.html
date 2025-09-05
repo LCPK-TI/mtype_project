@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ORDER PAGE</title>
+    <link rel="stylesheet" href="order.css" />
+  </head>
+  <body>
+    <header>
+      <h1>header</h1>
+    </header>
+
+    <!-- ORDER 페이지 -->
+    <main class="order-container">
+      <div class="left-container">
+        <section>
+          <div class="order-text">
+            <h1>주문서 작성 / 결제</h1>
+          </div>
+        </section>
+
+        <!-- 상품 정보 -->
+        <section>
+          <h3>상품정보</h3>
+          <div class="product-info">
+            <div class="product-img"></div>
+            <ul>
+              <li>브랜드명: <span>브랜드명</span></li>
+              <li>상품명: <span>상품명</span></li>
+              <li>옵션: <span>옵션</span></li>
+              <li>가격: <span>가격</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 배송 정보 -->
+        <section>
+          <h3>배송정보</h3>
+          <div class="shipping-info">
+            <form>
+              <div class="form-group">
+                <div class="label-btn-group">
+                  <label for="recipient">수령자</label>
+                  <button class="button">배송 목록</button>
+                </div>
+                <input
+                  type="text"
+                  id="recipient"
+                  placeholder="기본 배송지 정보 (이름)"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <div class="label-btn-group">
+                  <label for="address">배송지</label>
+                  <button class="button">주소 조회</button>
+                </div>
+                <input
+                  type="text"
+                  id="address-main"
+                  placeholder="기본 배송지 정보 (주소)"
+                  required
+                />
+                <input
+                  type="text"
+                  id="address-detail"
+                  placeholder="기본 배송지 정보 (상세 주소)"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">전화번호</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="기본 배송지 정보 (전화번호)"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- 결제 정보 -->
+        <section>
+          <h3>결제 정보</h3>
+          <div class="payment-info">
+            <div class="payment-details">
+              <div class="payment-row">
+                <label for="product-price">상품 금액</label>
+                <input
+                  type="text"
+                  id="product-price"
+                  value="0,000원"
+                  disabled
+                />
+              </div>
+              <div class="payment-row">
+                <label for="points">적립금</label>
+                <input type="text" id="points" value="0" />
+              </div>
+            </div>
+            <p class="points-info">보유 적립금 xxP</p>
+            <div class="use-buttons">
+              <button class="use-btn">사용</button>
+              <button class="use-all-btn">모두 사용</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 결제 예상 금액 -->
+      <section class="payment-summary">
+        <h3>결제 예상 금액</h3>
+        <div class="summary-details">
+          <div class="summary-row">
+            <p>총 x개 상품 금액</p>
+            <span>0,000원</span>
+          </div>
+          <div class="summary-row">
+            <p>사용 적립금</p>
+            <span>0P</span>
+          </div>
+          <div class="summary-row">
+            <p>예상 적립금</p>
+            <span>xxxP</span>
+          </div>
+          <button class="pay-btn">0,000원 결제하기</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <h1>footer</h1>
+    </footer>
+  </body>
+</html>
