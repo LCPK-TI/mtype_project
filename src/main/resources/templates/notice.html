@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOTICE PAGE</title>
+    <link rel="stylesheet" href="notice.css" />
+  </head>
+  <body>
+    <header>
+      <h1>header</h1>
+    </header>
+
+    <!-- NOTICE 페이지 -->
+    <main class="notice-container">
+      <section>
+        <div class="notice-text">
+          <h1>공지사항 검색</h1>
+        </div>
+      </section>
+
+      <!-- 검색창 -->
+      <section>
+        <div class="search-bar">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="공지사항을 검색하세요"
+          />
+          <button id="search-btn" class="search-btn">
+            <img
+              src="https://img.icons8.com/ios-filled/50/000000/search.png"
+              alt="검색"
+            />
+          </button>
+        </div>
+      </section>
+
+      <!-- NOTICE 목록 -->
+      <section>
+        <div class="notice-name">
+          <h1>공지사항</h1>
+        </div>
+        <div class="notice-list">
+          <span class="notice-numbername">번호</span>
+          <span class="notice-titlename">제목</span>
+          <span class="notice-datename">등록일</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-number">3</span>
+          <span class="notice-title">[공지] OOO 브랜드 철수 안내</span>
+          <span class="notice-date">2025.08.21</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="notice-content">
+          안녕하세요. <br />
+          MTYPE입니다. <br />
+          OOO 브랜드가 2025년 9월부로 철수하게 되었습니다. 자세한 내용은
+          고객센터를 참고해주세요.
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-number">2</span>
+          <span class="notice-title"
+            >[이벤트] 배송 지연으로 인한 쿠폰 지급 안내</span
+          >
+          <span class="notice-date">2025.08.18</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="notice-content">
+          배송지연으로 불편을 드려 죄송합니다. <br />
+          해당 기간 내 주문 고객분들께는 쿠폰이 지급됩니다.
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-number">1</span>
+          <span class="notice-title"
+            >[공지] 8월 공휴일로 인한 배송 지연 안내</span
+          >
+          <span class="notice-date">2025.08.15</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="notice-content">
+          안녕하세요. <br />
+          MTYPE입니다.<br />
+          8월 15일(금) 공휴일로 인해 배송이 지연될 수 있어 안내드립니다.<br />
+          회원님의 너른 양해를 부탁드리며, 빠르게 배송될 수 있도록 최선을
+          다하겠습니다.<br />
+          감사합니다.
+        </div>
+      </section>
+
+      <!-- 페이지네이션 -->
+      <section class="pagination">
+        <button class="page-btn">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+      </section>
+    </main>
+    <footer>
+      <h1>footer</h1>
+    </footer>
+
+    <script src="notice.js"></script>
+  </body>
+</html>

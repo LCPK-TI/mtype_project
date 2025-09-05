@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CART GIFT PAGE</title>
+    <link rel="stylesheet" href="cart_gift.css" />
+  </head>
+  <body>
+    <header>
+      <h1>header</h1>
+    </header>
+
+    <!-- CART(BUY) 페이지 -->
+    <main>
+      <div class="cart-container">
+        <!-- 좌측: 장바구니 목록 -->
+        <section>
+          <div class="cart-left">
+            <section>
+              <div class="cart-text">
+                <h1>장바구니</h1>
+              </div>
+            </section>
+
+            <!-- 탭 메뉴 -->
+            <section>
+              <div class="tabs">
+                <button>구매 장바구니</button>
+                <button class="active">선물 장바구니</button>
+                <button class="add-to-cart">구매 장바구니에 담기</button>
+              </div>
+            </section>
+
+            <!-- 선택 바 -->
+            <section>
+              <div class="select-bar">
+                <label class="checkbox-label"
+                  ><input type="checkbox" id="select-all" /> 전체선택</label
+                >
+                <button class="delete-selected">선택삭제</button>
+              </div>
+            </section>
+
+            <!-- 상품 정보 -->
+            <section>
+              <div class="cart-products">
+                <div class="cart-product">
+                  <input type="checkbox" class="product-checkbox" checked />
+                  <div class="product-img"></div>
+                  <div class="product-info">
+                    <ul>
+                      <li>스토어명</li>
+                      <li>상품명</li>
+                      <li class="list-name">가격</li>
+                      <li class="list-name">옵션 :</li>
+                    </ul>
+                  </div>
+
+                  <div class="quantity-controls">
+                    <button class="qty-btn">-</button>
+                    <div class="qty-value">1</div>
+                    <button class="qty-btn">+</button>
+                  </div>
+                  <button class="remove-product">✕</button>
+                </div>
+
+                <div class="cart-product">
+                  <input type="checkbox" class="product-checkbox" checked />
+                  <div class="product-img"></div>
+                  <div class="product-info">
+                    <ul>
+                      <li>스토어명</li>
+                      <li>상품명</li>
+                      <li class="list-name">가격</li>
+                      <li class="list-name">옵션 :</li>
+                    </ul>
+                  </div>
+
+                  <div class="quantity-controls">
+                    <button class="qty-btn">-</button>
+                    <div class="qty-value">1</div>
+                    <button class="qty-btn">+</button>
+                  </div>
+                  <button class="remove-product">✕</button>
+                </div>
+
+                <div class="cart-product">
+                  <input type="checkbox" class="product-checkbox" checked />
+                  <div class="product-img"></div>
+                  <div class="product-info">
+                    <ul>
+                      <li>스토어명</li>
+                      <li>상품명</li>
+                      <li class="list-name">가격</li>
+                      <li class="list-name">옵션 :</li>
+                    </ul>
+                  </div>
+
+                  <div class="quantity-controls">
+                    <button class="qty-btn">-</button>
+                    <div class="qty-value">1</div>
+                    <button class="qty-btn">+</button>
+                  </div>
+                  <button class="remove-product">✕</button>
+                </div>
+                <div class="cart-product"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- 우측: 결제 요약 -->
+        <section>
+          <div class="cart-right">
+            <div class="summary-box">
+              <h3>선물 장바구니 이용 안내</h3>
+              <div class="summary-row">
+                <span>· 선물 제안 기능은 최대 3개까지 전송 가능</span>
+                <span
+                  >· 받는 분이 원하는 상품을 선택하고 배송지를 입력하시면
+                  알림톡으로 결제창을 전송합니다.</span
+                >
+                <span
+                  >· 원활한 재고관리를 위해 배송지 입력은 다음날 자정까지
+                  가능하며, 다다음날 자동 취소됩니다.</span
+                >
+                <span>· 1개만 선택한 경우 바로 구매가 가능합니다.</span>
+              </div>
+              <button class="order-btn">선물하기</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <h1>footer</h1>
+    </footer>
+
+    <!--모달폼-->
+    <div class="modal" id="giftModal">
+      <div class="modal-content">
+        <form>
+          <h3>선물 장바구니로 상품이 담겼습니다.</h3>
+          <button class="modal-btn" type="submit">확인</button>
+        </form>
+      </div>
+    </div>
+    <script src="cart_gift.js"></script>
+  </body>
+</html>

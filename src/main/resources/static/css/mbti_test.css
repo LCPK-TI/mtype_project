@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.mbti-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.mbti-text {
+  text-align: center;
+  font-size: 30px;
+  color: black;
+  margin-bottom: 50px;
+}
+
+.mbti {
+  border: 1px solid black;
+  padding: 100px;
+}
+
+.mbti-question {
+  font-size: 25px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+/* 체크박스 숨기기 */
+.circle-check input[type="checkbox"] {
+  display: none;
+}
+
+/* 원형 체크박스 */
+.custom-circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: white;
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* 체크됐을 때 표시 추가 */
+.circle-check input[type="checkbox"]:checked + .custom-circle::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.mbti-answer {
+  font-size: 20px;
+}
+
+/* 제출버튼 */
+#submitBtn {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100px;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+/* 유형별 특징 버튼 */
+.cha-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #eee;
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  border: 1px solid black;
+  align-items: center;
+}
+
+.cha-btn:hover {
+  background-color: #ddd;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+/* MBTI 결과창 */
+#result {
+  display: none;
+  margin-top: 20px;
+  border: 1px solid black;
+  padding: 20px;
+  width: 500px;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  justify-self: center;
+}
+
+#result strong {
+  font-size: 20px;
+}
+
+#notice {
+  color: #9c6868;
+  font-size: 10px;
+  margin-top: 10px;
+}

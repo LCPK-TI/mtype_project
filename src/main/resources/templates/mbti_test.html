@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBTI TEST PAGE</title>
+    <link rel="stylesheet" href="mbti_test.css" />
+  </head>
+  <body>
+    <header>
+      <h1>header</h1>
+    </header>
+
+    <main>
+      <!-- MBTI(TEST) 페이지 -->
+      <div class="mbti-container">
+        <section>
+          <section>
+            <div class="mbti-text">
+              <h1>MBTI 테스트</h1>
+            </div>
+          </section>
+
+          <!-- MBTI 질문 -->
+          <section class="mbti">
+            <div>
+              <h3 class="mbti-question">
+                당신은 사람들과 함께 있을 때 보통 어떤가요?
+              </h3>
+              <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">사람들과 함께 있으면 에너지가 충전돼요.</span><br>
+              <label>
+                <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">사람들과 함께 있으면 혼자만의 시간이 필요해져요.</span>
+              <label>
+            </div>
+            <div>
+              <h3 class="mbti-question">
+                새로운 정보를 접할 때 당신은 어떤 방식에 더 끌리나요?
+              </h3>
+              <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">사실적이고 구체적인 정보, 현재에 집중하는 게 좋아요.</span><br>
+              <label>
+                <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">추상적이고 개념적인 아이디어, 미래 가능성을 떠올리는 게 좋아요.</span>
+              <label>
+            </div>
+            <div>
+              <h3 class="mbti-question">
+                중요한 결정을 내릴 때 당신은 어떤 기준을 더 중시하나요?
+              </h3>
+              <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">상황을 객관적으로 분석해 논리적으로 판단해요.</span><br>
+              <label>
+                <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">사람들의 감정이나 내 마음의 느낌을 고려해 결정해요.</span>
+              <label>
+            </div>
+            <div>
+              <h3 class="mbti-question">
+                일이나 생활을 할 때 당신은 어떤 스타일인가요?
+              </h3>
+              <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">계획을 세우고 정리하는 것을 좋아해요.</span><br>
+              <label>
+                <label class="circle-check">
+                <input type="checkbox" />
+                <span class="custom-circle"></span>
+                <span class="mbti-answer">상황에 맞춰 즉흥적으로 유연하게 행동해요</span>
+              <label>
+            </div>
+          </section>
+
+          <form id="mbtiForm">
+            <input type="submit" value="제출" id="submitBtn">
+          </form>
+
+          <div id="result">
+            <strong>MBTI는 <span id="mbtiResult">OOOO</span> 입니다!</strong>
+            <p id="notice">* 본 테스트는 간단하게 MBTI를 예측하기 위한 목적으로, 검사 결과의 정확성을 보장하지 않습니다.</p>
+          </div>
+
+          <div class="btn-wrapper">
+            <a href="mbti_char.html" class="cha-btn">MBTI 유형별 특징 보러가기</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <h1>footer</h1>
+    </footer>
+
+    <script src="mbti_test.js"></script>
+  </body>
+</html>

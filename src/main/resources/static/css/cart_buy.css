@@ -1,0 +1,279 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cart-left {
+  flex: 6;
+  width: 800px;
+}
+
+.cart-right {
+  flex: 4;
+  width: 300px;
+  height: 100px;
+  margin-top: 30%;
+}
+
+.cart-text {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 50px;
+}
+
+/* 장바구니 목록 */
+/* 탭 메뉴 */
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #a2a2a2;
+  position: relative;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background-color: #f3f3f3;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.tabs button.active {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  font-weight: bold;
+  position: relative;
+  top: 1px; /* 살짝 위로 올려서 선과 겹치지 않게 */
+  z-index: 2; /* 선 위에 올라오도록 */
+}
+
+.tabs .add-to-cart {
+  margin-left: auto;
+  font-size: 15px;
+  color: black;
+  background-color: white;
+  border: none;
+}
+
+/* 선택 바 */
+.select-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #949494;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center; /* ✅ 텍스트와 체크박스 수직 정렬 */
+  gap: 10px;
+  cursor: pointer;
+}
+
+.delete-selected {
+  border: none;
+  background-color: white;
+  font-size: 15px;
+  color: #949494;
+  cursor: pointer;
+}
+
+/* 상품정보 */
+.cart-products {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-product {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #a2a2a2;
+  padding-top: 15px;
+  position: relative;
+}
+
+.product-img {
+  width: 200px;
+  height: 200px;
+  background-color: #ddd;
+}
+
+.product-info {
+  flex: 1;
+  padding: 20px;
+  display: flex; /* 내부 요소들이 가로로 배치 */
+  align-items: flex-start; /* 이미지와 리스트를 위쪽 정렬 */
+  gap: 30px; /* 이미지와 리스트 사이 간격 */
+  font-size: 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 20px;
+}
+
+.list-name {
+  color: #727272;
+}
+
+/* 수량 조절 */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding: 20px;
+}
+
+.qty-btn,
+.qty-value {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  text-align: center;
+  line-height: 30px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.qty-value {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  pointer-events: none; /* 클릭 방지 */
+}
+
+/* 삭제 */
+.remove-product {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 25px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #66728a; /* 체크 표시 색상 */
+}
+
+/* 결제 요약 */
+.summary-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.summary-box h3 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid black;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.msg {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.order-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #66728a;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* 모달 배경 */
+.modal {
+  display: none; /* 기본은 숨김 */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
+}
+
+/* 모달 박스 */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.modal-content h3 {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  margin: 20% 0;
+}
+
+.modal-btn {
+  width: 75%;
+  height: 40px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}

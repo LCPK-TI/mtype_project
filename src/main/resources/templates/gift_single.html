@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIFT SINGLE PAGE</title>
+    <link rel="stylesheet" href="gift_single.css" />
+  </head>
+  <body>
+    <header>
+      <h1>header</h1>
+    </header>
+
+    <!-- GIFT(SINGLE) 페이지 -->
+    <main class="gift-container">
+      <section>
+        <div class="gift-text">
+          <h1>선물 주문서 작성 / 결제</h1>
+        </div>
+      </section>
+
+      <!-- 상품 정보 -->
+      <section>
+        <h3>상품정보</h3>
+        <div class="product-info">
+          <div class="product-img"></div>
+          <ul>
+            <li>브랜드명: <span>브랜드명</span></li>
+            <li>상품명: <span>상품명</span></li>
+            <li>옵션: <span>옵션</span></li>
+            <li>가격: <span>가격</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 받는 사람 -->
+      <section>
+        <h3>받는 사람</h3>
+        <p>결제 완료 후 카카오톡 친구목록에서 받는 분을 선택해주세요.</p>
+        <input
+          type="text"
+          id="recipient"
+          placeholder="수신자의 이름을 입력해주세요"
+        />
+      </section>
+
+      <!-- 선물 메시지 -->
+      <section>
+        <div class="gift">
+          <strong>선물메시지</strong>
+          <img
+            src="https://img.icons8.com/ios/24/000000/checked--v1.png"
+            alt="체크 아이콘"
+            class="check-icon"
+          />
+          <button class="s-btn">서프라이즈 선물하기</button>
+        </div>
+
+        <div class="box-group">
+          <div class="box">기본 배경</div>
+
+          <div class="image-options">
+            <div class="op-box"></div>
+            <div class="op-box"></div>
+            <div class="op-box">직접<br />이미지 추가</div>
+          </div>
+
+          <div class="message-box">메시지 입력</div>
+        </div>
+      </section>
+
+      <!-- 결제 정보 -->
+      <section>
+        <h3>결제 정보</h3>
+        <div class="payment-info">
+          <div class="payment-details">
+            <div class="payment-row">
+              <label for="product-price">상품 금액</label>
+              <input
+                type="text"
+                id="product-price"
+                placeholder="0,000원"
+                disabled
+              />
+            </div>
+            <div class="payment-row">
+              <label for="points">적립금</label>
+              <input type="text" id="points" placeholder="0" />
+            </div>
+          </div>
+          <p class="points-info">보유 적립금 xxP</p>
+          <div class="use-buttons">
+            <button class="use-btn">사용</button>
+            <button class="use-all-btn">모두 사용</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 결제 예상 금액 -->
+      <section class="payment-summary">
+        <h3>결제 예상 금액</h3>
+        <div class="summary-details">
+          <div class="summary-row">
+            <p>총 x개 상품 금액</p>
+            <span>0,000원</span>
+          </div>
+          <div class="summary-row">
+            <p>사용 적립금</p>
+            <span>0P</span>
+          </div>
+          <div class="summary-row">
+            <p>예상 적립금</p>
+            <span>xxxP</span>
+          </div>
+          <button class="pay-btn">0,000원 결제하기</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <h1>footer</h1>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.order-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.order-text {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 50px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.left-container {
+  position: relative;
+}
+
+/* 상품정보 */
+.product-info {
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex; /* 내부 요소들이 가로로 배치 */
+  align-items: flex-start; /* 이미지와 리스트를 위쪽 정렬 */
+  gap: 30px; /* 이미지와 리스트 사이 간격 */
+}
+
+label::after {
+  /* label 부분 뒤에 별 표시 */
+  content: " *";
+  color: orange;
+}
+
+.product-img {
+  width: 200px;
+  height: 200px;
+  background-color: #ddd;
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 20px;
+}
+
+/* 배송정보 */
+.shipping-info {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 50%;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.button {
+  width: 9%;
+  padding: 10px 15px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 36%;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+/* 결제정보 */
+.payment-info {
+  padding: 20px;
+  margin-bottom: 30px;
+  width: 50%;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.payment-row label {
+  font-size: 15px;
+  color: black;
+}
+
+.payment-row input {
+  width: 150px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: right;
+  font-size: 15px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-weight: bold;
+}
+
+.use-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.use-btn,
+.use-all-btn {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+  background-color: white;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+.use-btn {
+  margin-left: 368px;
+}
+
+.use-all-btn {
+  margin-left: auto;
+}
+
+.use-btn:hover,
+.use-all-btn:hover {
+  background-color: #ddd;
+}
+
+.points-info {
+  font-size: 15px;
+  color: #999;
+  margin-top: -10px;
+  margin-left: 430px;
+}
+
+/* 결제 예상 금액 */
+.payment-summary {
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 800px;
+  margin-top: -80%;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-row p {
+  font-size: 15px;
+  color: #333;
+}
+
+.summary-row span {
+  font-size: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #111;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pay-btn:hover {
+  background-color: #333;
+}
