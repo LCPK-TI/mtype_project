@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>상품 Q&A 내역</title>
+    <link rel="stylesheet" href="./qa.css" />
+  </head>
+  <body>
+    <main class="page" aria-labelledby="page_title">
+      <h1 id="page_title" class="page_title">상품 Q&A 내역</h1>
+      <div class="qa_head">
+        <div class="col col_prod">상품정보</div>
+        <div class="col col_question">문의내용</div>
+        <div class="col col_date">작성일</div>
+        <div class="col col_answered">답변여부</div>
+      </div>
+
+      <!-- 1번 문의 -->
+      <article class="qa_item" data-answered="N">
+        <button class="qa_summary" aria-expanded="false">
+          <div class="col col_prod">OOO</div>
+          <div class="col col_question">언제 배송되나요?</div>
+          <div class="col col_date">
+            <time datetime="2025-08-20">2025-08-20</time>
+          </div>
+          <div class="col col_answered">N</div>
+        </button>
+
+        <div class="qa_detail" hidden>
+          <div class="qa_detail_line">
+            <div class="qa_label">내용</div>
+            <div class="qa_text">○○○에 시켰는데 언제 배송?</div>
+            <div class="qa_actions">
+              <button type="button" class="btn_small js_edit">수정</button>
+              <button type="button" class="btn_small js_delete">삭제</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2번 문의 -->
+      <article class="qa_item" data-answered="Y">
+        <button class="qa_summary" aria-expanded="false">
+          <div class="col col_prod">OOO</div>
+          <div class="col col_question">언제 배송되나요?</div>
+          <div class="col col_date">
+            <time datetime="2025-08-11">2025-08-11</time>
+          </div>
+          <div class="col col_answered">Y</div>
+        </button>
+
+        <div class="qa_detail" hidden>
+          <div class="qa_detail_line">
+            <div class="qa_label">내용</div>
+            <div class="qa_text">언제 배송되나요?</div>
+            <div class="qa_actions">
+              <button type="button" class="btn_small js_edit">수정</button>
+              <button type="button" class="btn_small js_delete">삭제</button>
+            </div>
+          </div>
+
+          <div class="qa_answer_line">
+            <div class="qa_label">답변</div>
+            <div class="qa_answer_content">
+              <div class="qa_answer_text">
+                안녕하세요. OOOO스토어입니다 ~~~~입니다~! <br /><br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- 모달 -->
+    <div
+      id="qa_edit_modal"
+      class="qa_modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="qa_edit_title"
+    >
+      <div class="qa_modal_overlay" data-close></div>
+
+      <div class="qa_modal_card">
+        <div class="qa_modal_header">
+          <h2 id="qa_edit_title" class="qa_modal_title">상품 문의 수정</h2>
+          <button type="button" class="qa_modal_close" data-close>×</button>
+        </div>
+
+        <div class="qa_modal_body">
+          <div class="field_row">
+            <label for="qa_edit_text" class="field_label">내용</label>
+            <textarea
+              id="qa_edit_text"
+              class="field_textarea"
+              maxlength="500"
+              placeholder="문의 내용을 입력해 주세요."
+            ></textarea>
+            <div class="helper_row">
+              <span id="qa_edit_count" class="helper_text">0 / 500</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa_modal_footer">
+          <button type="button" class="btn_small" data-close>취소</button>
+          <button type="button" class="btn_primary" id="qa_edit_save">저장</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./qa.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>기념일 관리</title>
+  <link rel="stylesheet" href="./anniversary_management.css" />
+</head>
+<body>
+  <main class="page" aria-labelledby="page_title">
+    <h1 id="page_title" class="page_title">기념일 관리</h1>
+
+    <!-- 2단 레이아웃: 좌(달력 자리), 우(기념일 목록) -->
+    <section class="two_column_layout" aria-label="기념일 관리 레이아웃">
+      <!-- 달력 자리(다른 팀원이 넣을 예정) -->
+      <section class="calendar_placeholder" aria-label="달력 자리">
+        <!-- 비워둠: 다른 사람이 구현한 달력이 들어올 공간 -->
+      </section>
+
+      <!-- 기념일 목록 패널 -->
+      <section class="anniversary_panel" aria-label="기념일 목록">
+        <h2 class="panel_title">기념일 목록</h2>
+
+        <!-- 2025년 09월 섹션 -->
+        <section class="month_section" aria-labelledby="month_2025_09">
+          <h3 id="month_2025_09" class="month_title">2025년 09월</h3>
+
+          <!-- 카드 1: 생일 · 오늘  (예시 데이터) -->
+          <article
+            class="anniv_card"
+            data-id="a1"
+            data-title="홍길동 생일"
+            data-type="birthday"
+            data-date="2025-09-01"
+            data-repeat="yearly"
+            aria-label="기념일 카드"
+          >
+            <div class="left_stick" aria-hidden="true"></div>
+
+            <section class="card_body" aria-describedby="a1_desc">
+              <p id="a1_desc" class="card_meta">
+                <span class="type_label" data-text="생일">생일</span>
+                <span class="dot" aria-hidden="true">·</span>
+                <span class="when_text">오늘</span>
+              </p>
+
+              <p class="card_title">
+                <span class="name_mask">ㅇㅇㅇ</span>
+                <strong class="event_word">생일</strong>
+              </p>
+            </section>
+
+            <aside class="card_side">
+              <p class="dday_box" aria-label="디데이 표시">
+                <span class="dday_text">D-DAY</span>
+              </p>
+
+              <div class="card_actions">
+                <button class="btn ghost" type="button">선물 추천받기</button>
+                <div class="btn_row">
+                  <button class="btn line edit_btn" type="button">수정</button>
+                  <button class="btn line danger" type="button">삭제</button>
+                </div>
+              </div>
+            </aside>
+          </article>
+        </section>
+
+        <!-- 2025년 10월 섹션 -->
+        <section class="month_section" aria-labelledby="month_2025_10">
+          <h3 id="month_2025_10" class="month_title">2025년 10월</h3>
+
+          <!-- 카드 2: 결혼기념일 · 20일 후  (예시 데이터) -->
+          <article
+            class="anniv_card"
+            data-id="a2"
+            data-title="결혼기념일"
+            data-type="wedding"
+            data-date="2025-10-21"
+            data-repeat="yearly"
+            aria-label="기념일 카드"
+          >
+            <div class="left_stick" aria-hidden="true"></div>
+
+            <section class="card_body" aria-describedby="a2_desc">
+              <p id="a2_desc" class="card_meta">
+                <span class="type_label" data-text="결혼기념일">결혼기념일</span>
+                <span class="dot" aria-hidden="true">·</span>
+                <span class="when_text">20일 후</span>
+              </p>
+
+              <p class="card_title">
+                <span class="name_mask">ㅇㅇㅇ</span>
+                <strong class="event_word">생일</strong>
+              </p>
+            </section>
+
+            <aside class="card_side">
+              <p class="dday_box" aria-label="디데이 표시">
+                <span class="dday_text">D-20</span>
+              </p>
+
+              <div class="card_actions">
+                <button class="btn ghost" type="button">선물 추천받기</button>
+                <div class="btn_row">
+                  <button class="btn line edit_btn" type="button">수정</button>
+                  <button class="btn line danger" type="button">삭제</button>
+                </div>
+              </div>
+            </aside>
+          </article>
+        </section>
+
+        <!-- 하단 등록 버튼(동작은 미연결, 화면만) -->
+        <footer class="panel_footer">
+          <button class="btn primary xl" type="button">기념일 등록하기</button>
+        </footer>
+      </section>
+    </section>
+  </main>
+
+  <!-- 모달: 기념일 수정 -->
+  <section
+    class="modal_backdrop"
+    id="editModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="editModalTitle"
+    hidden
+  >
+    <article class="modal" aria-label="기념일 수정 모달">
+      <header class="modal_header">
+        <h3 id="editModalTitle" class="modal_title">기념일 수정</h3>
+        <button class="icon_btn close_btn" type="button" aria-label="닫기">✕</button>
+      </header>
+
+      <section class="modal_body">
+        <!-- 제목 -->
+        <div class="form_row">
+          <label for="m_title" class="form_label">제목</label>
+          <input id="m_title" class="input" type="text" placeholder="예: 홍길동 생일" />
+        </div>
+
+        <!-- 유형 -->
+        <fieldset class="form_row">
+          <legend class="form_label">유형</legend>
+          <div class="chip_group" role="tablist" aria-label="유형 선택">
+            <button class="chip is_selected" data-type="birthday" type="button">생일</button>
+            <button class="chip" data-type="wedding" type="button">결혼</button>
+            <button class="chip" data-type="etc" type="button">연애/기타</button>
+          </div>
+        </fieldset>
+
+        <!-- 날짜 / 반복 -->
+        <div class="form_grid">
+          <div class="form_row">
+            <label for="m_date" class="form_label">날짜</label>
+            <div class="inline_group">
+              <input id="m_date" class="input" type="date" />
+              <button id="todayBtn" class="btn line" type="button">Today</button>
+            </div>
+          </div>
+
+          <div class="form_row">
+            <label for="m_repeat" class="form_label">반복</label>
+            <select id="m_repeat" class="input select">
+              <option value="yearly">매년</option>
+              <option value="monthly">매월</option>
+              <option value="none">반복 안 함</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <footer class="modal_footer">
+        <button class="btn line modal_cancel" type="button">취소</button>
+        <button class="btn primary modal_save" type="button">수정</button>
+      </footer>
+    </article>
+  </section>
+
+  <!-- 기념일 등록 모달 -->
+  <section
+    class="modal_backdrop"
+    id="addModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="addModalTitle"
+    hidden
+  >
+    <article class="modal" aria-label="기념일 등록 모달">
+      <header class="modal_header">
+        <h3 id="addModalTitle" class="modal_title">기념일 등록</h3>
+        <button class="icon_btn close_btn" type="button" aria-label="닫기">✕</button>
+      </header>
+
+      <section class="modal_body">
+        <!-- 제목 -->
+        <div class="form_row">
+          <label for="add_title" class="form_label">제목</label>
+          <input id="add_title" class="input" type="text" placeholder="예: 홍길동 생일" />
+        </div>
+
+        <!-- 유형 -->
+        <fieldset class="form_row">
+          <legend class="form_label">유형</legend>
+          <div class="chip_group" role="tablist" aria-label="유형 선택">
+            <button class="chip is_selected" data-type="birthday" type="button">생일</button>
+            <button class="chip" data-type="wedding" type="button">결혼</button>
+            <button class="chip" data-type="etc" type="button">연애/기타</button>
+          </div>
+        </fieldset>
+
+        <!-- 날짜 / 반복 -->
+        <div class="form_grid">
+          <div class="form_row">
+            <label for="add_date" class="form_label">날짜</label>
+            <div class="inline_group">
+              <input id="add_date" class="input" type="date" />
+              <button id="addTodayBtn" class="btn line" type="button">Today</button>
+            </div>
+          </div>
+
+          <div class="form_row">
+            <label for="add_repeat" class="form_label">반복</label>
+            <select id="add_repeat" class="input select">
+              <option value="yearly">매년</option>
+              <option value="monthly">매월</option>
+              <option value="none">반복 안 함</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <footer class="modal_footer">
+        <button class="btn line add_modal_cancel" type="button">취소</button>
+        <button class="btn primary add_modal_save" type="button">등록</button>
+      </footer>
+    </article>
+  </section>
+
+  <!-- 스크립트 -->
+  <script src="./anniversary_management.js"></script>
+</body>
+</html>

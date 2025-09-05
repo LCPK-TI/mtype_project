@@ -1,0 +1,58 @@
+  <!doctype html>
+  <html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>나의 리뷰</title>
+    <link rel="stylesheet" href="./reviews.css" />
+  </head>
+  <body>
+    <main class="page" aria-labelledby="page_title">
+      <h1 id="page_title" class="page_title">리뷰</h1>
+
+      <nav class="tabs" aria-label="리뷰 탭">
+        <form action="./reviews_writable.html" method="get">
+          <button type="submit" class="tab">작성 가능한 리뷰</button>
+        </form>
+        <form action="./reviews_mine.html" method="get">
+          <button type="submit" class="tab is_active" aria-current="page">나의 리뷰</button>
+        </form>
+      </nav>
+      <hr class="tabs_divider" aria-hidden="true" />
+
+      <section class="review_list" aria-label="나의 리뷰 목록">
+        <!-- 행 1  -->
+        <article class="my_review_row" aria-label="내가 작성한 리뷰">
+          <figure class="thumb_box" aria-label="상품 이미지">
+            <div class="thumb_placeholder">상품이미지</div>
+          </figure>
+
+          <section class="info_box" aria-label="주문 정보">
+            <dl class="meta_list">
+              <div class="meta_item"><dt class="meta_label">주문일자</dt><dd class="meta_value">2025-08-18</dd></div>
+              <div class="meta_item"><dt class="meta_label">스토어명</dt><dd class="meta_value">스토어명</dd></div>
+              <div class="meta_item"><dt class="meta_label">상품명</dt><dd class="meta_value">상품명</dd></div>
+            </dl>
+            <p class="star_row" aria-label="평점 5점 만점 중 5점">★★★★★</p>
+          </section>
+
+          <section class="content_box" aria-label="리뷰 내용">
+            <p class="section_label">리뷰 내용</p>
+            <div class="image_row">
+              <div class="image_placeholder">리뷰 이미지</div>
+              <div class="image_placeholder">리뷰 이미지</div>
+            </div>
+          </section>
+
+          <div class="date_box" aria-label="작성일">
+            <p class="section_label center">2025.10.08</p>
+          </div>
+
+          <div class="action_box">
+            <button type="button" class="btn_small">수정</button>
+            <button type="button" class="btn_small">삭제</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+  </html>

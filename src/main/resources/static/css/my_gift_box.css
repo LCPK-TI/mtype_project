@@ -1,0 +1,148 @@
+/* 기본 */
+* { 
+  box-sizing: border-box; 
+}
+html, body { 
+  margin: 0; 
+  padding: 0; 
+}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+  color:#111; 
+  background:#fff; 
+  line-height:1.45;
+}
+
+/* 페이지 */
+.page{
+  width: 92%; 
+  margin: 2%;
+}
+.page_title{
+  margin:0 0 1.2rem;
+  font-size:1.6rem; 
+  font-weight: 800
+}
+
+.tabs {
+  display: grid;                   
+  grid-template-columns: 1fr 1fr;
+  background: #e9e9e9;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.tabs > form {
+  margin: 0;                       
+  width: 100%;                     
+}
+
+.tabs .tab {
+  width: 100%;                   
+  display: block;
+  padding: 0.8rem 0;               
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  appearance: none;
+}
+
+.tab.is_active{
+  background:#fff; 
+  color:#111
+}
+.tabs_divider{
+  border:0; 
+  border-top:1px 
+  solid #111; 
+  margin:0 0 1.4%
+}
+
+.gift_row {
+  display: grid;
+  grid-template-columns: 180px 1fr 140px; 
+  gap: 24px; 
+  align-items: start; 
+  padding: 18px 0;
+}
+.row_divider { 
+  border: none; 
+  border-top: 1px 
+  solid #eee; 
+  margin: 18px 0; 
+}
+
+/* 메시지 카드 */
+.message_card {
+  width: 160px; 
+  height: 160px; 
+  background: #e9e9e9;
+  border-radius: 8px; 
+  border: 2px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;
+}
+.message_title { 
+  font-size: 12px; 
+  color: #666; 
+}
+
+/* 본문 */
+.gift_body {
+  padding-left: 16px;
+  display: grid; 
+  gap: 12px; 
+  align-content: start;
+}
+
+.meta_list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 70px 1fr; 
+  column-gap: 8px; 
+  row-gap: 6px;
+}
+.meta_label { 
+  grid-column: 1;
+  font-size: 12px; 
+  color: #666; 
+}
+.meta_value { 
+  grid-column: 2; 
+  font-size: 14px; 
+  color: #222; 
+  margin: 0; 
+}
+
+/* 이미지 */
+.thumb {
+  width: 84px; 
+  height: 84px;
+  border: 1px 
+  solid #ddd; 
+  border-radius: 8px;
+  background: #f3f3f3; 
+  overflow: hidden;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+/* 받는,보낸 사람 */
+.user_box   { 
+  justify-self: end; 
+  text-align: right; 
+}
+.user_label { 
+  font-size: 12px; 
+  color: #777; 
+  margin-bottom: 6px; 
+}
+.user_name  { 
+  font-size: 14px; 
+  letter-spacing: 2px; 
+}

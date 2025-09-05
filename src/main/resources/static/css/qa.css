@@ -1,0 +1,230 @@
+/* 기본 */
+* { 
+  box-sizing: border-box; 
+}
+html, body { 
+  margin: 0; 
+  padding: 0; 
+}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+  color:#111; 
+  background:#fff; 
+  line-height:1.45;
+}
+
+/* 페이지 */
+.page{
+  width: 92%; 
+  margin: 2%;
+}
+.page_title{
+  margin:0 0 1.2rem;
+  font-size:1.6rem; 
+  font-weight: 800
+}
+
+.qa_head,
+.qa_summary {
+  display: grid;
+  grid-template-columns: 20% 50% 20% 10%;
+  align-items: center;
+  width: 100%;
+}
+
+.qa_head {
+  color: #555;
+  font-weight: 700;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 1% 1.2%;
+}
+
+.qa_summary {
+  background: #fff;
+  color: #111;
+  border: 0;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  padding: 1.2% 1.2%;
+  cursor: pointer;
+}
+
+.qa_summary:hover {
+  background: #fafafa;
+}
+
+/* 디테일 */
+.qa_detail {
+  background: #fff;
+}
+
+.qa_detail_line,
+.qa_answer_line {
+  display: grid;
+  grid-template-columns: 18% 1fr 18%;
+  gap: 2%;
+  padding: 1.2% 1.2%;
+  background: #f6f6f6;
+  border-top: 1px solid #ececec;
+}
+
+.qa_answer_line {
+  grid-template-columns: 18% 1fr;
+}
+
+.qa_label {
+  color: #666;
+}
+
+.qa_text {
+  color: #111;
+}
+
+.qa_actions {
+  text-align: right;
+}
+
+/* 버튼 */
+.btn_small {
+  background: #fff;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  padding: 0.6% 2.4%;
+  margin-left: 2%;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn_text {
+  background: transparent;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  padding: 0.6% 2.4%;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* 답변 내용 배치 */
+.qa_answer_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2%;
+}
+
+.qa_answer_text {
+  color: #111;
+}
+
+/* 모달 */
+.qa_modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.qa_modal.is_open {
+  display: flex;
+}
+
+.qa_modal_overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.qa_modal_card {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: 560px;
+  background: #fff;
+  color: #111;
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+  padding: 3% 3.5%;
+}
+
+.qa_modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1%;
+  margin-bottom: 2%;
+  border-bottom: 1px solid #111;
+}
+
+.qa_modal_title {
+  margin: 0;
+  font-weight: 800;
+}
+
+.qa_modal_close {
+  background: #fff;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  padding: 0.6% 1.6%;
+  cursor: pointer;
+}
+
+.field_row {
+  margin: 2% 0;
+}
+
+.field_label {
+  display: block;
+  font-weight: 700;
+  margin: 0 0 1%;
+}
+
+.field_textarea {
+  width: 100%;
+  min-height: 160px;
+  background: #f3f3f3;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1.2%;
+  resize: vertical;
+}
+
+.helper_row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.helper_text {
+  color: #666;
+}
+
+.radio_row {
+  display: flex;
+  gap: 4%;
+}
+
+.radio {
+  color: #111;
+}
+
+.qa_modal_footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1%;
+  margin-top: 2%;
+}
+
+.btn_primary {
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+  padding: 0.9% 2.4%;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.qa_modal .btn_small {
+  padding: 0.9% 2.4%;
+}

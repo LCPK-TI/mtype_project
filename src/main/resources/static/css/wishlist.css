@@ -1,0 +1,103 @@
+/* 기본 */
+* { 
+  box-sizing: border-box; 
+}
+html, body { 
+  margin: 0; 
+  padding: 0; 
+}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+  color:#111; 
+  background:#fff; 
+  line-height:1.45;
+}
+
+/* 페이지 */
+.page{
+  width: 92%; 
+  margin: 2%;
+}
+.page_title{
+  margin:0 0 1.2rem;
+  font-size:1.6rem; 
+  font-weight: 800
+}
+
+.tabs {
+  display: grid;                   
+  grid-template-columns: 1fr 1fr;
+  background: #e9e9e9;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.tabs > form {
+  margin: 0;                       
+  width: 100%;                     
+}
+
+.tabs .tab {
+  width: 100%;                   
+  display: block;
+  padding: 0.8rem 0;               
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  appearance: none;
+}
+
+.tab.is_active {
+  background: #fff;
+  color: #111;
+}
+
+.tabs_divider{
+  border:0;
+  border-top:1px solid #111;
+  margin:0 0 1.4%;
+}
+
+.product_grid{
+  display:flex; flex-wrap:wrap; gap:2%;
+}
+
+.product_card{
+  width:18%; min-width:160px; 
+}
+
+/* 상품 */
+.product_img{
+  position:relative;           
+  width:100%;                  
+  aspect-ratio:1/1;           
+  margin:0 0 4%;
+}
+.product_img > img{
+  width:100%; height:100%;
+  background:#ececec;          
+  border:1px solid #ddd; border-radius:6px;
+  display:block;
+}
+.wishlist_btn{
+  position:absolute; 
+  bottom:5px; 
+  right:5px;
+  background:none; 
+  border:none;
+  cursor:pointer;
+  color:red; 
+  font-size:1rem;  
+}
+
+/* 텍스트 정보 */
+.product_info p{
+  margin: 2px;
+  font-size:10pt
+}
+.product_info p:nth-child(1){
+  font-weight: bold; 
+  cursor: pointer;
+}

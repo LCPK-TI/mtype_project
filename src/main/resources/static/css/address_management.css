@@ -1,0 +1,206 @@
+/* 기본 */
+* { box-sizing: border-box; }
+html, body { 
+  margin: 0; 
+  padding: 0; 
+}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  color: #111; 
+  background: #fff; 
+  line-height: 1.45;
+}
+
+/* 페이지 */
+.page { 
+  width: 92%; 
+  max-width: 1100px;
+  margin: 2.2% 
+}
+header.page_header,.page_header {
+  display: grid;
+  grid-template-columns: 1fr auto; 
+  align-items: center;
+  gap: 2%;
+}
+.page_title {
+  margin:0 0 1.2rem;
+  font-size:1.6rem; 
+  font-weight: 800
+}
+.header_actions { 
+  display: flex; 
+  align-items: center; 
+}
+.page_divider { 
+  border: 0; 
+  border-top: 1px 
+  solid #e5e5e5; 
+  margin: 1.4% 
+}
+
+/* 버튼 */
+.btn_primary {
+  background: #111; 
+  color: #fff; 
+  border: 1px 
+  solid #111;
+  padding: 0.6rem 1rem; 
+  border-radius: 10px; 
+  font-weight: 700;
+}
+.btn_small {
+  background: #fff; 
+  color: #111; 
+  border: 1px 
+  solid #cfcfcf;
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px; 
+  font-weight: 600;
+}
+
+/* 카드 */
+.address_list { 
+  width: 100%; 
+}
+.address_card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 2%;
+  padding: 1.6% 0;
+}
+.row_divider {
+  border: 0; 
+  border-top: 1px 
+  solid #efefef; 
+  margin: 1.4% 0; 
+}
+
+.info_list { 
+  margin: 0; 
+}
+.info_item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1%;
+  margin: 0.4rem 0;
+}
+.info_label { 
+  color: #6b6b6b; 
+}
+.info_value { 
+  color: #111; 
+}
+.addr_name { 
+  font-weight: 700; 
+  margin-right: 0.6rem; 
+}
+
+/* 기본배송지 */
+.badge_default {
+  display: inline-block;
+  background: #111; color: #fff;
+  border: 1px solid #111;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.8rem; font-weight: 800;
+}
+
+.address_actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-top: 0.2rem; 
+}
+
+/* 모달 */
+dialog#address_dialog{
+  width: min(520px, 92vw);
+  border: none; 
+  border-radius: 10px; 
+  padding: 10px 16px 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.25)
+}
+dialog#address_dialog::backdrop{ 
+  background: rgba(0,0,0,.45) 
+}
+.panel_head{ 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between 
+}
+.panel_title{ 
+  font-size: 18px; 
+  margin: 8px 0 
+}
+.close{ 
+  border: none; 
+  background: transparent; 
+  font-size: 20px; 
+  cursor: pointer 
+}
+
+form.form{ 
+  display: grid; 
+  gap: 12px; 
+  margin-top: 8px 
+}
+.field{ 
+  display: grid; 
+  gap: 6px 
+}
+.f_label{ 
+  font-size: 12px; 
+  color: #777 
+}
+.input{ 
+  height: 38px; 
+  border: 1px solid #e5e5e5; 
+  border-radius: 6px; 
+  padding: 0 10px 
+}
+.check{ 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+  font-size: 14px 
+}
+.panel_actions{ 
+  display: flex; 
+  justify-content: flex-end; 
+  gap: 8px; 
+  margin-top: 6px 
+}
+
+.input_group{ 
+  display: grid; 
+  grid-template-columns: 1fr auto; 
+  gap: 8px; 
+  align-items: center 
+}
+
+/* 버튼 */
+.btn{ 
+  appearance: none; 
+  cursor: pointer; 
+  border: 1px solid #e5e5e5; 
+  background: #f7f7f7;
+  padding: 8px 12px; 
+  border-radius: 6px; 
+  font-size: 14px 
+}
+.btn:hover{ 
+  background: #f0f0f0 
+}
+.btn_dark{ 
+  background: #111; 
+  color: #fff; 
+  border-color: #111 
+}
+.btn_dark:hover{ 
+  filter: brightness(1.05) 
+}
+.btn_line{ 
+  background: #fff 
+}

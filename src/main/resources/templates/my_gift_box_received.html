@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>받은 선물함</title>
+  <link rel="stylesheet" href="./my_gift_box.css" />
+</head>
+<body>
+  <main class="page">
+    <h1 class="page_title">나의 선물함</h1>
+
+    <nav class="tabs" aria-label="선물함 종류">
+      <form action="./my_gift_box_received.html" method="get">
+        <button type="submit" class="tab is_active" aria-current="page">받은 선물함</button>
+      </form>
+       <form action="./my_gift_box_sent.html" method="get">
+        <button type="submit" class="tab"> 보낸 선물함</button>
+      </form>
+    </nav>
+    <hr class="tabs_divider" aria-hidden="true" />
+
+    <!-- 1행 -->
+    <article class="gift_row" aria-labelledby="gift1-title">
+      <figure class="message_card">
+        <figcaption id="gift1-title" class="message_title">메시지 카드</figcaption>
+      </figure>
+      <section class="gift_body">
+        <dl class="meta_list">
+          <dt class="meta_label">날짜</dt>   <dd class="meta_value">2025.08.21</dd>
+          <dt class="meta_label">스토어명</dt><dd class="meta_value">스토어A</dd>
+          <dt class="meta_label">상품명</dt> <dd class="meta_value">ㅇㅇㅇㅇ</dd>
+          <dt class="meta_label">옵션</dt>   <dd class="meta_value">옵션: 기본</dd>
+        </dl>
+        <figure class="thumb">
+          <img src="." />
+        </figure>
+      </section>
+      <div class="user_box">
+        <p class="user_label">보낸사람</p>
+        <p class="user_name">OOO</p>
+      </div>
+    </article>
+
+    <hr class="row_divider" />
+
+    <!-- 2행 -->
+    <article class="gift_row" aria-labelledby="gift2-title">
+      <figure class="message_card">
+        <figcaption id="gift2-title" class="message_title">메시지 카드</figcaption>
+      </figure>
+      <section class="gift_body">
+        <dl class="meta_list">
+          <dt class="meta_label">날짜</dt><dd class="meta_value">2025.08.21</dd>
+          <dt class="meta_label">스토어명</dt><dd class="meta_value">스토어B</dd>
+          <dt class="meta_label">상품명</dt><dd class="meta_value">ㅇㅇㅇㅇ</dd>
+          <dt class="meta_label">옵션</dt><dd class="meta_value">옵션: 기본</dd>
+        </dl>
+        <figure class="thumb">
+          <img src="." />
+        </figure>
+      </section>
+       <div class="user_box">
+        <p class="user_label">보낸사람</p>
+        <p class="user_name">OOO</p>
+      </div>
+    </article>
+
+    <hr class="row_divider" />
+
+    <!-- 3행 -->
+    <article class="gift_row" aria-labelledby="gift3-title">
+      <figure class="message_card">
+        <figcaption id="gift3-title" class="message_title">메시지 카드</figcaption>
+      </figure>
+      <section class="gift_body">
+        <dl class="meta_list">
+          <dt class="meta_label">날짜</dt><dd class="meta_value">2025.08.21</dd>
+          <dt class="meta_label">스토어명</dt><dd class="meta_value">스토어C</dd>
+          <dt class="meta_label">상품명</dt><dd class="meta_value">ㅇㅇㅇㅇ</dd>
+          <dt class="meta_label">옵션</dt><dd class="meta_value">옵션: 기본</dd>
+        </dl>
+        <figure class="thumb">
+          <img src="." />
+        </figure>
+      </section>
+      <div class="user_box">
+        <p class="user_label">보낸사람</p>
+        <p class="user_name">OOO</p>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
