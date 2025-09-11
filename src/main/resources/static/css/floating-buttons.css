@@ -1,0 +1,240 @@
+/*챗봇, 페이지업, 최근본상품 아이콘 css*/
+#chatbot_btn {
+	position: relative;
+	position: fixed;
+	display: flex;
+	align-items: center;
+
+	width: 200px;
+	height: 45px;
+	gap: 10px;
+	z-index: 1000;
+	bottom: 80px;
+	margin-left: 3%;
+}
+
+#chatbot_btn img {
+	margin-top: 5px;
+	margin-left: 10px;
+	height: 38px;
+}
+#cb_btn{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	border: none;
+	color: white;
+	background: none;
+	background-color: rgb(83, 97, 122);
+	border-radius: 50px;
+}
+
+#page_up {
+	display: none;
+	position: fixed;
+	right: 20px;
+	width: 50px;
+	height: 50px;
+	border: 0.5px solid gray;
+	background: white;
+	border-radius: 50px;
+	cursor: pointer;
+	bottom: 70px;
+}
+
+#page_up img {
+	width: 20px;
+}
+
+#recent_products {
+	position: fixed;
+	right: 20px;
+	width: 50px;
+	height: 50px;
+	border: 0.5px solid gray;
+	background: white;
+	border-radius: 50px;
+	cursor: pointer;
+	bottom: 130px;
+	padding: 0;
+}
+
+#recent_products img {
+	width: 20px;
+}
+
+/*챗봇 대화창*/
+#chatbot_modal {
+	display: none;
+	position: absolute;
+	width: 400px;
+	border-radius: 30px;
+	border: 1px solid rgb(216, 216, 216);
+	background: white;
+	bottom: 0;
+	padding: 4%;
+	z-index: 3000;
+}
+#chatbot_modal #chatbot_main {
+	max-height: 400px;
+	overflow: auto;
+	padding-right: 10px; /* 스크롤바 때문에 내용 가려지지 않도록 */
+}
+#chatbot_main{
+   -ms-overflow-style: none;
+}
+#chatbot_main::-webkit-scrollbar{
+  display:none;
+}
+#chatbot_header {
+	display: flex;
+	
+	justify-content: space-between;
+	align-items: center;
+	height:35px;
+	border-bottom: 1px solid rgb(216, 216, 216);
+	
+}
+#chatbot_header p{
+	font-weight: 500;
+	font-size: 13pt;
+	padding-left: 3%;
+}
+#chatbot_header button {
+	font-size: 13pt;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+#chatbot_main {
+	display: flex;
+	flex-direction: column;
+	padding: 5%;
+	/* 위에서 아래로 쌓이도록 */
+}
+
+.chatbot_text_detail {
+	display: inline-block;
+	/* 글 길이에 맞게 가로 길이 조절 */
+	background-color: rgb(236, 236, 236);
+	color: black;
+	line-height: 10px;
+	/* 높이 자동 조절되도록 줄 높이 조절 */
+	font-size: 11pt;
+	border-radius: 15px;
+	padding-inline: 5%;
+	overflow-wrap: break-word;
+
+	margin-bottom: 5%;
+	align-self: flex-start;
+	/* 왼쪽 정렬 */
+}
+.chatbot_name{
+	font-size: 8pt;
+	color: gray;
+	margin: 0;
+	padding-left: 3%;
+}
+.user_text {
+	display: inline-block;
+	/* 글 길이에 맞게 가로 길이 조절 */
+	background-color:  rgb(83, 97, 122);
+	line-height: 10px;
+	color: white;
+	/* 높이 자동 조절되도록 줄 높이 조절 */
+	font-size: 11pt;
+	border-radius:15px;
+	padding-inline: 5%;
+	overflow-wrap: break-word;
+	margin-bottom: 5%;
+	align-self: flex-end;
+	/* 오른쪽 정렬 */
+}
+
+.chatbot_product {
+	display: inline-block;
+	/* 글 길이에 맞게 가로 길이 조절 */
+	background-color:  rgb(236, 236, 236);
+	color: white;
+
+	/* 높이 자동 조절되도록 줄 높이 조절 */
+	font-size: 12pt;
+	border-radius: 40px;
+	padding-inline: 5%;
+	overflow-wrap: break-word;
+	width: 80%;
+	margin-bottom: 5%;
+	align-self: flex-start;
+	/* 왼쪽 정렬 */
+}
+
+/*상품정보*/
+.chatbot_product_card {
+	padding: 2%;
+	width: 20%;
+	
+}
+
+.chatbot_product_img {
+	position: relative;
+	/*하트 버튼의 부모태그*/
+	width: 80px;
+	height: 100px;
+
+}
+
+.chatbot_product_img>img {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.chatbot_wishlist_btn {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.chatbot_product_info p {
+	
+	font-size: 8pt;
+	color: black;
+}
+
+.chatbot_product_info p:nth-child(1) {
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.chatbot_product_info p:nth-child(3) {
+	font-weight: bold;
+}
+
+.chatbot_product_list {
+	display: flex;
+	gap: 10%;
+	align-items: center;
+}
+
+#chatbot_footer {
+	bottom: 0;
+	height: 30px;
+	position: sticky;
+	line-height: 30px;
+	border-top: 1px solid rgb(216, 216, 216);
+}
+
+#chatbot_footer input {
+	border: none;
+	width: 90%;
+	padding-left: 3%;
+	font-size: 10pt;
+}
+
+#chatbot_footer input:focus {
+	outline: none;
+}

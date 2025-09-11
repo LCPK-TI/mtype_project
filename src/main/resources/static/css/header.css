@@ -1,322 +1,403 @@
 /*header css*/
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  background: white;
-  border-bottom: 1px solid rgb(219, 219, 219);
-  display: flex; /*가로방향 배치*/
-  align-items: center; /*수직 중앙 배치*/
-  justify-content: space-between;
-  z-index: 2000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 70px;
+	background: white;
+	border-bottom: 1px solid rgb(219, 219, 219);
+	display: flex;
+	/*가로방향 배치*/
+	align-items: center;
+	/*수직 중앙 배치*/
+	justify-content: space-between;
+	z-index: 1500;
 }
+
 body {
-  padding-top: 63px;
+	padding-top: 63px;
 }
+
 /*기본적인 세팅 list 점 없애기, a태그 밑줄 없애기*/
 ul {
-  list-style-type: none;
+	list-style-type: none;
 }
+
 a {
-  text-decoration: none;
-  color: inherit;
-  margin: 10px;
+	text-decoration: none;
+	color: inherit;
+	margin: 10px;
 }
+
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
+
 header img {
-  cursor: pointer;
+	cursor: pointer;
 }
+
 header h1 {
-  cursor: pointer;
-  width: 100%;
+	cursor: pointer;
+	width: 100%;
 }
 
 #mtype_logo {
-  width: 70px;
-  padding-left: 30px;
+	width: 70px;
+	padding-left: 30px;
 }
+
 .navbar_menu {
-  position: relative;
-  width: 40%;
-  margin-left: 5%;
+	position: relative;
+	width: 40%;
+	margin-left: 5%;
 }
+
 .navbar_menu ul {
-  margin-left: 5%;
-  display: flex;
-  padding-left: 0;
-  gap: 3%;
+	margin-left: 5%;
+	display: flex;
+	padding-left: 0;
+	gap: 3%;
 }
+
 .navbar_menu li {
-  font-size: large;
+	font-size: large;
 }
+
 .navbar_search {
-  width: 20%;
-  border: 1px solid gray;
-  border-radius: 50px;
-  padding: 10px;
+	width: 20%;
+	border: 1px solid gray;
+	border-radius: 50px;
+	padding: 10px;
 }
+
 .navbar_search img {
-  float: right;
+	float: right;
 }
+
 .navbar_user {
-  display: flex;
-  align-items: center;
-  margin-right: 7%;
-  gap: 20%;
+	display: flex;
+	align-items: center;
+	margin-right: 7%;
+	gap: 20%;
 }
-.navbar_user img{
+
+.navbar_user img {
 	width: 20px;
 }
+
 #search {
-  border: none;
-  outline: none;
-  font-size: 12pt;
-  width: 87%;
+	border: none;
+	outline: none;
+	font-size: 12pt;
+	width: 87%;
 }
-#search_btn{
+
+#search_btn {
 	width: 25px;
 }
+
 /*카테고리 클릭 시*/
-#show_categories {
-  position: absolute;
-  display: none;
-  top: 71px;
-  width: 100%;
-  border-bottom: 1px solid rgb(219, 219, 219);
-  padding-bottom: 10px;
-  background: white;
+#cate_btn{
+	cursor: pointer;
 }
+#show_categories {
+	position: absolute;
+	display: none;
+	top: 71px;
+	width: 100%;
+	border-bottom: 1px solid rgb(219, 219, 219);
+	padding-bottom: 10px;
+	background: white;
+}
+
 .category_menu {
-  padding-left: 5%;
-  display: flex;
-  font-size: 10pt;
+	padding-left: 5%;
+	display: flex;
+	font-size: 10pt;
 }
 
 .category_menu li {
-  align-items: center;
-  display: flex;
-  font-size: 12pt;
-  line-height: 100%;
-  justify-content: space-between;
+	align-items: center;
+	display: flex;
+	font-size: 12pt;
+	line-height: 100%;
+	justify-content: space-between;
 }
+
 .category_menu span {
-  font-size: 20pt;
+	font-size: 20pt;
 }
+
 /* 왼쪽 카테고리 */
 #main_category {
-  width: 15%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+	width: 15%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
+
 #main_category a {
-  width: 100%;
-  padding: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	width: 100%;
+	padding: 10px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#main_category li {
+	line-height: 40px;
+	padding: 10px;
+	cursor: pointer;
+	height: 40px;
 }
 /* 오른쪽 서브카테고리 */
 #sub_category {
-  width: 70%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+	width: 70%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 #sub_category li {
-  line-height: 40px;
-  padding: 10px;
-  cursor: pointer;
-  height: 40px;
+	line-height: 40px;
+	padding: 10px;
+	cursor: pointer;
+	height: 40px;
 }
+
 #sub_category a {
-  color: gray;
+	color: gray;
 }
+
 #sub_category a:hover {
-  color: black;
+	color: black;
 }
 
 /*검색어 모달*/
 #show_search {
-  display: none;
-  position: absolute;
-  width: 35%;
-  left: 35%;
-  top: 71px;
-  background-color: rgb(255, 255, 255);
-  z-index: 1000;
-  opacity: 0.8;
-  backdrop-filter: blur(40px);
+	display: none;
+	position: absolute;
+	width: 35%;
+	left: 35%;
+	top: 71px;
+	background-color: rgb(255, 255, 255);
+	z-index: 1000;
+	opacity: 0.8;
+	backdrop-filter: blur(40px);
 }
-#search_main {
-  display: flex;
 
-  justify-content: space-between;
+#search_main {
+	display: flex;
+
+	justify-content: space-between;
 }
+
 #popular_search,
 #recent_search {
-  width: 48%;
-  padding: 3%;
-  padding-top: 7%;
+	width: 48%;
+	padding: 3%;
+	padding-top: 7%;
 }
 
 #popular_search {
-  border-right: 1px solid rgb(219, 219, 219);
+	border-right: 1px solid rgb(219, 219, 219);
 }
+
 #popular_search b {
-  font-size: 12pt;
+	font-size: 12pt;
 }
+
 #search_footer {
-  height: 30px;
-  line-height: 30px;
-  border-top: 1px solid rgb(238, 238, 238);
-  text-align: right;
+	height: 30px;
+	line-height: 30px;
+	border-top: 1px solid rgb(238, 238, 238);
+	text-align: right;
 }
+
 #search_footer button {
-  border: none;
-  background: none;
-  color: gray;
+	border: none;
+	background: none;
+	color: gray;
 }
+
 #search_footer button:hover {
-  color: black;
+	color: black;
 }
+
 /*인기 검색어 영역*/
 .rank_search {
-  margin-top: 20px;
-  display: flex;
-  gap: 10%;
-  font-size: 10pt;
+	margin-top: 20px;
+	display: flex;
+	gap: 10%;
+	font-size: 10pt;
 }
+
 #popular_header,
 #search_header {
-  padding-bottom: 5%;
-  margin-bottom: 5%;
-  border-bottom: 1px solid rgb(219, 219, 219);
+	padding-bottom: 5%;
+	margin-bottom: 5%;
+	border-bottom: 1px solid rgb(219, 219, 219);
 }
+
 /*최근 검색어 영역*/
 #search_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+
 #search_header button {
-  background: none;
-  border: none;
-  height: 20px;
-  color: gray;
+	background: none;
+	border: none;
+	height: 20px;
+	color: gray;
 }
+
 #search_header button:hover {
-  color: black;
+	color: black;
 }
+
 .search_content {
-  display: flex;
-  margin-top: 20px;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 10pt;
+	display: flex;
+	margin-top: 20px;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 10pt;
 }
+
 .search_content button {
-  border: none;
-  background: none;
-  color: gray;
+	border: none;
+	background: none;
+	color: gray;
 }
 
 /*기념일 영역*/
 #navbar_anniversary {
-  position: relative;
-  display: flex;
-  width: 20%;
-  height: 100%;
-  gap: 3%;
-  align-items: center;
-  justify-content: flex-end; /* 아이템들을 오른쪽 끝으로 정렬 */
+	position: relative;
+	display: flex;
+	width:400px;
+	height: 100%;
+	align-items: center;
+
+	/* 아이템들을 오른쪽 끝으로 정렬 */
+}
+
+#preview_anniversary {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap:3%;	
+	cursor: pointer;
+}
+#preview_anniversary p,#preview_anniversary b{
+
+ 	flex: 0 0 auto;  /* 내용 크기만큼만 차지 */
 }
 #navbar_anniversary p:nth-child(2) {
-  color: gray;
+	color: gray;
 }
+
 #navbar_anniversary b {
-  margin-left: 3%;
+	margin-left: 3%;
+	font-size: 11pt;
 }
-#navbar_anniversary > button {
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: none;
-  margin-right: 0;
+
+#anniversary_btn {
+	width: 30px;
+	height: 30px;
+	border: none;
+	background: none;
+	margin-right: 0;
 }
+
 #navbar_anniversary img {
-  width: 100%;
+	width: 15px;
+		height: 15px;
+
 }
 
 /*기념일 상세 내용 모달*/
 #anniversary_modal {
-  display: none;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 0 10px;
-}
-#anniversary_modal ul {
-  padding: 0;
-}
-#anniversary_modal li {
-  margin-top: 5%;
-  padding-bottom: 5%;
-  border-bottom: 1px solid rgb(219, 219, 219);
-}
-#anniversary_modal li:last-child {
-  margin-top: 5%;
-  padding-bottom: 5%;
-  border: none;
-}
-/*기념일 영역*/
-.anniverary_card {
-  padding: 0 2%;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.anniverary_left {
-  height: 100%;
-  width: 100%;
+	display: none;
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	background: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	padding: 0 10px;
 }
 
-.anniverary_left span:nth-child(2) {
-  color: gray;
+#anniversary_modal ul {
+	padding: 0;
 }
+
+#anniversary_modal li {
+	margin-top: 5%;
+	padding-bottom: 5%;
+	border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+#anniversary_modal li:last-child {
+	margin-top: 5%;
+	padding-bottom: 5%;
+	border: none;
+}
+
+/*기념일 영역*/
+.anniverary_card {
+	padding: 0 2%;
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.anniverary_left {
+	height: 100%;
+	width: 100%;
+}
+.anniverary_left span{
+	font-size: 10pt;
+}
+
+
 .anniverary_left p {
-  font-size: 15pt;
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 0;
+	font-size: 12pt;
+	font-weight: 500;
+	margin-top: 10px;
+	margin-bottom: 0;
 }
+
 .anniverary_left span:nth-child(1) {
-  border-radius: 15px;
-  padding: 0 10px;
-  border: 1px solid rgb(219, 219, 219);
+	border-radius:6px;
+	padding: 0 10px;
+	background:rgb(248, 248, 248);
+	color: rgb(0, 0, 0);
+	border: 1px solid rgb(219, 219, 219);
 }
+
 .anniverary_right {
-  height: 100%;
-  width: 50%;
-  text-align: right;
+	height: 100%;
+	width: 50%;
+	text-align: right;
 }
+
 .anniverary_right h2 {
-  margin: 0;
-  color: rgb(116, 146, 185);
+	margin: 0;
+	line-height: 100%;
+	color: rgb(0, 0, 0);
 }
+
 .anniverary_right button {
-  background: rgb(242, 242, 242);
-  border: none;
-  width: 100px;
+	border-radius:6px;
+	margin-top: 10px;
+	background: rgb(0, 0, 0);
+	color: white;
+	border: none;
+	width: 100px;
 }
