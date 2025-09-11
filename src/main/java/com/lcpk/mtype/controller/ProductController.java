@@ -11,8 +11,14 @@ public class ProductController {
 		return "productList";
 	}
 	
-	@GetMapping("/products/best")
+	@GetMapping("/products/pest")
 	public String bestProducts() {
-		return "productBest";
+		return "address-management";
 	}
+	
+	@GetMapping("/products/best")
+	public String pestProducts() {
+		return "wishlist-mine";
+	}
+	
 }

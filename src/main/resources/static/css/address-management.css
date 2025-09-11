@@ -1,21 +1,14 @@
-/* 기본 */
-* { box-sizing: border-box; }
 html, body { 
   margin: 0; 
   padding: 0; 
 }
-body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-  color: #111; 
-  background: #fff; 
-  line-height: 1.45;
-}
 
-/* 페이지 */
-.page { 
-  width: 92%; 
+/* 페이지 프레임 */
+.page{
+  width: 92%;
   max-width: 1100px;
-  margin: 2.2% 
+  margin: 0 auto;              /* 좌우 중앙 */
+  padding: 100px 0 96px;  /* 상단은 헤더만큼 띄우기 */
 }
 header.page_header,.page_header {
   display: grid;

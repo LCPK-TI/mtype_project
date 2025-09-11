@@ -141,12 +141,13 @@ form.addEventListener("submit", (e)=>{
   render();
 });
 
-/* 주소 찾기 버튼 */
+/* 다음 우편번호(Postcode) 연결 */
 document.getElementById("btn_search_address").addEventListener("click", openPostcode);
 
 function openPostcode(){
+  // 스크립트 로드 확인
   if(!(window.daum && window.daum.Postcode)){
-    alert("연결해주세요");
+    alert("우편번호 스크립트가 아직 로드되지 않았습니다.");
     return;
   }
   new daum.Postcode({
@@ -155,7 +156,10 @@ function openPostcode(){
       form.addr1.value = addr || "";
       form.addr2.focus();
     }
-  }).open();
+  }).open({
+    q: form.addr1?.value || ''   // 기존 입력이 있으면 기본 검색어로
+  });
 }
 
+/* 초기 렌더 */
 document.addEventListener("DOMContentLoaded", render);

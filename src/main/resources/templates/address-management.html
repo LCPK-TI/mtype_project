@@ -1,0 +1,76 @@
+<!DOCTYPE html> <!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/address-management.css}">
+
+<body>
+	<main class="page" aria-labelledby="page_title">
+		<!-- 제목, 배송지 추가 -->
+		<div class="page_header" role="group" aria-label="페이지 상단 영역">
+			<h1 id="page_title" class="page_title">배송지 관리</h1>
+			<div class="header_actions">
+				<button type="button" class="btn_primary">배송지 추가</button>
+			</div>
+		</div>
+
+		<hr class="page_divider" aria-hidden="true" />
+
+		<section class="address_list" aria-label="저장된 배송지 목록" aria-live="polite">
+		</section>
+	</main>
+
+	<dialog id="address_dialog" aria-labelledby="dialog_title">
+		<div class="panel_head">
+			<h2 class="panel_title" id="dialog_title">배송지 추가</h2>
+			<button class="close" id="btn_close" type="button" aria-label="닫기">✕</button>
+		</div>
+
+		<form id="address_form" class="form" method="dialog">
+			<input type="hidden" name="id" />
+
+			<label class="field">
+				<span class="f_label">배송지명</span>
+				<input class="input" name="name" placeholder="예: 집 / 회사" required />
+			</label>
+
+			<label class="field">
+				<span class="f_label">수령인</span>
+				<input class="input" name="receiver" placeholder="예: 홍길동" required />
+			</label>
+
+			<label class="field">
+				<span class="f_label">전화번호</span>
+				<input class="input" type="tel" inputmode="tel" name="phone" placeholder="예: 010-1234-5678" />
+			</label>
+
+			<!-- 주소 입력 버튼 -->
+			<label class="field">
+				<span class="f_label">주소</span>
+				<div class="input_group">
+					<input class="input" name="addr1" placeholder="도로명 주소" required />
+					<button type="button" id="btn_search_address" class="btn btn_line">주소 찾기</button>
+				</div>
+			</label>
+
+			<label class="field">
+				<span class="f_label">상세주소</span>
+				<input class="input" name="addr2" placeholder="상세주소" />
+			</label>
+
+			<label class="check">
+				<input type="checkbox" name="isDefault" />
+				<span>기본배송지로 설정</span>
+			</label>
+
+			<div class="panel_actions">
+				<button type="button" class="btn" id="btn_cancel">취소</button>
+				<button type="submit" class="btn btn_dark">저장</button>
+			</div>
+		</form>
+	</dialog>
+
+	<script type="text/javascript" th:src="@{/js/address-management.js}"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script>
+</body>
+
+</html>
