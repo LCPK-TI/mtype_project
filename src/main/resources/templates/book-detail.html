@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/product-detail.css}" />
+<script type="text/javascript" th:src="@{/js/product-detail.js}"></script>
+
+<body>
+
+	<main>
+		<div class="top_content">
+			<!--왼쪽 상품이미지 영역-->
+			<div class="left_content">
+				<!--대표 이미지-->
+				<img th:src="@{/img/product_img.png}" />
+			</div>
+			<!--오른쪽 상품 선택 주문관련 영역-->
+			<div class="right_content">
+				<div class="product_header">
+					<div class="product_info">
+						<a href="">스토어명 &gt;</a>
+						<!--상품명, 가격-->
+						<section class="product_summary">
+							<h1 class="product_title">상품명</h1>
+							<p class="book_info">저자 | 출판사 | 출판일</p>
+							<p class="product_price">0,000원</p>
+						</section>
+					</div>
+					<!--찜, 공유버튼-->
+					<div class="product_actions">
+						<button class="wishlist_btn">
+							<img th:src="@{/img/wishlist.png}" width="40px" />
+						</button>
+						<button class="share_btn">
+							<img th:src="@{/img/share_logo.png}" width="40px" />
+						</button>
+					</div>
+				</div>
+				<!--수량-->
+				<div class="quantity">
+					<table>
+						<tr>
+							<td><button>-</button></td>
+							<td>1</td>
+							<td><button>+</button></td>
+						</tr>
+					</table>
+				</div>
+				<!--총 가격-->
+				<div class="total_price">
+					<p>총 상품 금액</p>
+					<b>0,000원</b>
+				</div>
+				<!--구매 버튼 영역-->
+				<div class="order_btns">
+					<button id="cart_btn">장바구니</button>
+					<button id="gift_btn">선물하기</button>
+					<button id="buy_btn">바로구매</button>
+				</div>
+			</div>
+		</div>
+		<section id="middle_content">
+			<!--탭 메뉴-->
+			<nav id="navbar_detail">
+				<ul>
+					<!--현재 영역의 navbar 밑에 선긋기 위한 active 사용-->
+					<!--js로 li 클릭시 navbar active 추가해줘야함-->
+					<li class="active"><a href="#detail">상세 정보</a></li>
+					<li><a href="#review">상품 리뷰 ooo</a></li>
+					<li><a href="#inquiry">상품 문의</a></li>
+				</ul>
+			</nav>
+			<!--상세 정보-->
+			<section id="detail" class="tab_content">
+				<div class="book_des">
+					<h3>책 소개</h3>
+					<hr>
+					<div>책소개글</div>
+				</div>
+				<div class="book_contents">
+					<h3>목차</h3>
+					<hr>
+					<div>목차글</div>
+				</div>
+				<div class="author_intro">
+					<h3>작가 소개</h3>
+					<hr>
+					<div class="author_profile">
+						<h4>작가명</h4>
+						<div>작가소개글</div>
+					</div>
+				</div>
+			</section>
+			<!--리뷰 영역-->
+			<section id="review" class="tab_content">
+				<div class="review_count">
+					<h2>리뷰(ooo)</h2>
+					<span class="rating">★★★★☆</span>
+				</div>
+
+				<!--리뷰 썸네일-->
+				<div class="review_thumbnails">
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지1" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지2" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지3" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지4" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지5" />
+					<button class="more_btn">더보기</button>
+				</div>
+				<!--리뷰 리스트-->
+				<ul class="review_list">
+					<li>
+						<div class="review_header">
+							<span class="stars">★★★★☆</span>
+							<span class="user_id">아이디(se***)</span>
+							<span class="date">작성일</span>
+						</div>
+						<div class="review_content">
+							<div class="review_left">
+								<p class="option">옵션</p>
+								<p class="review_text">리뷰 내용</p>
+							</div>
+							<div class="review_right">
+								<img th:src="@{/img/product_img.png}" />
+							</div>
+						</div>
+					</li>
+				</ul>
+				<!--페이지네이션 데이터 값에 따라 동적으로 변경해야함-->
+				<nav class="pagination">
+					<a href="#">&lt;</a>
+					<a href="#">1</a>
+					<a href="#">2</a>
+					<a href="#">…</a>
+					<a href="#">4</a>
+					<a href="#">&gt;</a>
+				</nav>
+			</section>
+
+			<!--상품 문의-->
+			<section id="inquiry" class="tab_content">
+				<div class="inquiry_top">
+					<h2>상품 문의</h2>
+					<button id="inquiry_btn">문의 작성</button>
+				</div>
+				<!--문의 목록-->
+				<ul>
+					<li>
+						<div class="inquiry_header">
+							<span class="user_id">아이디(se***)</span>
+							<span class="date">작성일</span>
+							<span class="answer">응답 여부</span>
+						</div>
+						<div class="inquiry_content">
+							<p>문의 내용</p>
+						</div>
+					</li>
+				</ul>
+				<!--문의 작성 시 모달-->
+				<div id="write_inquiry">
+					<strong>문의 작성</strong>
+					<form>
+						<div id="inquiry_title">
+							<input type="text" placeholder="제목을 입력하세요" />
+						</div>
+						<div id="inquiry_text">
+							<input type="text" placeholder="문의하실 내용을 입력하세요." />
+						</div>
+						<div id="inquiry_publicity">
+							<input type="checkbox" name="publicity" value="private" />비공개
+						</div>
+
+						<div id="inquiry_btns">
+							<button type="button" id="cancel_inquiry">취소</button>
+							<button type="submit" id="register_inquiry">문의 등록</button>
+						</div>
+					</form>
+				</div>
+			</section>
+
+			<!--판매자 정보-->
+			<section id="seller_info">
+				<h2>판매자 정보</h2>
+				<table>
+					<colgroup>
+						<col style="width: 20%" />
+						<col style="width: 80%" />
+					</colgroup>
+					<tr id="store_name">
+						<td>상호명</td>
+						<td>(주)OOOO</td>
+					</tr>
+					<tr id="store_number">
+						<td>사업자등록번호</td>
+						<td>OOO-OO-OOOO</td>
+					</tr>
+					<tr id="store_rep">
+						<td>대표자</td>
+						<td>홍길동</td>
+					</tr>
+				</table>
+			</section>
+		</section>
+	</main>
+	<!--장바구니 담기 성공 시 모달-->
+	<div id="cart_modal">
+		<div class="modal_text">
+			<p>장바구니에 추가하였습니다.</p>
+			<p>장바구니로 이동하시겠습니까?</p>
+		</div>
+		<div class="modal_btn">
+			<button class="cancel">취소</button>
+			<button class="moveto_cart">확인</button>
+		</div>
+	</div>
+	<!--옵션 미선택 시 장바구니,구매,선물 실패 모달-->
+	<div id="failed_cart">
+		<div class="modal_text">
+			<p>옵션을 선택해주세요</p>
+		</div>
+		<div class="modal_btn">
+			<button id="ok">확인</button>
+		</div>
+	</div>
+	<!--선물하기 클릭 시-->
+	<div id="gift_modal">
+		<span>선물하기</span>
+		<div class="modal_text">
+			<p>
+				친구에게 보낼 선물이 고민될 땐 <br />선물 꾸러미로 담아<br />
+				친구가 선택할 수 있게 해보세요!
+			</p>
+		</div>
+		<div class="modal_btn">
+			<button id="cart_gift">선물 꾸러미 담기</button>
+			<button id="to_gift">바로 보내기</button>
+		</div>
+	</div>
+	<!--선뭂 장바구니 담기 성공 시 모달-->
+	<div id="giftcart_modal">
+		<div class="modal_text">
+			<p>
+				선물 꾸러미에 추가하였습니다.<br />선물 꾸러미로 이동하시겠습니까?
+			</p>
+		</div>
+		<div class="modal_btn">
+			<button class="cancel">취소</button>
+			<button class="moveto_cart">확인</button>
+		</div>
+	</div>
+</body>
+
+</html>

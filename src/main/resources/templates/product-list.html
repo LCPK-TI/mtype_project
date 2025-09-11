@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/product-list.css}" />
+
+<body>
+
+	<div class="content">
+		<aside class="middle_categories">
+			<h1 th:text="${topCategory.categoryName}">상위 카테고리</h1>
+			<hr />
+			<ul>
+				<li th:each="sub: ${midCategories}"
+					th:classappend="${sub.categoryNo==clickedCategory.categoryNo or sub.categoryNo==clickedCategory.parentCategoryNo}?'active'">
+					<a th:href="@{/category/{no}(no=${sub.categoryNo})}" th:text="${sub.categoryName}"></a>
+				</li>
+			</ul>
+		</aside>
+		<main>
+			<nav class="bottom_categories">
+				<ul th:if="${subCategories.size()>0 and clickedCategory.parentCategoryNo!=null}">
+					<!--<li th:classappend="${clickedCategory.depth==2}?'active'">
+						<a>전체</a>
+					</li>-->
+					<li th:each="clickedsub:${subCategories}"
+						th:classappend="${clickedsub.categoryNo==clickedCategory.categoryNo}?'active'">
+						<a th:href="@{/category/{no}(no=${clickedsub.categoryNo})}"
+							th:text="${clickedsub.categoryName}"></a>
+					</li>
+				</ul>
+			</nav>
+			<div class="sort_by">
+				<ul>
+					<li id="new">신상품순</li>
+					<li>리뷰 많은순</li>
+					<li>판매순</li>
+					<li>낮은 가격순</li>
+					<li>높은 가격순</li>
+				</ul>
+			</div>
+			<div class="product_list">
+				<div class="product_card" th:each="product : ${products}">
+					<a th:href="@{/product/{no}(no=${product.productNo})}">
+						<div class="view_img">
+
+							<img class=product_img th:src="${product.getThumbnailUrl()}" alt="상품이미지" />
+
+							<button class="wishlist_btn">
+								<img th:src="@{/img/heart_empty.png}" />
+							</button>
+						</div>
+						<div class="product_info">
+							<p class="store_name">스토어명</p>
+							<p class="product_name" th:text="${product.productName}"></p>
+							<p class="product_price"
+								th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</main>
+	</div>
+
+</body>
+
+</html>

@@ -84,7 +84,10 @@ footer {
 main {
   width: 88%;
 }
-
+#detail_img{
+	width: 50%;
+	text-align: center;
+}
 /*챗봇, 페이지업, 최근본상품 아이콘 css*/
 .chatbot_btn {
   position: fixed;
@@ -135,6 +138,7 @@ main {
 /*상품 정보 css*/
 main {
   padding: 70px;
+ 
 }
 .top_content {
   display: flex;
@@ -144,15 +148,18 @@ main {
 /*왼쪽 위 상품 이미지 영역 css*/
 
 .left_content {
-  width: 100%;
+  width: 1000px;
 }
 .left_content > img {
   width: 90%;
-  height: 60%;
+  aspect-ratio: auto 1 / 1; 
 }
 .bottom_imgs {
   margin-top: 3%;
+  display: flex;
+  gap:5%;
 }
+
 .bottom_imgs img {
   width: 20%;
 }
@@ -185,7 +192,7 @@ main {
 #options option {
   height: 100px;
 }
-.selected_product {
+.selected_card {
   background-color: rgb(241, 241, 241);
   margin-top: 3%;
   padding: 2%;
@@ -280,8 +287,8 @@ main {
   border-bottom: 2px solid black;
 }
 /*상품 상세 이미지*/
-.detail_content img {
-  width: 100%;
+.detail_content {
+	text-align: center;
 }
 
 /*리뷰 영역*/
