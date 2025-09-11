@@ -6,11 +6,13 @@
   <body>
     <main>
       <h2>회원 로그인</h2>
-      <div class="kakao_login">
+      <div class="kakao_login" id="kakao-login-btn">
         <img id="kakao_logo" th:src="@{/img/kakao_logo.png}" />
         <h4>카카오로 로그인하기</h4>
       </div>
     </main>
-    <script type="text/javascript" src="../static/js/header.js"></script>
+    <script type="text/javascript" th:src="@{/js/header.js}"></script>
+	<script type="text/javascript" th:src="@{/js/user-login.js}"></script>
+	<script type="text/javascript" th:src="@{/js/login-handler.js}"></script>
   </body>
 </html>

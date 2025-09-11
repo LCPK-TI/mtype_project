@@ -1,3 +1,9 @@
+.main_mypage {
+  max-width: 1000px;
+  min-width: 700px;
+  padding-top: 30px
+}
+
 /*상품리스트 레이아웃*/
 .products_grid {
   display: grid;
