@@ -1,76 +1,81 @@
 html {
-  font-size: 16px;
+	font-size: 16px;
 }
 
+/*
 body {
   font-family: "Noto Sans KR", sans-serif;
   background-color: white;
   margin: 0 auto;
-  padding: 0;
+  padding: 70px;
   color: black;
   max-width: 1200px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+*/
 
 .layout_middle_mypage {
-  display: flex;
-  justify-content: flex-start;
-  gap: 32px;
-  padding: 16px;
-  flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	gap: 32px;
+	padding: 16px;
+	flex: 1;
+	max-width: 1200px;
+	min-height: 100vh;
+	margin: 0 auto;
 }
 
 /*왼쪽 메뉴*/
 .side_mypage {
-  width: 200px;
-  padding: 40px;
+	width: 200px;
+	padding: 40px;
 }
 
-.side_mypage > div {
-  font-size: 18px;
-  line-height: 1.5;
-  margin-bottom: 40px;
+.side_mypage>div {
+	font-size: 18px;
+	line-height: 1.5;
+	margin-bottom: 40px;
 }
 
-.side_mypage > div b {
-  font-size: 20px;
+.side_mypage>div b {
+	font-size: 20px;
 }
 
 /*메뉴*/
 .side_mypage nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
-.side_mypage nav > ul > li {
-  margin-bottom: 32px;
+.side_mypage nav>ul>li {
+	margin-bottom: 32px;
 }
 
-.side_mypage nav > ul > li > b {
-  display: block;
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 5px;
+.side_mypage nav>ul>li>b {
+	display: block;
+	font-size: 15px;
+	font-weight: 700;
+	margin-bottom: 5px;
 }
 
 .side_mypage nav ul ul li {
-  margin-bottom: 6px;
-  margin-left: 5px;
+	margin-bottom: 6px;
+	margin-left: 5px;
 }
 
 .side_mypage nav ul ul li a {
-  display: block;
-  font-size: 14px;
-  color: gray;
-  text-decoration: none;
-  padding: 4px 0;
-  border-radius: 4px;
-  transition: color 0.2s;
+	display: block;
+	font-size: 14px;
+	color: gray;
+	text-decoration: none;
+	padding: 4px 0;
+	border-radius: 4px;
+	transition: color 0.2s;
 }
 
 .side_mypage nav ul ul li a:hover {
-  color: black;
+	color: black;
 }

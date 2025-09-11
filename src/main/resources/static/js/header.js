@@ -68,6 +68,33 @@ document.addEventListener("DOMContentLoaded", function() {
 	openSearchBtn.addEventListener("click", showSearch);
 	closeSearchBtn.addEventListener("click", closeSearch);
 
+	
+	const jwtToken = localStorage.getItem('jwt');
+	const loginLogoutImg = document.getElementById('login-logout-img');
+	
+	if(loginLogoutImg){
+		if(jwtToken){
+			// 로그인 상태
+			loginLogoutImg.src = "/img/logout.png";
+			// 로그아웃
+			loginLogoutImg.addEventListener('click', function(){
+				
+					localStorage.removeItem('jwt');
+					window.location.href='/';
+				
+			});
+			
+		}else{
+			// 로그아웃 상태
+			loginLogoutImg.src = "/img/login.png";
+			
+			loginLogoutImg.addEventListener('click', function(){
+				window.location.href = '/user/login';
+			});
+		}
+	}
+	
+	
 	/*기념일 클릭시 모달 */
 	const prvAnv = document.getElementById("preview_anniversary");
 	const anvModal = document.getElementById("anniversary_modal");
