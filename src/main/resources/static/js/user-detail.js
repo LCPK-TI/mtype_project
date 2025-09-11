@@ -87,3 +87,41 @@ saveAddrBtn.addEventListener("click", () => {
 
   //서버 전송
 });
+
+
+
+// 회원 탈퇴
+const deleteUserBtn = document.querySelector(".btn_user_delete");
+
+if(deleteUserBtn) {
+	deleteUserBtn.addEventListener("click", function(){
+		if(confirm("정말 MTYPE을 탈퇴하실 건가요?")){
+			const jwtToken = localStorage.getItem("jwt");
+			
+			if(!jwtToken){
+				alert("로그인 정보가 없습니다!");
+				return;
+			}
+			
+			fetch("/api/user/withdraw", {
+				method: "DELETE",
+				headers: {
+					"Authorization": "Bearer " + jwtToken,
+				},
+			})
+			.then(response => {
+				if(response.ok){
+					localStorage.removeItem("jwt");
+					alert("회원 탈퇴처리 되었습니다. 감사합니다.");
+					window.location.href ="/";
+				}else{
+					alert("회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
+				}
+			})
+			.catch(error=>{
+				console.error("Error:", error);
+				alert("회원 탈퇴 오류 발생.");
+			});
+		}
+	});
+}
