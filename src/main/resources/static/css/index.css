@@ -1,6 +1,4 @@
-main{
-	margin-bottom: 5%;
-}
+
 /*main css*/
 /*배너 영역*/
 #mbti_contents {
@@ -9,6 +7,7 @@ main{
   margin: 0 auto;
   overflow-x: hidden;
   text-align: center;
+  position: relative;
 }
 #inner_list {
   display: flex;
@@ -33,17 +32,20 @@ main{
 #button_list {
   position: absolute;
   inset: 0;
+  bottom: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   pointer-events: none; /* 배너 자체 클릭은 그대로 가능 */
   padding: 0 8px;
 }
+#button_list img {
+	width: 25px;
+	height: 25px;
+}
 #button_list button {
   pointer-events: auto; /* 버튼만 클릭 가능 */
-  background: rgba(154, 154, 154, 0.5);
-  color: #fff;
-  font-size: 10pt;
+background: none;
   border: 0;
   width: 36px;
   height: 36px;

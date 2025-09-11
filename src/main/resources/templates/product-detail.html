@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTYPE SHOP</title>
-    <link rel="stylesheet" href="../static/css/productDetail.css" />
-    <script type="text/javascript" src="../static/js/productDetail.js"></script>
-  </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+    <link rel="stylesheet" th:href="@{/css/product-detail.css}" />
+    <script type="text/javascript" th:src="@{/js/product-detail.js}"></script>
   <body>
     
     <main>
@@ -14,11 +11,13 @@
         <!--왼쪽 상품이미지 영역-->
         <div class="left_content">
           <!--대표 이미지-->
-          <img src="../static/img/product_img.png" />
+          <img id="thumbnail" th:src="${product.getThumbnailUrl()}" />
           <!--왼쪽 아래 후보 이미지들 영역-->
           <div class="bottom_imgs">
             <!--후보 이미지1-->
-            <img src="../static/img/product_img.png" />
+			<img th:src="${product.getThumbnailUrl()}" />
+            <img th:each="img : ${imgs}"
+				th:src="${img.imgUrl}" />
           </div>
         </div>
         <!--오른쪽 상품 선택 주문관련 영역-->
@@ -28,17 +27,17 @@
               <a href="">스토어명 &gt;</a>
               <!--상품명, 가격-->
               <section class="product_summary">
-                <h1 class="product_title">상품명</h1>
-                <p class="product_price">0,000원</p>
+                <h3 class="product_title" th:text="${product.productName}">상품명</h3>
+                <p class="product_price" th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</p>
               </section>
             </div>
             <!--찜, 공유버튼-->
             <div class="product_actions">
               <button class="wishlist_btn">
-                <img src="../static/img/wishlist.png" width="40px" />
+                <img th:src="@{/img/wishlist.png}" width="40px" />
               </button>
               <button class="share_btn">
-                <img src="../static/img/share_logo.png" width="40px" />
+                <img th:src="@{/img/share_logo.png}" width="40px" />
               </button>
             </div>
           </div>
@@ -52,26 +51,7 @@
           </div>
           <!--선택된 상품 옵션 여러개 선택할 경우 selected_product 개수 증가-->
           <div class="selected_product">
-            <div class="selected_header">
-              <div>
-                <span>옵션1</span>
-                <span>/</span>
-                <span>옵션2</span>
-              </div>
-              <button>X</button>
-            </div>
-            <div class="price_quantity">
-              <p class="price">가격</p>
-              <div class="quantity">
-                <table>
-                  <tr>
-                    <td><button>-</button></td>
-                    <td>1</td>
-                    <td><button>+</button></td>
-                  </tr>
-                </table>
-              </div>
-            </div>
+            
           </div>
           <!--총 가격-->
           <div class="total_price">
@@ -101,7 +81,7 @@
         <section id="detail" class="tab_content">
           <div class="detail_content">
             <!--상품 상세 이미지 넣을 영역-->
-            <img src="../static/img/product_img.png" />
+            <img id="detail_img" th:src="${product.detailImgUrl}" />
           </div>
         </section>
         <!--리뷰 영역-->
@@ -113,11 +93,11 @@
 
           <!--리뷰 썸네일-->
           <div class="review_thumbnails">
-            <img src="../static/img/product_img.png" alt="리뷰이미지1" />
-            <img src="../static/img/product_img.png" alt="리뷰이미지2" />
-            <img src="../static/img/product_img.png" alt="리뷰이미지3" />
-            <img src="../static/img/product_img.png" alt="리뷰이미지4" />
-            <img src="../static/img/product_img.png" alt="리뷰이미지5" />
+            <img th:src="@{/img/product_img.png}" alt="리뷰이미지1" />
+            <img th:src="@{/img/product_img.png}" alt="리뷰이미지2" />
+            <img th:src="@{/img/product_img.png}" alt="리뷰이미지3" />
+            <img th:src="@{/img/product_img.png}" alt="리뷰이미지4" />
+            <img th:src="@{/img/product_img.png}" alt="리뷰이미지5" />
             <button class="more_btn">더보기</button>
           </div>
           <!--리뷰 리스트-->
@@ -134,7 +114,7 @@
                   <p class="review_text">리뷰 내용</p>
                 </div>
                 <div class="review_right">
-                  <img src="../static/img/product_img.png" />
+                  <img th:src="@{/img/product_img.png}" />
                 </div>
               </div>
             </li>

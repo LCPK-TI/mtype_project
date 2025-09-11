@@ -1,0 +1,72 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="FloatingFragment">
+
+<head>
+	<link th:href="@{/css/floating-buttons.css}" rel="stylesheet" />
+
+</head>
+<!-- Thymeleaf 선언 / FooterFragment 임을 선언-->
+
+<body>
+	<div id="chatbot_btn">
+		<button id="cb_btn">
+			<img th:src="@{/img/chatbot_logo.png}" />
+			<p>선물 추천받기</p>
+		</button>
+		<div id="chatbot_modal">
+			<div id="chatbot_header">
+				<p>MTYPE</p>
+				<button>X</button>
+			</div>
+			<div id="chatbot_main">
+				<div class="chatbot_text">
+					<p class="chatbot_name">MTYPE</p>
+					<div class="chatbot_text_detail">
+						<p>안녕하세요! 무엇을 도와드릴까요?</p>
+					</div>
+				</div>
+
+				<div class="user_text">
+					<p>20대 INFP에게 생일 선물할 상품 추천해줘</p>
+				</div>
+				<div class="chatbot_text">
+					<p class="chatbot_name">MTYPE</p>
+					<div class="chatbot_text_detail">
+						<p>20대 INFP의 생일에 어울리는 상품들을 추천드릴게요!</p>
+					</div>
+				</div>
+
+				<div class="chatbot_product">
+					<div class="chatbot_product_list">
+						<div class="chatbot_product_card">
+							<div class="chatbot_product_img">
+								<img th:src="@{/img/product_img.png}" alt="상품이미지" width="200px" />
+								<button class="chatbot_wishlist_btn">
+									<img th:src="@{/img/heart_empty.png}" width="40px" />
+								</button>
+							</div>
+							<div class="chatbot_product_info">
+								<p class="store_name">스토어명 ></p>
+								<p class="product_name">상품명</p>
+								<p class="product_price">가격</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+			<div id="chatbot_footer">
+				<input type="text" placeholder="추천받고 싶은 내용 또는, MBTI에 대해 궁금한 점을 입력해주세요!" />
+			</div>
+		</div>
+	</div>
+	<button id="page_up">
+		<img id="pugeup_btn" th:src="@{/img/page_up.png}" />
+	</button>
+	<button id="recent_products">
+		<a href=""><img th:src="@{/img/recent_products.png}" /></a>
+	</button>
+	<script th:src="@{/js/floating-buttons.js}"></script>
+</body>
+
+</html>

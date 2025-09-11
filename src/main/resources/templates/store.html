@@ -1,94 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTYPE SHOP</title>
-    <link rel="stylesheet" href="../static/css/store.css" />
-  </head>
-  <body>
-    <header>
-      <h1 id="mtype_logo">MTYPE</h1>
-      <nav class="navbar_menu">
-        <ul>
-          <li><a href="#">베스트</a></li>
-          <li><a href="#">카테고리</a></li>
-          <li><a href="#">MBTI 테스트</a></li>
-        </ul>
-      </nav>
-      <div class="navbar_search">
-        <input type="text" class="search" placeholder="검색어를 입력하세요." />
-        <img src="../static/img/search.png" width="25" />
-      </div>
-      <ul class="navbar_user">
-        <img src="../static/img/mypage.png" width="20" />
-        <img src="../static/img/cart.png" width="20" />
-        <img src="../static/img/wishlist.png" width="20" />
-        <img src="../static/img/login.png" width="20" />
-      </ul>
-    </header>
-    <div class="content">
-      <aside class="top_categories">
-        <h1>스토어명</h1>
-        <hr />
-        <p>상위 카테고리</p>
-        <p>상위 카테고리</p>
-        <p>상위 카테고리</p>
-        <p>상위 카테고리</p>
-      </aside>
-      <main>
-        <div class="product_list">
-          <div class="product_card">
-            <div class="product_img">
-              <img
-                src="../static/img/product_img.png"
-                alt="상품이미지"
-                width="200px"
-              />
-              <button class="wishlist_btn">
-                <img src="../static/img/heart_empty.png" width="40px" />
-              </button>
-            </div>
-            <div class="product_info">
-              <p class="product_name">상품명</p>
-              <p class="product_price">가격</p>
-            </div>
-          </div>
-        </div>
-        <div class="chatbot_btn">
-          <img src="../static/img/chatbot_logo.png" />
-          <p>선물 추천받기</p>
-        </div>
-        <button class="page_up">
-          <img src="../static/img/page_up.png" width="30px" />
-        </button>
-        <button class="recent_products">
-          <img src="../static/img/recent_products.png" width="30px" />
-        </button>
-      </main>
-    </div>
-    <footer>
-      <nav class="footer_navbar">
-        <ul>
-          <li><a href="#">공지사항</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">입점신청</a></li>
-        </ul>
-      </nav>
-      <div class="footer_content">
-        <h1 id="footer_logo">MTYPE</h1>
-        <div>
-          <p>상호명 : MTYPE(주)</p>
-          <p>대표 : TI</p>
-          <p>주소 : 서울 강남구 뱅뱅사거리</p>
-          <p>사업자번호 : 123-45-67890</p>
-        </div>
-        <div>
-          <p>고객만족센터 : 0000-0000</p>
-          <p>운영시간 : 평일 09:00 ~ 18:00 (주말, 공휴일 휴무)</p>
-          <p>점심시간 : 12:00 ~ 13:00</p>
-        </div>
-      </div>
-    </footer>
-  </body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/store.css}" />
+
+<body>
+	<div class="content">
+		<aside class="top_categories">
+			<h1>스토어명</h1>
+			<hr />
+			<p>상위 카테고리</p>
+			<p>상위 카테고리</p>
+			<p>상위 카테고리</p>
+			<p>상위 카테고리</p>
+		</aside>
+		<main>
+			<div class="product_list">
+				<div class="product_card">
+					<div class="product_img">
+						<img th:src="@{/img/product_img.png}" alt="상품이미지" width="200px" />
+						<button class="wishlist_btn">
+							<img th:src="@{/img/heart_empty.png}" width="40px" />
+						</button>
+					</div>
+					<div class="product_info">
+						<p class="product_name">상품명</p>
+						<p class="product_price">가격</p>
+					</div>
+				</div>
+			</div>
+			
+		</main>
+	</div>
+
+</body>
+
 </html>

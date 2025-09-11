@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+
 	/*카테고리*/
 	const cateBtn = document.getElementById("cate_btn");
 	const cateModal = document.getElementById("show_categories");
@@ -7,20 +8,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	function showCategory() {
 		cateModal.style.display = "block";
-		//모달 open 시 스크롤 막기 위해 body에 class 추가
-		document.body.classList.add("modal-open");
 		//모달 열릴 때 첫번째 부모 카테고리의 서브 보여주기
-		const defaultTarget = "outer";
+		const defaultTarget = 1;
 
 		subItems.forEach((sub) => {
 			sub.style.display =
-				sub.getAttribute("data-parent") === defaultTarget ? "block" : "none";
+				sub.getAttribute("data-parent") == defaultTarget ? "block" : "none";
 		});
 
 		// 메인 아이템 배경 초기화 후 "첫번째 부모 카테고리" 강조
 		mainItems.forEach((i) => (i.style.backgroundColor = ""));
 		const defaultItem = document.querySelector(
-			'#main_category li[data-sub="outer"]'
+			'#main_category li[data-sub="1"]'
 		);
 		if (defaultItem) {
 			defaultItem.style.backgroundColor = "#f2f2f2";
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			const target = item.getAttribute("data-sub");
 
 			subItems.forEach((sub) => {
-				if (sub.getAttribute("data-parent") === target) {
+				if (sub.getAttribute("data-parent") == target) {
 					sub.style.display = "block";
 				} else {
 					sub.style.display = "none";
@@ -70,24 +69,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	closeSearchBtn.addEventListener("click", closeSearch);
 
 	/*기념일 클릭시 모달 */
-	const anvBtn = document.getElementById("anniversary_btn");
+	const prvAnv = document.getElementById("preview_anniversary");
 	const anvModal = document.getElementById("anniversary_modal");
-	const img = document.querySelector("#anniversary_btn img");
-	function toggleAnniversary() {
-		
+	const img = document.getElementById("anv_btn");
+	let isOpen = false;
 
-		if (img.src.includes("down.png")) {
-			// 열기
-			anvModal.style.display = "block";
-			img.src = "/img/page_up.png";
-		} else {
-			// 닫기
-			anvModal.style.display = "none";
-			img.src = "/img/down.png";
-		}
-	}
+	prvAnv.addEventListener("click", function() {
+		isOpen = !isOpen;
+		anvModal.style.display = isOpen ? "block" : "none";
+		img.src = isOpen ? "/img/page_up.png" : "/img/down.png";
+	});
 
-	anvBtn.addEventListener("click", toggleAnniversary);
 
 	// 외부 클릭시 모달 닫히게
 	document.addEventListener("click", (e) => {
@@ -96,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		const isClickSearchInside =
 			searchModal.contains(e.target) || openSearchBtn.contains(e.target);
 		const isClickAnniInside =
-			anvModal.contains(e.target) || anvBtn.contains(e.target);
+			anvModal.contains(e.target) || prvAnv.contains(e.target);
 		if (!isClickCateInside) {
 			cateModal.style.display = "none";
 		}
@@ -107,4 +99,4 @@ document.addEventListener("DOMContentLoaded", function() {
 			anvModal.style.display = "none";
 		}
 	});
-});
+	});
