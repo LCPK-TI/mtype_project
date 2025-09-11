@@ -23,7 +23,7 @@ public class CategoryController {
 	@Autowired
 	private ProductService productService;
 	
-	//카테고리 클릭 시 상품 리스트 페이지
+	//일반 카테고리 클릭 시 상품 리스트 페이지
 	@GetMapping("/{categoryno}") //페이지 렌더링
 	public String getCategoryPage(@PathVariable(name="categoryno") Long categoryno,Model model) {
 		//상품 조회 (클릭한 카테고리를 포함한 하위 카테고리 상품 전체 조회)
@@ -58,6 +58,15 @@ public class CategoryController {
 		model.addAttribute("midCategories",midCategories); //상위
 		model.addAttribute("subCategories",subCategories); //하위
 		model.addAttribute("clickedCategory",clicked); //클릭한카테고리
+		return "product-list";
+	}
+	
+	//MBTI 카테고리 클릭시 상품 리스트 페이지
+	@GetMapping("/mbti/{mbti}")
+	public String getMbtiPage(@PathVariable(name="mbti") String mbti,Model model) {
+		//mbti가지는 모든 카테고리 조회
+		List<CategoryEntity> mbtiCategories = categoryService.findMbtiCategoryPath(mbti);
+		model.addAttribute("categories",mbtiCategories);
 		return "product-list";
 	}
 }

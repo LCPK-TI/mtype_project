@@ -29,7 +29,7 @@ public class CategoryEntity {
 	private String categoryName;
 	
 	@Column(name="PARENT_CATEGORY_NO")
-	private Long parentCategoryNo; //NULL 인경우가 있기 때문에 필드 Integer로 지정
+	private Long parentCategoryNo; 
 	
 	@Column(name="MBTI_NM")
 	private String mbtiName;

@@ -27,27 +27,9 @@ public class CategoryService {
 		}
 		return childNos;
 	}
-	
 	public List<CategoryEntity> getAllCategories(){
 		return categoryRepository.findAll();
 	}
-	//특정 카테고리 조회
-//	public CategoryEntity findById(int categoryNo){
-//		return categoryRepository.findById(categoryNo).orElse(null);
-//	}
-//	
-	//클릭한 하위 카테고리 기준 최상위 카테고리 찾기
-//	public CategoryEntity findTopParent(Long categoryNo) {
-//		if(categoryNo==null) {
-//			return findById(categoryNo); //최상위
-//		}
-//		return findTopParent(categoryRepository.findById(category.getParentCategoryNo()).orElse(null));
-//	}
-//	
-//	//특정 최상위 카테고리의 하위 카테고리 리스트
-//	public List<CategoryEntity> findChildren(int parentNo){
-//		return categoryRepository.findByParentCategoryNo(parentNo);
-//	}
 	//클릭한 카테고리
 	public CategoryEntity findById(Long categoryNo) {
 		return categoryRepository.findById(categoryNo).orElse(null);
@@ -64,4 +46,31 @@ public class CategoryService {
 	public List<CategoryEntity> findChildren(Long categoryNo){
 		return categoryRepository.findByParentCategoryNo(categoryNo);
 	}
+	
+	public List<CategoryEntity> findMbtiCategories(String mbti){
+		return categoryRepository.findByMbtiName(mbti);
+	}
+	
+	//mbti 해당하는 카테고리 + 부모 재귀로 조회
+	public List<CategoryEntity> findMbtiCategoryPath(String mbti) {
+        List<CategoryEntity> mbtiCategories = categoryRepository.findByMbtiName(mbti);
+        List<CategoryEntity> result = new ArrayList<>();
+
+        for (CategoryEntity cat : mbtiCategories) {
+            addCategoryWithParents(cat, result);
+        }
+        return result;
+    }
+	private void addCategoryWithParents(CategoryEntity category, List<CategoryEntity> result) {
+        if (!result.contains(category)) {
+            result.add(category);
+        }
+        if (category.getParentCategoryNo() != null) {
+            CategoryEntity parent = categoryRepository.findById(category.getParentCategoryNo()).orElse(null);
+            if (parent != null) {
+                addCategoryWithParents(parent, result);
+            }
+        }
+    }
+
 }

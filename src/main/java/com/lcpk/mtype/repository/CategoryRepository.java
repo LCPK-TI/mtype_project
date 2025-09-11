@@ -13,6 +13,6 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity,Long>{
 	//PARENT_CATEGORY_NO가 parentCategoryNo인 카테고리들만 리스트로 반환
 	List<CategoryEntity> findByParentCategoryNo(Long parentCategoryNo);
 	
-	
-	CategoryEntity findByParentCategoryNoAndDepth(Long parentCategoryNo, int depth);
+	//선택한 mbti를 가진 최하위 카테고리 조회	depth3 또는 depth2 최하위 mbti 카테고리
+	List<CategoryEntity> findByMbtiName(String mbti);
 }
