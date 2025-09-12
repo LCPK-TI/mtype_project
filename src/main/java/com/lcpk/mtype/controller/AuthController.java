@@ -1,6 +1,8 @@
 package com.lcpk.mtype.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,8 @@ public class AuthController {
 			Long kakaoId = e.getKakaoUserId();
 			response.sendRedirect("http://localhost:8888/user/login?status=withdrawn&id="+kakaoId);
 		} catch (Exception e) {
-			response.sendRedirect("http://localhost:8888/user/login?error="+e.getMessage());
+			String errorMessage = URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8);
+			response.sendRedirect("http://localhost:8888/user/login?error="+errorMessage);
 		}
 		
 		
