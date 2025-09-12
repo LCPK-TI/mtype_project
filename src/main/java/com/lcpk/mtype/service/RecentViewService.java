@@ -29,7 +29,7 @@ public class RecentViewService {
 	
 	// 트랜잭션 처리. 하나라도 실패하면 취소.
 	@Transactional
-	public void addRecentView(String token, Long productId) {
+	public void addRecentView(String token, Long productNo) {
 		// jwt 토큰 해독 => 사용자의 카카오 번호 알아냄
 		Long kakaoUserId = jwtTokenProvider.getKakaoUserIdFromToken(token);
 		
@@ -38,7 +38,7 @@ public class RecentViewService {
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 		
 		// 상품 번호로 상품 정보를 찾음.
-		ProductEntity product = productRepository.findById(productId)
+		ProductEntity product = productRepository.findById(productNo)
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
 		
 		// 최근 본 상품 테이블에 이미 같은 상품이 존재하는지 확인
