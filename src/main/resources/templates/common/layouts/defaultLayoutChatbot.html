@@ -4,7 +4,7 @@
 
 <!--공통 JS / CSS 영역을 관리하는 환경 영역-->
 
-<head th:replace="common/fragments/config :: ConfigFragment">
+<head th:replace="~{common/fragments/config :: ConfigFragment}">
 	<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">MTYPE SHOP</title>
 </head>
 
@@ -17,7 +17,7 @@
 	<th:block layout:fragment="Content"></th:block>
 
 	<!--Floating 버튼: 로그인 여부 상관없이 하단 고정 -->
-	<div th:replace="~{common/fragments/floatingBtns :: FloatingFragment}"></div>
+	<div th:replace="~{common/fragments/floating-buttons :: FloatingFragment}"></div>
 	<!--Footer 영역을 참조합니다.-->
 	<footer th:replace="~{common/fragments/footer :: FooterFragment}"></footer>
 </body>

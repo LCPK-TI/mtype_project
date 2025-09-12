@@ -3,140 +3,129 @@
 
 <head>
 	<link th:href="@{/css/header.css}" rel="stylesheet" />
-	
+
 </head>
 
 <body>
 	<header>
-	<a href="/"><h1 id="mtype_logo">MTYPE</h1></a>
-	<nav class="navbar_menu">
-		<ul>
-			<li><a href="/products/best">베스트</a></li>
-			<li id="cate_btn"><a href="#">카테고리</a>	
-				<div id="show_categories">
-					<div class="category_menu">
-						<!--왼쪽 메인 카테고리-->
-						<ul id="main_category">
-							<li data-sub="outer">
-								<a href="">남성<span>&#8250;</span></a>
-							</li>
-							<li data-sub="tshirt">
-								<a href="">여성<span>&#8250;</span></a>
-							</li>
-							<li data-sub="kids">
-								<a href="">아동 <span>&#8250;</span></a>
-							</li>
-							<li data-sub="fashion">
-								<a href="">패션잡화 <span>&#8250;</span></a>
-							</li>
-						</ul>
-						<!-- 오른쪽 서브 카테고리 -->
-						<ul id="sub_category">
-							<li data-parent="outer"><a href="">아우터</a></li>
-							<li data-parent="tshirt"><a href="">티셔츠</a></li>
-							<li data-parent="kids"><a href="">니트</a></li>
-							<li data-parent="fashion"><a href="">팬츠</a></li>
-							<li data-parent="outer"><a href="">셔츠</a></li>
-							<li data-parent="outer"><a href="">홈웨어</a></li>
-							<li data-parent="outer"><a href="">이너웨어</a></li>
-						</ul>
-					</div>
-				</div></li>
-			<li><a href="#">MBTI 테스트</a></li>
-		</ul>
-	</nav>
-
-	<div class="navbar_search">
-		<input type="text" id="search" placeholder="검색어를 입력하세요." />
-		<img id="search_btn" th:src="@{/img/search.png}"/>
-		<div id="show_search">
-			<div id="search_main">
-				<div id="popular_search">
-					<div id="popular_header">
-						<b>인기 검색어</b>
-					</div>
-					<div class="rank_search">
-						<span>1</span>
-						<span>검색어</span>
-					</div>
-					<div class="rank_search">
-						<span>2</span>
-						<span>검색어</span>
-					</div>
-					<div class="rank_search">
-						<span>3</span>
-						<span>검색어</span>
-					</div>
-					<div class="rank_search">
-						<span>4</span>
-						<span>검색어</span>
-					</div>
-					<div class="rank_search">
-						<span>5</span>
-						<span>검색어</span>
-					</div>
-				</div>
-				<div id="recent_search">
-					<div id="search_header">
-						<b>최근 검색어</b>
-						<button>전체 삭제</button>
-					</div>
-					<div class="search_content">
-						<span>검색어</span>
-						<button>X</button>
-					</div>
-				</div>
-			</div>
-			<div id="search_footer">
-				<button>닫기</button>
-			</div>
-		</div>
-	</div>
-	<div id="navbar_anniversary">
-		<p>홍길동</p>
-		<p>결혼기념일</p>
-		<b>D-DAY</b>
-		<button id="anniversary_btn">
-			<img id="anv_down" th:src="@{/img/down.png}" />
-		</button>
-		<div id="anniversary_modal">
+		<a href="/">
+			<h1 id="mtype_logo">MTYPE</h1>
+		</a>
+		<nav class="navbar_menu">
 			<ul>
-				<li>
-					<div class="anniverary_card">
-						<div class="anniverary_left">
-							<span>생일</span>&nbsp; <span>오늘</span><br />
-							<p>홍길동 생일</p>
-						</div>
-						<div class="anniverary_right">
-							<h2>D-day</h2>
-							<button>선물 추천받기</button>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="anniverary_card">
-						<div class="anniverary_left">
-							<span>결혼기념일</span>&nbsp; <span>오늘</span><br />
-							<p>김길동 결혼기념일</p>
-						</div>
-						<div class="anniverary_right">
-							<h2>D-day</h2>
-							<button>선물 추천받기</button>
-						</div>
-					</div>
-				</li>
+				<li><a href="/product/best">베스트</a></li>
+				<li id="cate_btn">카테고리 </li>
+				<li><a href="#">MBTI 테스트</a></li>
 			</ul>
+		</nav>
+		<div id="show_categories">
+			<div class="category_menu">
+				<!--왼쪽 메인 카테고리-->
+				<ul id="main_category">
+					<li th:each="category : ${categories}" th:if="${category.parentCategoryNo==null}" th:data-sub="${category.categoryNo}">
+						<a th:href="@{/category/{no}(no=${category.categoryNo})}" th:text="${category.categoryName}"></a>
+					</li>
+				</ul>
+				<!-- 오른쪽 서브 카테고리 -->
+				<ul id="sub_category">
+					<li th:each="category : ${categories}" th:if="${category.parentCategoryNo != null}" th:data-parent="${category.parentCategoryNo}" style="display:none;">
+						<a th:href="@{/category/{no}(no=${category.categoryNo})}" th:text="${category.categoryName}"></a>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<ul class="navbar_user">
-		<img th:src="@{/img/mypage.png}"/>
-		<img th:src="@{/img/cart.png}"/>
-		<img th:src="@{/img/wishlist.png}" />
-		<img th:src="@{/img/login.png}"/>
-	</ul>
-	
+
+		<div class="navbar_search">
+			<input type="text" id="search" placeholder="검색어를 입력하세요." />
+			<img id="search_btn" th:src="@{/img/search.png}" />
+			<div id="show_search">
+				<div id="search_main">
+					<div id="popular_search">
+						<div id="popular_header">
+							<b>인기 검색어</b>
+						</div>
+						<div class="rank_search">
+							<span>1</span>
+							<span>검색어</span>
+						</div>
+						<div class="rank_search">
+							<span>2</span>
+							<span>검색어</span>
+						</div>
+						<div class="rank_search">
+							<span>3</span>
+							<span>검색어</span>
+						</div>
+						<div class="rank_search">
+							<span>4</span>
+							<span>검색어</span>
+						</div>
+						<div class="rank_search">
+							<span>5</span>
+							<span>검색어</span>
+						</div>
+					</div>
+					<div id="recent_search">
+						<div id="search_header">
+							<b>최근 검색어</b>
+							<button>전체 삭제</button>
+						</div>
+						<div class="search_content">
+							<span>검색어</span>
+							<button>X</button>
+						</div>
+					</div>
+				</div>
+				<div id="search_footer">
+					<button>닫기</button>
+				</div>
+			</div>
+		</div>
+		<div id="navbar_anniversary">
+			<div id="preview_anniversary">
+				<p>홍길동</p>
+				<p>결혼기념일</p>
+				<b>D-DAY</b>
+				<img id="anv_btn" th:src="@{/img/down.png}" />
+			</div>
+			<div id="anniversary_modal">
+				<ul>
+					<li>
+						<div class="anniverary_card">
+							<div class="anniverary_left">
+								<span>생일</span><br />
+								<p>홍길동 생일</p>
+							</div>
+							<div class="anniverary_right">
+								<h2>D-day</h2>
+								<button>선물 추천받기</button>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="anniverary_card">
+							<div class="anniverary_left">
+								<span>결혼기념일</span><br />
+								<p>김길동 결혼기념일</p>
+							</div>
+							<div class="anniverary_right">
+								<h2>D-day</h2>
+								<button>선물 추천받기</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<ul class="navbar_user">
+			<img th:src="@{/img/mypage.png}" />
+			<img th:src="@{/img/cart.png}" />
+			<img th:src="@{/img/wishlist.png}" />
+			<img id="login-logout-img" th:src="@{/img/login.png}"/>
+		</ul>
+
 	</header>
-	<script th:src="@{/js/header.js}" defer></script> <!-- defer 꼭 넣기 -->
+	<script th:src="@{/js/header.js}"></script>
 </body>
 
 </html>

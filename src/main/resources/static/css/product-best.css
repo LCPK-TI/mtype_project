@@ -1,0 +1,83 @@
+
+/*main css*/
+main {
+  height: 800px;
+  width: 88%;
+}
+.content {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+.content h1 {
+  font-size: 15pt;
+}
+.content hr {
+  background: rgb(219, 219, 219);
+  height: 1px;
+  border: 0;
+}
+/*aside css*/
+.top_categories {
+  width: 200px;
+}
+.top_categories h1 {
+  padding-bottom: 20px;
+  cursor: auto;
+  font-size: 18pt;
+}
+.top_categories p {
+  font-size: 11pt;
+  color: gray;
+  padding: 5px;
+}
+.top_categories p:hover {
+  color: black;
+  cursor: pointer;
+}
+.product_list {
+  margin-top: 50px;
+}
+/*상품정보*/
+.product_card {
+  width: 17%;
+}
+.product_img div {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  position: absolute;
+}
+.product_img {
+  position: relative; /*하트 버튼의 부모태그*/
+}
+.product_img > img {
+  width: 100%;
+  height: 100%;
+}
+.wishlist_btn img {
+  width: 40px;
+}
+.wishlist_btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.product_info p {
+  margin: 2px;
+  font-size: 10pt;
+}
+.product_info p:nth-child(1) {
+  font-weight: bold;
+  cursor: pointer;
+}
+.product_info p:nth-child(3) {
+  font-weight: bold;
+}

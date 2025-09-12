@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>로그인 시도 중...</title>
+</head>
+<body>
+	로그인 처리 중입니다... (JWT 토큰 저장하는 페이지)
+	
+	<script>
+		(function(){
+			const urlParams = new URLSearchParams(window.location.search);
+			const jwtToken = urlParams.get("token");
+			
+			if(jwtToken){
+				localStorage.setItem('jwt', jwtToken);
+				//alert("로그인 성공! 메인 페이지로 이동합니다.");
+				window.location.href = '/';
+			}else{
+				alert("로그인 실패");
+				window.location.href = '/user/login'
+			}
+		})();
+	</script>
+</body>
+</html>
