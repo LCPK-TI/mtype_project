@@ -1,0 +1,155 @@
+.gift-container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.gift-text {
+	font-size: 20px;
+	color: black;
+	margin-bottom: 50px;
+}
+
+.gift-container h3 {
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+
+/* 상품정보 */
+.product-info {
+	padding: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	/* 내부 요소들이 가로로 배치 */
+	align-items: flex-start;
+	/* 이미지와 리스트를 위쪽 정렬 */
+	gap: 30px;
+	/* 이미지와 리스트 사이 간격 */
+}
+
+.product-img {
+	width: 200px;
+	height: 200px;
+	background-color: #ddd;
+	margin-bottom: 15px;
+}
+
+.product-info ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.product-info ul li {
+	margin-bottom: 20px;
+}
+
+/* 받는사람 */
+#recipient {
+	width: 300px;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 40px;
+	border: none;
+	border-bottom: 1px solid black;
+}
+
+/* 선물메시지 */
+.gift {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.check-icon {
+	width: 16px;
+	height: 16px;
+}
+
+.gift strong {
+	font-size: 20px;
+	color: black;
+	margin-right: 10px;
+}
+
+.s-btn {
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	color: #888;
+	font-size: 14px;
+	padding-left: 10px;
+}
+
+.box-group {
+	display: flex;
+	gap: 40px;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.left {
+	flex: 1;
+	max-width: 50%;
+}
+
+.right {
+	flex: 1;
+}
+
+.box {
+	flex: 1;
+	height: 300px;
+	background-color: #ddd;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 0;
+}
+
+.image-options {
+	display: flex;
+	gap: 15px;
+	width: 100%;
+}
+
+.op-box {
+	width: 100%;
+	/* 박스 크기 비율 조절 */
+	height: 100px;
+	background-color: #ddd;
+	color: black;
+	text-align: center;
+	line-height: 1.4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.message-box {
+	width: 100%;
+	height: 415px;
+	background-color: #ddd;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn-wrapper {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.gift-btn {
+	width: 20%;
+	background-color: #66728a;
+	color: white;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 15px;
+	margin-bottom: 50px;
+}

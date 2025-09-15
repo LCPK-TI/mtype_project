@@ -1,0 +1,142 @@
+.seller-container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.seller-text {
+	text-align: center;
+	font-size: 30px;
+	color: black;
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+/* 회원가입 폼 */
+.total-form {
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+	width: 500px;
+	margin: 0 auto;
+}
+
+.reg-form {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+}
+
+.reg-form span {
+	font-size: 18px;
+	font-weight: bold;
+	position: relative;
+}
+
+.reg-form span::after {
+	content: " *";
+	color: red;
+	font-size: 15px;
+	position: absolute;
+	margin-top: 8px;
+	margin-left: 5px;
+}
+
+.reg-form input[type="text"],
+.reg-form input[type="password"] {
+	padding: 10px;
+	font-size: 15px;
+	border: 1px solid #ccc;
+	margin-right: 20%;
+}
+
+.total-form p {
+	font-size: 10px;
+	color: #888;
+	margin-top: 5px;
+}
+
+.address-group {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+#search-address {
+	padding: 10px 15px;
+	font-size: 15px;
+	background-color: black;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#search-address:hover {
+	background-color: #444;
+}
+
+/* 개인정보 동의 */
+.agree-form {
+	display: block;
+	margin: auto;
+	margin-top: 40px;
+	width: 100%;
+	max-width: 1050px;
+}
+
+.agreement-header {
+	padding: 10px;
+	font-size: 20px;
+}
+
+.agreement-group {
+	border: 1px solid black;
+}
+
+.agreement-check {
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+#agree {
+	margin-left: 30px;
+}
+
+.agreement-content {
+	padding: 10px;
+}
+
+.detail-content {
+	margin-bottom: 15px;
+}
+
+.agreement-content ol {
+	margin-left: 30px;
+}
+
+.agreement-content ul {
+	margin-left: 30px;
+}
+
+.list-end {
+	margin-bottom: 15px;
+}
+
+.agreement-notice {
+	font-weight: bold;
+	text-align: center;
+}
+
+.reg-btn {
+	display: block;
+	margin: 50px auto;
+	width: 20%;
+	padding: 10px;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
