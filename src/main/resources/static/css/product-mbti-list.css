@@ -17,53 +17,61 @@ main {
   border: 0;
 }
 /*aside css*/
-.middle_categories {
+.mbti_categories {
   width: 200px;
 }
-.middle_categories h1 {
+.mbti_categories h1 {
   padding-bottom: 20px;
   cursor: auto;
   font-size: 18pt;
 }
-.middle_categories ul {
+
+.mbti_categories >ul {
 	padding: 0;
 }
-.middle_categories li{
-  font-size: 12pt;
- 
+.mbti_categories a{
+	color: rgb(150, 150, 150);
+}
+.mbti_categories li:hover {
+  color: black;
+  cursor: pointer;
+}
+.mbti_categories li {
+  color: gray;
+}
+
+.mbti_category{
+  font-size: 11pt;
   height:30px;
-  padding: 5px;
+  padding:10px;
 }
-.middle_categories a{
-	color: rgb(150, 150, 150);
+.mbti{
+	margin-bottom: 5px;
+	padding: 5px;
 }
-.middle_categories li:hover {
-  color: black;
-  cursor: pointer;
+.mbti li{
+	color: gray;
 }
-/*하위 카테고리 css*/
-.bottom_categories {
-  border-bottom: 1px solid rgb(219, 219, 219);
+.mbti ul {
+	padding:0;
 }
-.bottom_categories ul {
-  display: flex;
-  padding-left: 0px;
+.mbti.active {
+	color: black;
 }
-.bottom_categories li {
-  font-size: 12pt;
-  margin-right: 50px;
-  color: rgb(192, 192, 192);
-  cursor: pointer;
+.category_list {
+	display: none;
 }
-.bottom_categories a{
-	color: rgb(150, 150, 150);
+.category_list.active {
+  display: block;
 }
-.bottom_categories li:hover {
-  color: black;
-  cursor: pointer;
+.mbti div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
-
+.mbti div img{
+	width: 15px;
+}
 /*정렬 기준 css*/
 .sort_by {
   margin-bottom: 50px;
@@ -118,12 +126,6 @@ main {
 
 .active a{
 	color:black;
-}
-.active li{
-	color:black;
-}
-li.active {
-	color: black;
 }
 
 

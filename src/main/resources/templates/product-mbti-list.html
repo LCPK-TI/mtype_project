@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/product-list.css}" />
+<link rel="stylesheet" th:href="@{/css/product-mbti-list.css}" />
+
+<body>
+	<div class="content">
+		<aside class="mbti_categories">
+			<h1 th:text="${mbti} != null ? 'MBTI-' + ${mbti} : 'MBTI'">상위 카테고리</h1>
+			<hr />
+			<ul>
+				<li class="mbti" th:each="mbti : ${mbtiGroups}">
+					<div>
+						<span th:text="${mbti}"></span>
+						<img th:src="@{/img/down.png}">
+					</div>
+					
+					<ul class="category_list">
+						<li class="mbti_category" th:each="c : ${categoryMap[__${mbti}__]}">
+							<a th:href="@{/category/mbti/{no}(no=${c.categoryNo})}" th:text="${c.categoryName}"></a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</aside>
+		<main>
+			<div class="sort_by">
+				<ul>
+					<li id="new">신상품순</li>
+					<li>리뷰 많은순</li>
+					<li>판매순</li>
+					<li>낮은 가격순</li>
+					<li>높은 가격순</li>
+				</ul>
+			</div>
+			<div class="product_list">
+				<div class="product_card" th:each="product : ${products}">
+					<a th:href="@{/product/{no}(no=${product.productNo})}">
+						<div class="view_img">
+
+							<img class=product_img th:src="${product.getThumbnailUrl()}" alt="상품이미지" />
+
+							<button class="wishlist_btn">
+								<img th:src="@{/img/heart_empty.png}" />
+							</button>
+						</div>
+						<div class="product_info">
+							<p class="store_name">스토어명</p>
+							<p class="product_name" th:text="${product.productName}"></p>
+							<p class="product_price"
+								th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</main>
+	</div>
+	<script type="text/javascript" th:src="@{/js/product-mbti-list.js}"></script>
+</body>
+
+</html>
