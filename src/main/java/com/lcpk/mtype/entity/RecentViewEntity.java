@@ -36,16 +36,16 @@ public class RecentViewEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRODUCT_NO", nullable = false)
-	private ProductEntity product;
+	private ProductEntity productEntity;
 	
 	@CreationTimestamp
 	@Column(name = "VIEW_DATE")
 	private LocalDateTime viewDate;
 	
 	@Builder
-	public RecentViewEntity(User user, ProductEntity product) {
+	public RecentViewEntity(User user, ProductEntity productEntity) {
 		this.user = user;
-		this.product = product;
+		this.productEntity = productEntity;
 	}
 	
 	public void updateViewDate() {

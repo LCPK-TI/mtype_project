@@ -1,11 +1,14 @@
 package com.lcpk.mtype.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lcpk.mtype.config.jwt.JwtTokenProvider;
+import com.lcpk.mtype.dto.RecentViewDto;
 import com.lcpk.mtype.entity.ProductEntity;
 import com.lcpk.mtype.entity.RecentViewEntity;
 import com.lcpk.mtype.entity.User;
@@ -38,11 +41,11 @@ public class RecentViewService {
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 		
 		// 상품 번호로 상품 정보를 찾음.
-		ProductEntity product = productRepository.findById(productNo)
+		ProductEntity productEntity = productRepository.findById(productNo)
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
 		
 		// 최근 본 상품 테이블에 이미 같은 상품이 존재하는지 확인
-		Optional<RecentViewEntity> existingView = recentViewRepository.findByUserAndProduct(user, product);
+		Optional<RecentViewEntity> existingView = recentViewRepository.findByUserAndProductEntity(user, productEntity);
 		if(existingView.isPresent()) {
 			// 테이블에 이미 존재하면, 조회 일자를 갱신
 			existingView.get().updateViewDate();
@@ -60,8 +63,20 @@ public class RecentViewService {
 		// 새로 조회한 상품 insert
 		RecentViewEntity newView = RecentViewEntity.builder()
 				.user(user)
-				.product(product)
+				.productEntity(productEntity)
 				.build();
 		recentViewRepository.save(newView);
+	}
+	
+	// 사용자 최근 본 상품 목록 조회
+	public List<RecentViewDto> getRecentViews(String token) {
+		Long kakaoUserId = jwtTokenProvider.getKakaoUserIdFromToken(token);
+		User user = userRepository.findByKakaoUserId(kakaoUserId).orElseThrow(() -> new IllegalArgumentException("사용자 정보가 존재하지 않습니다."));
+		
+		List<RecentViewEntity> recentViews = recentViewRepository.findByUserOrderByViewDateDesc(user);
+		
+		return recentViews.stream()
+				.map(RecentViewDto::new)
+				.collect(Collectors.toList());
 	}
 }

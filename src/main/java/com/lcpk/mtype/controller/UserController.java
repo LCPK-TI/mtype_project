@@ -56,4 +56,8 @@ public class UserController {
 		return ResponseEntity.ok(newJwtToken);
 	}
 	
+	@GetMapping("/user/recent-views")
+	public String recentViewsPage() {
+		return "user-recent-view-product";
+	}
 }

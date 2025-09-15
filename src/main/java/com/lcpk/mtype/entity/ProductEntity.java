@@ -42,8 +42,8 @@ public class ProductEntity {
 	@Column(name="PRODUCT_PRICE")
 	private int productPrice;
 	
-	@Column(name="PRODUCT_STOCK")
-	private int productStock;
+//	@Column(name="PRODUCT_STOCK")
+//	private int productStock;
 	
 	@Column(name="DETAIL_IMG_URL")
 	private String detailImgUrl;
@@ -101,13 +101,13 @@ public class ProductEntity {
 		this.productPrice = productPrice;
 	}
 
-	public int getProductStock() {
-		return productStock;
-	}
-
-	public void setProductStock(int productStock) {
-		this.productStock = productStock;
-	}
+//	public int getProductStock() {
+//		return productStock;
+//	}
+//
+//	public void setProductStock(int productStock) {
+//		this.productStock = productStock;
+//	}
 
 	public String getDetailImgUrl() {
 		return detailImgUrl;
