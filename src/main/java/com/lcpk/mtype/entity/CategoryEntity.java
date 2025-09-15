@@ -1,17 +1,28 @@
 package com.lcpk.mtype.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="PRODUCT_CATEGORY_TB")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryEntity {
@@ -28,43 +39,23 @@ public class CategoryEntity {
 	@Column(name="CATEGORY_NM")
 	private String categoryName;
 	
-	@Column(name="PARENT_CATEGORY_NO")
-	private Long parentCategoryNo; 
 	
 	@Column(name="MBTI_NM")
 	private String mbtiName;
 
 	@Column(name="DEPTH")
 	private int depth;
-	public int getDepth() {
-		return depth;
-	}
-	public Long getCategoryNo() {
-		return categoryNo;
-	}
-	public void setCategoryNo(Long categoryNo) {
-		this.categoryNo = categoryNo;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public Long getParentCategoryNo() {
-		return parentCategoryNo;
-	}
-	public void setParentCategoryNo(Long parentCategoryNo) {
-		this.parentCategoryNo = parentCategoryNo;
-	}
-	public String getMbtiName() {
-		return mbtiName;
-	}
-	public void setMbtiName(String mbtiName) {
-		this.mbtiName = mbtiName;
-	}
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
+	
+	@OneToMany(mappedBy ="category",fetch=FetchType.LAZY)
+	private List<ProductEntity> products;
+	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PARENT_CATEGORY_NO")
+    private CategoryEntity parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<CategoryEntity> children = new ArrayList<>();
+
+	
 }
 	

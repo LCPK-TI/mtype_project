@@ -16,31 +16,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="PRODUCT_IMG_TB")
+@Table(name="PRODUCT_OPTION_TB")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductImgEntity {
-
+public class ProductOptionEntity {
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="product_img_seq_gen")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="productOption_seq_gen")
 	@SequenceGenerator(
-			name="product_img_seq_gen",
-			sequenceName="PRODUCT_IMG_SQ",
+			name="productOption_seq_gen",
+			sequenceName="PRODUCT_OPTION_SQ",
 			allocationSize=1)
-	@Column(name="IMG_NO")
-	private Long imgNo;
+	@Column(name="PRODUCT_OPTION_NO")
+	private Long productOptionNo;
 	
-	@Column(name="IMG_URL")
-	private String imgUrl;
+	//productOption(N) productEntity(1)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PRODUCT_NO" , nullable = false)
+	private ProductEntity product; 
 	
-	@Column(name="IS_MAIN")
-	private String isMain;
-	
-	 // 상품과 ManyToOne
+	// ProductOption(N) Option(1)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="PRODUCT_NO")
-    private ProductEntity product;
-
+    @JoinColumn(name = "OPTION_NO", nullable = false)
+    private OptionEntity option;
 }

@@ -11,13 +11,13 @@
         <!--왼쪽 상품이미지 영역-->
         <div class="left_content">
           <!--대표 이미지-->
-          <img id="thumbnail" th:src="${product.getThumbnailUrl()}" />
+          <img id="thumbnail" th:src="${product.mainImageUrl}" />
           <!--왼쪽 아래 후보 이미지들 영역-->
           <div class="bottom_imgs">
             <!--후보 이미지1-->
-			<img th:src="${product.getThumbnailUrl()}" />
-            <img th:each="img : ${imgs}"
-				th:src="${img.imgUrl}" />
+			<img th:src="${product.mainImageUrl}" />
+            <img th:each="img : ${product.subImageUrls}"
+				th:src="${img}" />
           </div>
         </div>
         <!--오른쪽 상품 선택 주문관련 영역-->
