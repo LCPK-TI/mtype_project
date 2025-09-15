@@ -1,121 +1,113 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"></html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTYPE</title>
-    <!-- <link rel="stylesheet" href="css/user-mypage-template-basicCss.css" />
-    <link rel="stylesheet" href="css/user-point-history.css" /> -->
-    <link
-      rel="stylesheet"
-      th:href="@{../static/css/user-mypage-template-basicCss.css}"
-    />
-    <link rel="stylesheet" th:href="@{../static/css/user-point-history.css}" />
-  </head>
-  <body>
-    <header>header</header>
-    <div class="layout_middle_mypage">
-      <aside class="side_mypage">
-        <div><b>이름</b>님<br />안녕하세요</div>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/user-mypage-template-basicCss.css}">
+<link rel="stylesheet" th:href="@{/css/user-point-history.css}">
 
-        <!--마이페이지 메뉴 (세로)-->
-        <nav>
-          <ul>
-            <li>
-              <b>나의 쇼핑정보</b>
-              <ul>
-                <li><a href="#">주문배송조회</a></li>
-                <li><a href="#">취소/교환/반품 내역</a></li>
-                <li><a href="#">상품 리뷰</a></li>
-              </ul>
-            </li>
-            <li>
-              <b>선물함</b>
-              <ul>
-                <li><a href="#">나의 선물함</a></li>
-              </ul>
-            </li>
-            <li>
-              <b>나의 정보</b>
-              <ul>
-                <li><a href="#">회원정보 수정</a></li>
-                <li><a href="#">배송지 관리</a></li>
-                <li><a href="#">기념일 관리</a></li>
-                <li><a href="#">적립 내역</a></li>
-              </ul>
-            </li>
-            <li>
-              <b>고객센터</b>
-              <ul>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">상품 Q&A 내역</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+<body>
+	<div class="layout_middle_mypage">
+		<aside class="side_mypage">
+			<div><b>이름</b>님<br />안녕하세요</div>
 
-      <main class="main_mypage">
-        <section class="point_history">
-          <h2 class="page_title">적립 내역</h2>
+			<!--마이페이지 메뉴 (세로)-->
+			<nav>
+				<ul>
+					<li>
+						<b>나의 쇼핑정보</b>
+						<ul>
+							<li><a href="#">주문배송조회</a></li>
+							<li><a href="#">취소/교환/반품 내역</a></li>
+							<li><a href="#">상품 리뷰</a></li>
+						</ul>
+					</li>
+					<li>
+						<b>선물함</b>
+						<ul>
+							<li><a href="#">나의 선물함</a></li>
+						</ul>
+					</li>
+					<li>
+						<b>나의 정보</b>
+						<ul>
+							<li><a href="#">회원정보 수정</a></li>
+							<li><a href="#">배송지 관리</a></li>
+							<li><a href="#">기념일 관리</a></li>
+							<li><a href="#">적립 내역</a></li>
+						</ul>
+					</li>
+					<li>
+						<b>고객센터</b>
+						<ul>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">공지사항</a></li>
+							<li><a href="#">상품 Q&A 내역</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</aside>
 
-          <!--연도별로 구분-->
-          <div class="year_history">
-            <h3 class="year_title">2025</h3>
-            <ul class="point_list">
-              <li>
-                <div class="point_top">
-                  <span class="date">08.22</span>
-                  <span class="point_title">주문 적립</span>
-                  <span class="point_plus">+50</span>
-                </div>
-                <div class="product_name">상품명</div>
-              </li>
-              <li>
-                <div class="point_top">
-                  <span class="date">08.21</span>
-                  <span class="point_title">주문 사용</span>
-                  <span class="point_minus">-300</span>
-                </div>
-                <div class="product_name">상품명</div>
-              </li>
-              <li>
-                <div class="point_top">
-                  <span class="date">08.20</span>
-                  <span class="point_title">리뷰 적립</span>
-                  <span class="point_plus">+50</span>
-                </div>
-                <div class="product_name">상품명</div>
-              </li>
-              <li>
-                <div class="point_top">
-                  <span class="date">08.20</span>
-                  <span class="point_title">주문 적립</span>
-                  <span class="point_plus">+50</span>
-                </div>
-                <div class="product_name">상품명</div>
-              </li>
-            </ul>
-          </div>
+		<main class="main_mypage">
+			<section class="point_history">
+				<h2 class="page_title">적립 내역</h2>
 
-          <div class="year_history">
-            <h3 class="year_title">2024</h3>
-            <ul class="point_list">
-              <li>
-                <div class="point_top">
-                  <span class="date">12.31</span>
-                  <span class="point_title">주문 적립</span>
-                  <span class="point_plus">+100</span>
-                </div>
-                <span class="product_name">상품명</span>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </main>
-    </div>
-    <footer>footer</footer>
-  </body>
+				<!--연도별로 구분-->
+				<div class="year_history">
+					<h3 class="year_title">2025</h3>
+					<ul class="point_list">
+						<li>
+							<div class="point_top">
+								<span class="date">08.22</span>
+								<span class="point_title">주문 적립</span>
+								<span class="point_plus">+50</span>
+							</div>
+							<div class="product_name">상품명</div>
+						</li>
+						<li>
+							<div class="point_top">
+								<span class="date">08.21</span>
+								<span class="point_title">주문 사용</span>
+								<span class="point_minus">-300</span>
+							</div>
+							<div class="product_name">상품명</div>
+						</li>
+						<li>
+							<div class="point_top">
+								<span class="date">08.20</span>
+								<span class="point_title">리뷰 적립</span>
+								<span class="point_plus">+50</span>
+							</div>
+							<div class="product_name">상품명</div>
+						</li>
+						<li>
+							<div class="point_top">
+								<span class="date">08.20</span>
+								<span class="point_title">주문 적립</span>
+								<span class="point_plus">+50</span>
+							</div>
+							<div class="product_name">상품명</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="year_history">
+					<h3 class="year_title">2024</h3>
+					<ul class="point_list">
+						<li>
+							<div class="point_top">
+								<span class="date">12.31</span>
+								<span class="point_title">주문 적립</span>
+								<span class="point_plus">+100</span>
+							</div>
+							<span class="product_name">상품명</span>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</main>
+	</div>
+	<footer>footer</footer>
+</body>
+
 </html>

@@ -1,208 +1,197 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"></html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTYPE</title>
-    <!-- <link rel="stylesheet" href="css/user-mypage-template-basicCss.css" /> -->
-    <!-- <link rel="stylesheet" th:href="@{css/user-mypage-template-basicCss.css}" /> -->
-    <!-- <link rel="stylesheet" href="css/user-mypage.css" /> -->
-    <!-- <link rel="stylesheet" th:href="@{css/user-mypage.css}" /> -->
-    <link
-      rel="stylesheet"
-	  th:href="@{../static/css/user-mypage-template-basicCss.css}"
-    />
-    <link rel="stylesheet" th:href="@{../static/css/user-mypage.css}"/>
-  </head>
-  <body>
-    <header>header</header>
-    <div class="layout_middle_mypage">
-      <aside class="side_mypage">
-        <div><b>이름</b>님<br />안녕하세요</div>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
 
-        <!--마이페이지 좌측 메뉴 (세로)-->
-        <nav>
-          <ul>
-            <li>
-              <b>나의 쇼핑정보</b>
-              <ul>
-                <li><a href="#">주문배송조회</a></li>
-                <li><a href="#">취소/교환/반품 내역</a></li>
-                <li><a href="#">상품 리뷰</a></li>
-              </ul>
-            </li>
-            <li>
-              <b>선물함</b>
-              <ul>
-                <li><a href="#">나의 선물함</a></li>
-              </ul>
-            </li>
-            <li>
-              <b>나의 정보</b>
-              <ul>
-                <li><a href="#">회원정보 수정</a></li>
-                <li><a href="#">배송지 관리</a></li>
-                <li><a href="#">기념일 관리</a></li>
-                <li><a href="#">적립 내역</a></li>
-              </ul>
-            </li>
-            <li>
-              <b>고객센터</b>
-              <ul>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">상품 Q&A 내역</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+<link rel="stylesheet" th:href="@{/css/user-mypage-template-basicCss.css}" />
+<link rel="stylesheet" th:href="@{/css/user-mypage.css}" />
+<body>
+	<div class="layout_middle_mypage">
+		<aside class="side_mypage">
+			<div><b>이름</b>님<br />안녕하세요</div>
 
-      <!-- Main : 마이페이지 우측 컨텐츠-->
-      <main class="main_mypage">
-        <!--포인트, 리뷰-->
-        <section class="user_stats">
-          <div class="stat_box">
-            <span class="stat_label">적립금</span>
-            <strong class="stat_value">0P</strong>
-          </div>
-          <div class="stat_box">
-            <span class="stat_label">작성한 리뷰</span>
-            <strong class="stat_value">0건</strong>
-          </div>
-        </section>
+			<!--마이페이지 좌측 메뉴 (세로)-->
+			<nav>
+				<ul>
+					<li>
+						<b>나의 쇼핑정보</b>
+						<ul>
+							<li><a href="#">주문배송조회</a></li>
+							<li><a href="#">취소/교환/반품 내역</a></li>
+							<li><a href="#">상품 리뷰</a></li>
+						</ul>
+					</li>
+					<li>
+						<b>선물함</b>
+						<ul>
+							<li><a href="#">나의 선물함</a></li>
+						</ul>
+					</li>
+					<li>
+						<b>나의 정보</b>
+						<ul>
+							<li><a href="#">회원정보 수정</a></li>
+							<li><a href="#">배송지 관리</a></li>
+							<li><a href="#">기념일 관리</a></li>
+							<li><a href="#">적립 내역</a></li>
+						</ul>
+					</li>
+					<li>
+						<b>고객센터</b>
+						<ul>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">공지사항</a></li>
+							<li><a href="#">상품 Q&A 내역</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</aside>
 
-        <!-- 기념일, 캘린더 -->
-        <section class="anniversary">
-          <div class="anniv_header">
-            <h2>기념일</h2>
-            <button class="btn_add_anniv">+ 기념일 등록</button>
-          </div>
-          <div class="anniv_content">
-            <div class="anniv_calendar_area">
-              <div class="calendar">달력자리</div>
-            </div>
-            <div class="anniv_list">
-              <div class="anniv_item">
-                <div class="anniv_top">
-                  <span class="anniv_keyword">생일</span>
-                  <span class="anniv_when">오늘</span>
-                </div>
-                <div class="anniv_name"><strong>홍길동 생일</strong></div>
-                <button class="btn_anniv_gift">선물 추천받기</button>
-              </div>
-              <div class="anniv_item">
-                <div class="anniv_top">
-                  <span class="anniv_keyword">결혼</span>
-                  <span class="anniv_when">2일후</span>
-                </div>
-                <div class="anniv_name"><strong>김길동 결혼기념일</strong></div>
-                <button class="btn_anniv_gift">선물 추천받기</button>
-              </div>
-              <div class="anniv_item">
-                <div class="anniv_top">
-                  <span class="anniv_keyword">연애</span>
-                  <span class="anniv_when">5일후</span>
-                </div>
-                <div class="anniv_name"><strong>최길동 1주년</strong></div>
-                <button class="btn_anniv_gift">선물 추천받기</button>
-              </div>
-            </div>
-          </div>
-        </section>
+		<!-- Main : 마이페이지 우측 컨텐츠-->
+		<main class="main_mypage">
+			<!--포인트, 리뷰-->
+			<section class="user_stats">
+				<div class="stat_box">
+					<span class="stat_label">적립금</span>
+					<strong class="stat_value">0P</strong>
+				</div>
+				<div class="stat_box">
+					<span class="stat_label">작성한 리뷰</span>
+					<strong class="stat_value">0건</strong>
+				</div>
+			</section>
 
-        <!--나의 위시-->
-        <section class="mypage_wish">
-          <div class="section_head">
-            <h2>나의 위시</h2>
-            <button class="btn_more">더보기 ></button>
-          </div>
-          <div class="product_list">
-            <div class="product_card">
-              <div class="product_img">
-                <img th:src="@{../static/img/.}" alt="상품이미지" width="200px" />
-                <button class="wishlist_btn">
-                  <img th:src="@{../static/img/.}" width="40px" />
-                </button>
-              </div>
-              <div class="product_info">
-                <p class="store_name">스토어명 ></p>
-                <p class="product_name">상품명</p>
-                <p class="product_price">가격</p>
-              </div>
-            </div>
-            <div class="product_card">
-              <div class="product_img">
-                <img th:src="@{../static/img/.}" alt="상품이미지" width="200px" />
-                <button class="wishlist_btn">
-                  <img th:src="@{../static/img/.}" width="40px" />
-                </button>
-              </div>
-              <div class="product_info">
-                <p class="store_name">스토어명 ></p>
-                <p class="product_name">상품명</p>
-                <p class="product_price">가격</p>
-              </div>
-            </div>
-          </div>
-        </section>
+			<!-- 기념일, 캘린더 -->
+			<section class="anniversary">
+				<div class="anniv_header">
+					<h2>기념일</h2>
+					<button class="btn_add_anniv">+ 기념일 등록</button>
+				</div>
+				<div class="anniv_content">
+					<div class="anniv_calendar_area">
+						<div class="calendar">달력자리</div>
+					</div>
+					<div class="anniv_list">
+						<div class="anniv_item">
+							<div class="anniv_top">
+								<span class="anniv_keyword">생일</span>
+								<span class="anniv_when">D-DAY</span>
+							</div>
+							<div class="anniv_name"><strong>홍길동 생일</strong></div>
+							<button class="btn_anniv_gift">선물 추천받기</button>
+						</div>
+						<div class="anniv_item">
+							<div class="anniv_top">
+								<span class="anniv_keyword">결혼</span>
+								<span class="anniv_when">D-2</span>
+							</div>
+							<div class="anniv_name"><strong>김길동 결혼기념일</strong></div>
+							<button class="btn_anniv_gift">선물 추천받기</button>
+						</div>
+						<div class="anniv_item">
+							<div class="anniv_top">
+								<span class="anniv_keyword">연애</span>
+								<span class="anniv_when">D-5</span>
+							</div>
+							<div class="anniv_name"><strong>최길동 1주년</strong></div>
+							<button class="btn_anniv_gift">선물 추천받기</button>
+						</div>
+					</div>
+				</div>
+			</section>
 
-        <!-- 최근 주문 -->
-        <section class="recent_orders">
-          <div class="section_head">
-            <h2>최근 주문</h2>
-            <button class="btn_more">더보기 ></button>
-          </div>
-          <div class="recent_order_list">
-            <div class="order_item">
-              <span class="order_date">주문일</span>
-              <div class="order_main_img"></div>
-              <span class="order_product_name">상품명</span>
-              <span class="order_cnt"></span>
-              <span class="order_price">30,000원</span>
-            </div>
-            <div class="order_item">
-              <span class="order_date">주문일</span>
-              <div class="order_main_img"></div>
-              <span class="order_product_name">상품명</span>
-              <span class="order_cnt">외 3건</span>
-              <span class="order_price">120,000원</span>
-            </div>
-            <div class="order_item">
-              <span class="order_date">주문일</span>
-              <div class="order_main_img"></div>
-              <span class="order_product_name">상품명</span>
-              <span class="order_cnt">외 2건</span>
-              <span class="order_price">110,000원</span>
-            </div>
-          </div>
-        </section>
+			<!--나의 위시-->
+			<section class="mypage_wish">
+				<div class="section_head">
+					<h2>나의 위시</h2>
+					<button class="btn_more">더보기 ></button>
+				</div>
+				<div class="product_list">
+					<div class="product_card">
+						<div class="product_img">
+							<img th:src="@{/img/product_img.png}" alt="상품이미지" width="200px" />
+							<button class="wishlist_btn">
+								<img th:src="@{/img/.}" width="40px" />
+							</button>
+						</div>
+						<div class="product_info">
+							<p class="store_name">스토어명 ></p>
+							<p class="product_name">상품명</p>
+							<p class="product_price">가격</p>
+						</div>
+					</div>
+					<div class="product_card">
+						<div class="product_img">
+							<img th:src="@{/img/.}" alt="상품이미지" width="200px" />
+							<button class="wishlist_btn">
+								<img th:src="@{/img/.}" width="40px" />
+							</button>
+						</div>
+						<div class="product_info">
+							<p class="store_name">스토어명 ></p>
+							<p class="product_name">상품명</p>
+							<p class="product_price">가격</p>
+						</div>
+					</div>
+				</div>
+			</section>
 
-        <!-- 최근 본 상품 -->
-        <section class="recent_views">
-          <div class="section_head">
-            <h2>최근 본 상품</h2>
-            <button class="btn_more">더보기 ></button>
-          </div>
-          <div class="product_list">
-            <div class="product_card">
-              <div class="product_img">
-                <img th:src="@{../static/img/.}" alt="상품이미지" width="200px" />
-                <button class="wishlist_btn">
-                  <img th:src="@{../static/img/.}" width="40px" />
-                </button>
-              </div>
-              <div class="product_info">
-                <p class="store_name">스토어명 ></p>
-                <p class="product_name">상품명</p>
-                <p class="product_price">가격</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-    <footer>footer</footer>
-  </body>
+			<!-- 최근 주문 -->
+			<section class="recent_orders">
+				<div class="section_head">
+					<h2>최근 주문</h2>
+					<button class="btn_more">더보기 ></button>
+				</div>
+				<div class="recent_order_list">
+					<div class="order_item">
+						<span class="order_date">주문일</span>
+						<div class="order_main_img"></div>
+						<span class="order_product_name">상품명</span>
+						<span class="order_cnt"></span>
+						<span class="order_price">30,000원</span>
+					</div>
+					<div class="order_item">
+						<span class="order_date">주문일</span>
+						<div class="order_main_img"></div>
+						<span class="order_product_name">상품명</span>
+						<span class="order_cnt">외 3건</span>
+						<span class="order_price">120,000원</span>
+					</div>
+					<div class="order_item">
+						<span class="order_date">주문일</span>
+						<div class="order_main_img"></div>
+						<span class="order_product_name">상품명</span>
+						<span class="order_cnt">외 2건</span>
+						<span class="order_price">110,000원</span>
+					</div>
+				</div>
+			</section>
+
+			<!-- 최근 본 상품 -->
+			<section class="recent_views">
+				<div class="section_head">
+					<h2>최근 본 상품</h2>
+					<button class="btn_more">더보기 ></button>
+				</div>
+				<div class="product_list">
+					<div class="product_card">
+						<div class="product_img">
+							<img th:src="@{/img/.}" alt="상품이미지" width="200px" />
+							<button class="wishlist_btn">
+								<img th:src="@{/img/.}" width="40px" />
+							</button>
+						</div>
+						<div class="product_info">
+							<p class="store_name">스토어명 ></p>
+							<p class="product_name">상품명</p>
+							<p class="product_price">가격</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+</body>
+
 </html>
