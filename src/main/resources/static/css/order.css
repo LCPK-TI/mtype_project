@@ -1,16 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: white;
-  margin: 0;
-  padding: 0;
-}
-
 .order-container {
   width: 100%;
   max-width: 1200px;
@@ -24,7 +11,7 @@ body {
   margin-bottom: 50px;
 }
 
-h3 {
+.order-container h3 {
   font-size: 20px;
   margin-bottom: 15px;
 }
@@ -55,12 +42,12 @@ label::after {
   margin-bottom: 15px;
 }
 
-ul {
+.product-info ul {
   list-style-type: none;
   padding: 0;
 }
 
-ul li {
+.product-info ul li {
   margin-bottom: 20px;
 }
 
@@ -84,7 +71,7 @@ ul li {
   margin-bottom: 8px;
 }
 
-input {
+.order-container input {
   width: 50%;
   padding: 10px;
   margin: 10px;
@@ -112,7 +99,7 @@ button:hover {
 .payment-info {
   padding: 20px;
   margin-bottom: 30px;
-  width: 50%;
+  width: 30%;
 }
 
 .payment-details {
@@ -157,11 +144,10 @@ button:hover {
   cursor: pointer;
   background-color: white;
   font-size: 15px;
-  margin-top: 30px;
 }
 
 .use-btn {
-  margin-left: 368px;
+  margin-left: 55%;
 }
 
 .use-all-btn {
@@ -174,10 +160,9 @@ button:hover {
 }
 
 .points-info {
-  font-size: 15px;
+  font-size: 13px;
   color: #999;
-  margin-top: -10px;
-  margin-left: 430px;
+  text-align: right;
 }
 
 /* 결제 예상 금액 */
