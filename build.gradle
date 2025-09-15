@@ -45,9 +45,18 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.apache.commons:commons-pool2' // 커넥션 풀
-    implementation 'com.fasterxml.jackson.core:jackson-databind' // JSON 직렬화 
+    implementation 'com.fasterxml.jackson.core:jackson-databind' // JSON 직렬화
+    // JWT 라이브러리 추가
+   	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'	// JSON 직렬화 지원
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ["-parameters"]
+}
+

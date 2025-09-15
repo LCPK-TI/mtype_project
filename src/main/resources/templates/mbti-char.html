@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/mbti-char.css}">
+
+<body>
+	<main>
+		<!-- MBTI(유형별 특징) 페이지 -->
+		<div class="mbti-container">
+			<section>
+				<div class="mbti-text">
+					<h1>MBTI 유형별 특징</h1>
+				</div>
+			</section>
+
+			<section class="mbti">
+				<img th:src="@{/img/mbtiimage.png}" alt="MBTI 유형별 이미지" />
+			</section>
+		</div>
+	</main>
+
+</body>
+
+</html>
