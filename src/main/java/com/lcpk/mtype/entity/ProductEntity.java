@@ -52,11 +52,12 @@ public class ProductEntity {
 	@Column(name = "DETAIL_IMG_URL")
 	private String detailImgUrl;
 
-	// ProductImg와 OneToMany 관계(상품 하나에 여러 이미지)
-	@OneToMany(mappedBy = "product")
-	private List<ProductImgEntity> images = new ArrayList<>();
+    // ProductImg와 OneToMany 관계(상품 하나에 여러 이미지)
+    @OneToMany(mappedBy = "product")
+    private List<ProductImgEntity> images = new ArrayList<>();
+    
+    //product(1) productOption(n)
+    @OneToMany(mappedBy="product") //cascade = CascadeType.ALL, orphanRemoval = true
+    private List<ProductOptionEntity> productOptions = new ArrayList<>();
 
-	// Product(1) ProductSku(N)
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ProductSkuEntity> skus = new ArrayList<>();
 }

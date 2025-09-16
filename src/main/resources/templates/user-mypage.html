@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" th:href="@{/css/user-mypage-template-basicCss.css}" />
 <link rel="stylesheet" th:href="@{/css/user-mypage.css}" />
+
 <body>
 	<div class="layout_middle_mypage">
 		<aside class="side_mypage">
@@ -112,7 +113,7 @@
 						<div class="product_img">
 							<img th:src="@{/img/product_img.png}" alt="상품이미지" width="200px" />
 							<button class="wishlist_btn">
-								<img th:src="@{/img/.}" width="40px" />
+								<img th:src="@{/img/product_img.png}" width="40px" />
 							</button>
 						</div>
 						<div class="product_info">
@@ -123,9 +124,9 @@
 					</div>
 					<div class="product_card">
 						<div class="product_img">
-							<img th:src="@{/img/.}" alt="상품이미지" width="200px" />
+							<img th:src="@{/img/product_img.png}" alt="상품이미지" width="200px" />
 							<button class="wishlist_btn">
-								<img th:src="@{/img/.}" width="40px" />
+								<img th:src="@{/img/product_img.png}" width="40px" />
 							</button>
 						</div>
 						<div class="product_info">
@@ -172,8 +173,32 @@
 			<section class="recent_views">
 				<div class="section_head">
 					<h2>최근 본 상품</h2>
-					<button class="btn_more">더보기 ></button>
+					<button id="more-recent-views-btn" class="btn_more">더보기 ></button>
 				</div>
+				<div class="products_grid" th:if="${not #lists.isEmpty(recentProductsPreview)}">
+				    <div class="product_card" th:each="product : ${recentProductsPreview}">
+				        <div class="product_img">
+				            <a th:href="@{/product/{no}(no=${product.productNo})}">
+				                <img th:src="${product.thumbnailUrl}" th:alt="${product.productName}" />
+				            </a>
+				            <button class="wishlist_btn">
+				                <img th:src="@{/img/heart_empty.png}" width="32px"/>
+				            </button>
+				        </div>
+				        <div class="product_info">
+				            <p class="store_name" th:text="${product.storeName}">스토어명 ></p>
+				            <p class="product_name">
+				                <a th:href="@{/product/{no}(no=${product.productNo})}" th:text="${product.productName}">상품명</a>
+				            </p>
+				            <p class="product_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">가격</p>
+				        </div>
+				    </div>
+				</div>
+
+				<div th:if="${#lists.isEmpty(recentProductsPreview)}">
+					<p>최근 본 상품이 없습니다.</p>
+				</div>
+				<!--
 				<div class="product_list">
 					<div class="product_card">
 						<div class="product_img">
@@ -189,9 +214,11 @@
 						</div>
 					</div>
 				</div>
+				-->
 			</section>
 		</main>
 	</div>
+	
+	<script th:src="@{/js/user-mypage.js}"></script>
 </body>
-
 </html>

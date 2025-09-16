@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/seller-login.css}">
+
+<body>
+	<main>
+		<div class="seller-container">
+			<section>
+				<div class="seller-text">
+					<h1>판매자 센터</h1>
+				</div>
+			</section>
+
+			<section class="group">
+				<form id="login-form">
+					<input type="text" id="seller-id" name="sellerId" placeholder="아이디를 입력해주세요" required />
+					<input type="password" id="seller-pw" name="sellerPw" placeholder="비밀번호를 입력해주세요" required />
+					<button type="submit" id="login">로그인</button>
+				</form>
+
+				<a href="/sellers/signup" class="registration">회원가입</a>
+				<a href="" class="select-id">아이디 찾기</a>
+				<a href="" class="reset-pw">비밀번호 재설정</a>
+			</section>
+		</div>
+	</main>
+
+	<!-- 로그인 실패 시 경고창 -->
+	<script th:if="${error != null}" th:inline="javascript">
+		alert('[[${error}]]');
+	</script>
+
+	<!-- JWT토큰 저장 -->
+	<script>
+		document.getElementById('login-form').addEventListener('submit', async function(e) {
+		    e.preventDefault();
+
+		    const sellerId = document.getElementById('seller-id').value;
+		    const sellerPw = document.getElementById('seller-pw').value;
+
+		    try {
+		      const response = await fetch('/sellers/login', {
+		        method: 'POST',
+		        headers: {
+		          'Content-Type': 'application/x-www-form-urlencoded',
+		        },
+		        body: `sellerId=${encodeURIComponent(sellerId)}&sellerPw=${encodeURIComponent(sellerPw)}`,
+		        credentials: 'include'  // 쿠키를 포함
+		      });
+
+		      if (response.status === 302 || response.status === 200) {
+		        // 로그인 성공
+		        window.location.href = "/sellers/index";
+		      } else {
+		        const result = await response.json();
+		        alert(result.error || "로그인 실패");
+		      }
+		    } catch (err) {
+		      alert("서버 통신 중 오류가 발생했습니다.");
+		      console.error(err);
+		    }
+		  });
+		
+		// === 여기에 토큰 재발급 fetch 유틸 함수 추가 ===
+		    async function fetchWithAuth(url, options = {}) {
+		        let accessToken = localStorage.getItem('accessToken');
+		        const refreshToken = localStorage.getItem('refreshToken');
+
+		        const authOptions = {
+		            ...options,
+		            headers: {
+		                ...options.headers,
+		                'Authorization': `Bearer ${accessToken}`,
+		                'Content-Type': 'application/json',
+		            }
+		        };
+
+		        let response = await fetch(url, authOptions);
+
+		        if (response.status === 401 && refreshToken) {
+		            // accessToken이 만료된 경우 refresh로 재발급
+		            const refreshResponse = await fetch('/sellers/refresh', {
+		                method: 'POST',
+		                headers: {
+		                    'Content-Type': 'application/x-www-form-urlencoded',
+		                },
+		                body: `refreshToken=${encodeURIComponent(refreshToken)}`
+		            });
+
+		            if (refreshResponse.ok) {
+		                const data = await refreshResponse.json();
+		                localStorage.setItem('accessToken', data.accessToken);
+
+		                // 재시도
+		                authOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
+		                response = await fetch(url, authOptions);
+		            } else {
+		                // 재발급 실패 → 로그인 페이지로 이동
+		                alert("로그인 세션이 만료되었습니다. 다시 로그인 해주세요.");
+		                localStorage.removeItem('accessToken');
+		                localStorage.removeItem('refreshToken');
+		                window.location.href = "/sellers/login";
+		            }
+		        }
+
+		        return response;
+		    }
+			
+			
+	</script>
+
+
+
+</body>
+
+</html>

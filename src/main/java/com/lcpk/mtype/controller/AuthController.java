@@ -23,9 +23,8 @@ public class AuthController {
 	@GetMapping("/oauth/kakao/redirect")
 	public void kakaoRedirect(@RequestParam("code") String code, HttpServletResponse response) throws IOException{
 		try {
-			String jwtToken = kakaoService.kakaoLogin(code);
-			String redirectUrl = "http://localhost:8888/user/login-success?token=" + jwtToken;
-			response.sendRedirect(redirectUrl);
+			kakaoService.kakaoLogin(code, response);
+			response.sendRedirect("/");
 			
 		} catch (WithdrawnUserException e) {
 			// 탈퇴 회원의 로그인 시도

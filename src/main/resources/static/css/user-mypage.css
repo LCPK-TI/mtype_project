@@ -150,10 +150,46 @@
 }
 
 /*상품 카드 리스트*/
-.product_list {
-  display: flex;
+.product_list, .products_grid {
+	display: grid;
+	  grid-template-columns: repeat(4, 1fr); /*가로 4줄*/
   gap: 20px;
   flex-wrap: wrap;
+}
+.product_card a {
+  display: flex;
+  flex-direction: column; /* 자식 요소(이미지, 정보)를 세로로 정렬 */
+  text-decoration: none;
+  color: inherit;
+  width: 100%;  /* 부모(.product_card)의 너비를 채움 */
+  height: 100%; /* 부모(.product_card)의 높이를 채움 */
+}
+
+/* 상품 카드 스타일은 너비만 지정. */
+.product_card {
+  width: 250px;
+  background: white;
+}
+
+.product_img {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: none;
+}
+
+.product_img > img {
+	display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 이미지 전체가 보이도록 크기 조절 */
+}
+
+/*
+.product_card a{
+	text-decoration: none;
+	color: inherit;
 }
 .product_card {
   width: 200px;
@@ -172,8 +208,23 @@
 .product_img > img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain !important;
 }
+.product_img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product_img > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+*/
 .wishlist_btn {
   position: absolute;
   bottom: 8px;

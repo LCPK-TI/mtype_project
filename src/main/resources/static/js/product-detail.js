@@ -1,5 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// 장바구니 담기 모달
+	// 최근 본 상품
+	// 토큰 가져오기(로그인)
+	if (window.isUserLoggedIn) {
+	       
+	       //로그인 상태일 때만, 최근 본 상품 저장을 실행
+	       const pathParts = window.location.pathname.split('/');
+	       const productNO = pathParts[pathParts.length - 1];
+
+	       if (productNO && !isNaN(productNO)) {
+	           fetch(`/api/recent-views/${productNO}`, {
+	               method: "POST"
+	           })
+	           .then(response => {
+	               if (response.ok) {
+	                   console.log(`상품번호 ${productNO} 조회 기록 저장 성공`);
+	               } else {
+	                   console.error("조회 기록 저장 실패. 상태: ", response.status);
+	               }
+	           })
+	           .catch(error => {
+	               console.error("조회 기록 저장 중 네트워크 오류 발생", error);
+	           });
+	       }
+	   } else {
+	       // 로그아웃 상태일 경우
+	       console.log("로그인하지 않은 사용자. 최근 본 상품을 저장하지 않습니다.");
+	   }
+	
+	
+	//장바구니 담기 성공
 	const cartBtn = document.getElementById("cart_btn");
 	const closeCart = document.getElementsByClassName("cancel")[0];
 	const closeGiftCart = document.getElementsByClassName("cancel")[1];

@@ -22,14 +22,14 @@ body {
 	gap: 32px;
 	padding: 16px;
 	flex: 1;
-	max-width: 1200px;
+	max-width: 1500px;
 	min-height: 100vh;
 	margin: 0 auto;
 }
 
 /*왼쪽 메뉴*/
 .side_mypage {
-	width: 200px;
+	min-width: 150px;
 	padding: 40px;
 }
 
