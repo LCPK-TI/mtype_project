@@ -23,4 +23,7 @@ public interface RecentViewRepository extends JpaRepository<RecentViewEntity, Lo
 	
 	// 조회 기록 검색
 	List<RecentViewEntity> findByUserOrderByViewDateDesc(User user);
+	
+	// 마이페이지에 최근 본 상품 viewDate 기준 최신순으로 상위 4개만 조회
+	List<RecentViewEntity> findTop4ByUserOrderByViewDateDesc(User user);
 }

@@ -8,6 +8,13 @@
 	<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">MTYPE SHOP</title>
 </head>
 
+<script th:inline="javascript">
+			/*<![CDATA[*/
+			// 서버의 ${isLoggedIn} 값을 JavaScript의 window.isUserLoggedIn 변수로 만듭니다.
+			window.isUserLoggedIn = /*[[${isLoggedIn}]]*/ false;
+			/*]]>*/
+		</script>
+
 <body>
 	<!--Header 영역을 참조합니다.-->
 	<header th:replace="~{common/fragments/header :: HeaderFragment}"></header>

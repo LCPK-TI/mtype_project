@@ -1,37 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// 최근 본 상품
 	// 토큰 가져오기(로그인)
-	const jwtToken = localStorage.getItem("jwt");
-			
-			// 토큰 없으면 로그인 안한 사용자. => 최근 본 상품 저장 X
-			if(!jwtToken){
-				console.log("로그인 하지 않은 사용자. 최근 본 상품 저장 X");
-				return;
-			}
-			
-			// url 경로를 쪼개서 상품 번호 가져옴.
-			const pathParts = window.location.pathname.split('/');
-			const productNO = pathParts[pathParts.length-1];	// 배열 마지막 요소가 상품 번호
-			
-			if(productNO && !isNaN(productNO)){
-				// 상품 번호가 실존하고, 숫자이면
-				fetch(`/api/recent-views/${productNO}`, {
-					method: "POST",
-					headers: {
-						"Authorization": "Bearer " + jwtToken,
-					},
-				})
-				.then(response =>{
-					if(response.ok){
-						console.log(`상품번호 ${productNO} 조회 기록 저장 성공`);
-					}else{
-						console.error("조회 기록 저장 실패.. 상태: ", response.status);
-					}
-				})
-				.catch(error => {
-					console.error("조회 기록 저장 중 네트워크 오류 발생", error);
-				});
-			}
+	if (window.isUserLoggedIn) {
+	       
+	       //로그인 상태일 때만, 최근 본 상품 저장을 실행
+	       const pathParts = window.location.pathname.split('/');
+	       const productNO = pathParts[pathParts.length - 1];
+
+	       if (productNO && !isNaN(productNO)) {
+	           fetch(`/api/recent-views/${productNO}`, {
+	               method: "POST"
+	           })
+	           .then(response => {
+	               if (response.ok) {
+	                   console.log(`상품번호 ${productNO} 조회 기록 저장 성공`);
+	               } else {
+	                   console.error("조회 기록 저장 실패. 상태: ", response.status);
+	               }
+	           })
+	           .catch(error => {
+	               console.error("조회 기록 저장 중 네트워크 오류 발생", error);
+	           });
+	       }
+	   } else {
+	       // 로그아웃 상태일 경우
+	       console.log("로그인하지 않은 사용자. 최근 본 상품을 저장하지 않습니다.");
+	   }
 	
 	
 	//장바구니 담기 성공

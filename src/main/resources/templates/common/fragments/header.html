@@ -118,10 +118,15 @@
 			</div>
 		</div>
 		<ul class="navbar_user">
-			<img th:src="@{/img/mypage.png}" />
-			<img th:src="@{/img/cart.png}" />
-			<img th:src="@{/img/wishlist.png}" />
-			<img id="login-logout-img" th:src="@{/img/login.png}"/>
+			<img id="mypage-icon" th:src="@{/img/mypage.png}"/>
+			<img id="cart-icon" th:src="@{/img/cart.png}"/>
+			<img id="wishlist-icon" th:src="@{/img/wishlist.png}"/>
+			<th:block th:if="${isLoggedIn}">
+				<img id="logout-btn" th:src="@{/img/logout.png}"/>
+			</th:block>
+			<th:block th:unless="${isLoggedIn}">
+				<img id="login-btn" th:src="@{/img/login.png}"/>
+			</th:block>
 		</ul>
 
 	</header>

@@ -3,6 +3,7 @@ package com.lcpk.mtype.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,7 @@ public class RecentViewController {
 	private final RecentViewService recentViewService;
 	
 	@PostMapping("/{productNo}")
-	public ResponseEntity<Void> addRecentView(@RequestHeader("Authorization") String accessToken, @PathVariable("productNo") Long productNo){
-		String token = accessToken.substring(7);
+	public ResponseEntity<Void> addRecentView( @CookieValue(name = "jwtToken", required = false) String token, @PathVariable("productNo") Long productNo){
 		recentViewService.addRecentView(token, productNo);
 		
 		return ResponseEntity.ok().build();

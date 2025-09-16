@@ -79,4 +79,17 @@ public class RecentViewService {
 				.map(RecentViewDto::new)
 				.collect(Collectors.toList());
 	}
+	
+	// 최근 본 상품 미리보기 (4개)
+	public List<RecentViewDto> getRecentViewPreview(String token){
+		Long kakaoUserId = jwtTokenProvider.getKakaoUserIdFromToken(token);
+		User user = userRepository.findByKakaoUserId(kakaoUserId)
+				.orElseThrow(() -> new IllegalArgumentException("사용자 정보가 존재하지 않습니다."));
+		
+		List<RecentViewEntity> recentViews = recentViewRepository.findTop4ByUserOrderByViewDateDesc(user);
+		
+		return recentViews.stream()
+				.map(RecentViewDto::new)
+				.collect(Collectors.toList());
+	}
 }
