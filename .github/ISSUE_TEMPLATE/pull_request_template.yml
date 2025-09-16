@@ -1,0 +1,37 @@
+name: "📦 Pull Request"
+description: "작업 내용을 간단히 작성하고 리뷰 요청"
+title: "[PR] "
+labels: ["PR"]
+assignees: []
+
+body:
+  - type: input
+    attributes:
+      label: "#️⃣ 관련 이슈"
+      description: "연결할 이슈 번호를 적어주세요. ex) #12"
+      placeholder: "#이슈번호"
+
+  - type: textarea
+    attributes:
+      label: "📝 작업 내용 요약"
+      description: "무엇을, 왜 수정했는지 간단히 작성"
+      placeholder: "예) 장바구니 버튼 클릭 시 오류 수정"
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: "🛠️ PR 유형"
+      description: "이번 PR에 해당하는 항목 선택"
+      options:
+        - "새로운 기능 추가"
+        - "버그 수정"
+        - "코드 리팩토링/문서 수정"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "💬 리뷰어 참고 사항 (선택)"
+      description: "리뷰어에게 알려주고 싶은 점이 있다면 작성"
+      placeholder: "ex) 메서드 이름 고민 중입니다"
