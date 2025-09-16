@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-	//장바구니 담기 성공
+	// 장바구니 담기 모달
 	const cartBtn = document.getElementById("cart_btn");
 	const closeCart = document.getElementsByClassName("cancel")[0];
 	const closeGiftCart = document.getElementsByClassName("cancel")[1];
 
 	function putCart() {
 		document.getElementById("cart_modal").style.display = "block";
-		document.body.classList.add("modal-open"); //모달 open 시 스크롤 막기 위해 body에 class 추가
+		document.body.classList.add("modal-open");
 	}
 	function closeModal() {
 		document.getElementById("cart_modal").style.display = "none";
@@ -17,101 +17,62 @@ document.addEventListener("DOMContentLoaded", () => {
 	cartBtn.addEventListener("click", putCart);
 	closeCart.addEventListener("click", closeModal);
 
-	//옵션 미선택 시 장바구니,구매,선물 실패
-	// const ok = document.getElementById("ok");
-	function closeFailed() {
-		document.getElementById("failed_cart").style.display = "none";
-		document.body.classList.remove("modal-open");
-	}
-	function failedCart() {
-		document.getElementById("failed_cart").style.display = "block";
-		document.body.classList.add("modal-open");
-	}
-	// cartBtn.addEventListener("click", failedCart);
-	// ok.addEventListener("click", closeFailed);
-
-	//선물하기
-	const giftBtn = document.getElementById("gift_btn");
-	const giftCartBtn = document.getElementById("cart_gift");
-	function toGift() {
-		document.getElementById("gift_modal").style.display = "block";
-	}
-	function putGiftCart() {
-		document.getElementById("gift_modal").style.display = "none";
-		document.getElementById("giftcart_modal").style.display = "block";
-		document.body.classList.add("modal-open");
-	}
-
-	giftBtn.addEventListener("click", toGift);
-	giftCartBtn.addEventListener("click", putGiftCart);
-	closeGiftCart.addEventListener("click", closeModal);
-
-	//문의하기
-	const inquiryBtn = document.getElementById("inquiry_btn");
-	const cancelBtn = document.getElementById("cancel_inquiry");
-	const submit = document.getElementById("register_inquiry");
-	function openInquiry() {
-		document.getElementById("write_inquiry").style.display = "block";
-		document.body.classList.add("modal-open");
-	}
-	function cancelWrite() {
-		document.getElementById("write_inquiry").style.display = "none";
-		document.body.classList.remove("modal-open");
-	}
-	function submitInquiry() {
-		document.getElementById("write_inquiry").style.display = "none";
-	}
-	inquiryBtn.addEventListener("click", openInquiry);
-	cancelBtn.addEventListener("click", cancelWrite);
-
-	//옵션 클릭시 추가
-	const optionSelect = document.getElementById("options");
+	// 옵션 선택 시 아래에 추가
+	const optionSelects = document.querySelectorAll(".option_select");
 	const selectedContainer = document.querySelector(".selected_product");
 
-	optionSelect.addEventListener("change", () => {
-		const selectedOption = optionSelect.value;
-		if (!selectedOption) return;
+	optionSelects.forEach(select => {
+		select.addEventListener("change", () => {
+			const selectedOptionNo = select.value;
+			const selectedOptionText = select.options[select.selectedIndex].text;
 
-		//이미 선택된 옵션인지 체크
-		const existing = selectedContainer.querySelector(`[data-option='${selectedOption}']`);
-		if (existing) {
-			alert("이미 선택된 옵션");
-			return;
-		}
+			if (!selectedOptionNo) return;
 
-		//새로운 선택 상품 요소 생성
-		const div = document.createElement("div");
-		div.classList.add("selected_product");
-		div.dataset.option = selectedOption;
-		div.innerHTML = `
-		<div class="selected_card">
-			<div class="selected_header">
-				<span>${selectedOption}</span>
-				<button class="remove_btn">X</button>
-			</div>
-			<div class="price_quantity">
-				<p class="price">가격</p>
-				<div class="quantity">
-					<table>
-						<tr>
-							<td><button class="minus">-</button></td>
-							<td><span class="qty">1</span></td>
-							<td><button class="plus">+</button>
-						</tr>
-					</table>
+			// 이미 선택된 옵션인지 체크
+			const existing = selectedContainer.querySelector(`[data-option='${selectedOptionNo}']`);
+			if (existing) {
+				alert("이미 선택된 옵션입니다.");
+				return;
+			}
+
+			// 새로운 선택 상품 요소 생성
+			const div = document.createElement("div");
+			div.classList.add("selected_card");
+			div.dataset.option = selectedOptionNo;
+			div.innerHTML = `
+				<div class="selected_header">
+					<span>${selectedOptionText}</span>
+					<button class="remove_btn">X</button>
 				</div>
-			</div>
-		</div>
-		`;
-		selectedContainer.appendChild(div);
+				<div class="price_quantity">
+					<p class="price">${serverData.basePrice.toLocaleString()}원</p>
+					<div class="quantity">
+						<table>
+							<tr>
+								<td><button class="minus">-</button></td>
+								<td><span class="qty">1</span></td>
+								<td><button class="plus">+</button></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			`;
 
-		//옵션 삭제
-		div.querySelector(".remove_btn").addEventListener("click", () => {
-			div.remove();
+			selectedContainer.appendChild(div);
+
+			// 옵션 삭제
+			div.querySelector(".remove_btn").addEventListener("click", () => {
+				div.remove();
+				updateTotalPrice();
+			});
+
+
+			updateQuantity(div);
 			updateTotalPrice();
 		});
-
-		//수량 증가/감소
+	});
+	function updateQuantity(div) {
+		// 수량 증가/감소
 		const qtySpan = div.querySelector(".qty");
 		div.querySelector(".plus").addEventListener("click", () => {
 			qtySpan.textContent = parseInt(qtySpan.textContent) + 1;
@@ -122,30 +83,42 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (qty > 1) qtySpan.textContent = qty - 1;
 			updateTotalPrice();
 		});
-
+	}
+	const singleCard = document.getElementById("single_product_card"); // 옵션 없는 상품 영역
+	if (singleCard){
+		updateQuantity(singleCard);
 		updateTotalPrice();
-	});
-
+	} 
+	
+	// 총 가격 업데이트
 	function updateTotalPrice() {
 		let total = 0;
-		selectedContainer.querySelectorAll(".selected_product").forEach(sp => {
-			const price = 10000; //상품 가격
-			const qty = parseInt(sq.querySelector(".qty").textContent);
+		document.querySelectorAll(".selected_card, #single_product_card").forEach(card => {
+			const price = serverData.basePrice; // 상품 기본 가격
+			const qty = parseInt(card.querySelector(".qty").textContent);
 			total += price * qty;
-			sp.querySelector(".price").textContent = price.toLocaleString() + "원";
+			card.querySelector(".price").textContent = (price * qty).toLocaleString() + "원";
 		});
-		document.querySelector(".total_price b").textContent = total.toLocaleString() + "원";
+		document.getElementById("total_price_amount").textContent = total.toLocaleString() + "원";
 	}
-	
-	//사진 후보 클릭하여 사진 크게 띄우기
+
+	// 썸네일 클릭 시 대표 이미지 교체
 	const thumbnail = document.getElementById("thumbnail");
 	const bottomImgs = document.querySelectorAll(".bottom_imgs img");
-	
-	bottomImgs.forEach(img=>{
-		img.addEventListener("click",()=>{
-			//클릭한 이미지의 src를 대표이미지에 적용
+
+	bottomImgs.forEach(img => {
+		img.addEventListener("click", () => {
 			thumbnail.src = img.src;
-			
-		})
-	})
+		});
+	});
+
+	//상세정보 더보기 
+	function moreDetail() {
+		//이미지의 부모 div에서 'hidden' 클래스 제거
+		document.querySelector(".detail_content").classList.remove("hidden");
+
+		//더보기 버튼 제거
+		document.querySelector(".detailMore").remove();
+	}
+	document.getElementById("btnMore").addEventListener("click", moreDetail);
 });

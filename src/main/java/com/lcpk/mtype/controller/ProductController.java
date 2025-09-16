@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
 
 	private final ProductService productService;
-
+	private static final long BOOK_CATEGORY_NO = 3L;
 	// JSON 데이터를 응답하는 API 메서드
 	@GetMapping("/api/products")
 	@ResponseBody
@@ -42,7 +42,7 @@ public class ProductController {
         System.out.println("Main Image URL: " + productDto.getMainImageUrl());
         System.out.println("Sub Image URLs: " + productDto.getSubImageUrls());
         // 3. DTO에 담긴 최상위 카테고리 ID로 View를 결정
-        if (productDto.getTopCategory().getCategoryNo() == 3L) { // 3L은 상수로 관리하는 것이 더 좋습니다.
+        if (productDto.getTopCategory().getCategoryNo() == BOOK_CATEGORY_NO) { // 3L은 상수로 관리하는 것이 더 좋습니다.
             return "book-detail";
         } else {
             return "product-detail";

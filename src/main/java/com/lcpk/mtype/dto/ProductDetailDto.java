@@ -1,6 +1,7 @@
 package com.lcpk.mtype.dto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.lcpk.mtype.entity.CategoryEntity;
@@ -10,7 +11,7 @@ import com.lcpk.mtype.entity.ProductImgEntity;
 import lombok.Getter;
 
 @Getter
-public class ProductDetailDto { //상품 상세페이지용 dto
+public class ProductDetailDto { // 상품 상세페이지용 dto
 
 	private final Long productNo;
 	private final String productName;
@@ -23,21 +24,35 @@ public class ProductDetailDto { //상품 상세페이지용 dto
 	private final String mainImageUrl; // 대표 이미지
 	private final List<String> subImageUrls; // 나머지 서브 이미지 목록
 
-	// Entity를 DTO로 변환하는 생성자
-	public ProductDetailDto(ProductEntity product, CategoryEntity topCategory) {
+	private List<OptionGroup> optionGroups;
+	private List<SkuInfo> skus;
+
+	// 생성자는 모든 정보를 받아서 필드를 초기화합니다.
+	private ProductDetailDto(ProductEntity product, CategoryEntity topCategory, String mainImageUrl,
+			List<String> subImageUrls, List<OptionGroup> optionGroups, List<SkuInfo> skus) {
 		this.productNo = product.getProductNo();
 		this.productName = product.getProductName();
 		this.productPrice = product.getProductPrice();
 		this.detailImgUrl = product.getDetailImgUrl();
-
 		this.category = new CategoryDto(product.getCategory());
 		this.topCategory = new CategoryDto(topCategory);
+		this.mainImageUrl = mainImageUrl;
+		this.subImageUrls = subImageUrls;
+		this.optionGroups = optionGroups;
+		this.skus = skus;
+	}
 
-		// 이미지 리스트에서 대표 이미지와 서브 이미지를 분리
-		this.mainImageUrl = product.getImages().stream().filter(img -> "Y".equals(img.getIsMain()))
-				.map(ProductImgEntity::getImgUrl).findFirst().orElse(null); // 대표 이미지가 없을 경우 null
+	public static ProductDetailDto from(ProductEntity product, CategoryEntity topCategory,
+			List<OptionGroup> optionGroups, List<SkuInfo> skus) {
 
-		this.subImageUrls = product.getImages().stream().filter(img -> "N".equals(img.getIsMain()))
-				.map(ProductImgEntity::getImgUrl).collect(Collectors.toList());
+		// 이미지 분리 로직
+		Map<Boolean, List<String>> partitionedImages = product.getImages().stream()
+				.collect(Collectors.partitioningBy(img -> "Y".equals(img.getIsMain()),
+						Collectors.mapping(ProductImgEntity::getImgUrl, Collectors.toList())));
+		String mainImg = partitionedImages.get(true).stream().findFirst().orElse(null);
+		List<String> subImgs = partitionedImages.get(false);
+
+		// private 생성자를 통해 모든 정보를 담은 DTO 객체 생성
+		return new ProductDetailDto(product, topCategory, mainImg, subImgs, optionGroups, skus);
 	}
 }
