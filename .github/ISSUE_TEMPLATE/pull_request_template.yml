@@ -24,7 +24,7 @@ body:
       label: "🛠️ PR 유형"
       description: "이번 PR에 해당하는 항목 선택"
       options:
-       - label: "새로운 기능 추가"
+        - label: "새로운 기능 추가"
           value: "new_feature"
         - label: "버그 수정"
           value: "bug_fix"
