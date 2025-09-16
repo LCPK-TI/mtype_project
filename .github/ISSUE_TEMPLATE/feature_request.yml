@@ -21,6 +21,7 @@ body:
         - [ ] API 설계
         - [ ] 화면 UI 제작
         - [ ] 기능 연동
+        - [ ] DB 생성
     validations:
       required: true
 
