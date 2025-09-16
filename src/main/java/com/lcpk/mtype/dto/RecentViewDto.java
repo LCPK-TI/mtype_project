@@ -1,6 +1,7 @@
 package com.lcpk.mtype.dto;
 
 import com.lcpk.mtype.entity.ProductEntity;
+import com.lcpk.mtype.entity.ProductImgEntity;
 import com.lcpk.mtype.entity.RecentViewEntity;
 
 import lombok.Getter;
@@ -19,7 +20,13 @@ public class RecentViewDto {
 		ProductEntity productEntity = recentViewEntity.getProductEntity();
 		
 		this.productNo = productEntity.getProductNo();
-		this.thumbnailUrl = productEntity.getThumbnailUrl();
+
+		this.thumbnailUrl = productEntity.getImages().stream()
+				.filter(img -> "Y".equals(img.getIsMain()))
+				.map(ProductImgEntity::getImgUrl)
+				.findFirst()
+				.orElse(null);
+		
 		this.productName = productEntity.getProductName();
 		this.productPrice = productEntity.getProductPrice();
 		this.storeName = "임시스토어명";

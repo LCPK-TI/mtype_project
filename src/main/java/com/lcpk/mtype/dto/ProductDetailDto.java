@@ -1,0 +1,43 @@
+package com.lcpk.mtype.dto;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.lcpk.mtype.entity.CategoryEntity;
+import com.lcpk.mtype.entity.ProductEntity;
+import com.lcpk.mtype.entity.ProductImgEntity;
+
+import lombok.Getter;
+
+@Getter
+public class ProductDetailDto { //상품 상세페이지용 dto
+
+	private final Long productNo;
+	private final String productName;
+	private final int productPrice;
+	private final String detailImgUrl;
+
+	private final CategoryDto category; // 상품의 카테고리 정보
+	private final CategoryDto topCategory; // 최상위 카테고리 정보
+
+	private final String mainImageUrl; // 대표 이미지
+	private final List<String> subImageUrls; // 나머지 서브 이미지 목록
+
+	// Entity를 DTO로 변환하는 생성자
+	public ProductDetailDto(ProductEntity product, CategoryEntity topCategory) {
+		this.productNo = product.getProductNo();
+		this.productName = product.getProductName();
+		this.productPrice = product.getProductPrice();
+		this.detailImgUrl = product.getDetailImgUrl();
+
+		this.category = new CategoryDto(product.getCategory());
+		this.topCategory = new CategoryDto(topCategory);
+
+		// 이미지 리스트에서 대표 이미지와 서브 이미지를 분리
+		this.mainImageUrl = product.getImages().stream().filter(img -> "Y".equals(img.getIsMain()))
+				.map(ProductImgEntity::getImgUrl).findFirst().orElse(null); // 대표 이미지가 없을 경우 null
+
+		this.subImageUrls = product.getImages().stream().filter(img -> "N".equals(img.getIsMain()))
+				.map(ProductImgEntity::getImgUrl).collect(Collectors.toList());
+	}
+}

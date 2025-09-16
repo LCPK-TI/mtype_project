@@ -15,23 +15,28 @@
 			<ul>
 				<li><a href="/product/best">베스트</a></li>
 				<li id="cate_btn">카테고리 </li>
-				<li><a href="#">MBTI 테스트</a></li>
+				<li><a href="/category/mbti">MBTI 카테고리</a></li>
 			</ul>
 		</nav>
 		<div id="show_categories">
 			<div class="category_menu">
-				<!--왼쪽 메인 카테고리-->
 				<ul id="main_category">
-					<li th:each="category : ${categories}" th:if="${category.parentCategoryNo==null}" th:data-sub="${category.categoryNo}">
-						<a th:href="@{/category/{no}(no=${category.categoryNo})}" th:text="${category.categoryName}"></a>
+					<li th:each="topCategory : ${categories}" th:data-category-no="${topCategory.categoryNo}">
+						<a th:href="@{/category/{no}(no=${topCategory.categoryNo})}"
+							th:text="${topCategory.categoryName}"></a>
 					</li>
 				</ul>
-				<!-- 오른쪽 서브 카테고리 -->
-				<ul id="sub_category">
-					<li th:each="category : ${categories}" th:if="${category.parentCategoryNo != null}" th:data-parent="${category.parentCategoryNo}" style="display:none;">
-						<a th:href="@{/category/{no}(no=${category.categoryNo})}" th:text="${category.categoryName}"></a>
-					</li>
-				</ul>
+
+				<div id="sub_category_wrapper">
+					<ul th:each="topCategory : ${categories}" th:if="${!topCategory.children.isEmpty()}"
+						th:data-parent-no="${topCategory.categoryNo}" class="sub_category_list">
+
+						<li th:each="subCategory : ${topCategory.children}">
+							<a th:href="@{/category/{no}(no=${subCategory.categoryNo})}"
+								th:text="${subCategory.categoryName}"></a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
@@ -130,7 +135,7 @@
 		</ul>
 
 	</header>
-	<script th:src="@{/js/header.js}"></script>
+	<script th:src="@{/js/header.js}" defer></script> <!-- defer 꼭 넣기 -->
 </body>
 
 </html>

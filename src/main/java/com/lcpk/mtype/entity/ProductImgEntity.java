@@ -11,10 +11,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="PRODUCT_IMG_TB")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductImgEntity {
@@ -34,39 +38,9 @@ public class ProductImgEntity {
 	@Column(name="IS_MAIN")
 	private String isMain;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="PRODUCT_NO")
-	private ProductEntity product;
+	 // 상품과 ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="PRODUCT_NO")
+    private ProductEntity product;
 
-	public Long getImgNo() {
-		return imgNo;
-	}
-
-	public void setImgNo(Long imgNo) {
-		this.imgNo = imgNo;
-	}
-
-	public String getImgUrl() {
-		return imgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
-
-	public String getIsMain() {
-		return isMain;
-	}
-	public void setIsMain(String isMain) {
-		this.isMain = isMain;
-	}
-
-	public ProductEntity getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductEntity product) {
-		this.product = product;
-	}
-	
 }

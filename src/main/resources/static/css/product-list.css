@@ -119,3 +119,11 @@ main {
 .active a{
 	color:black;
 }
+.active li{
+	color:black;
+}
+li.active {
+	color: black;
+}
+
+

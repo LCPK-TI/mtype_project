@@ -1,0 +1,131 @@
+
+/*main css*/
+main {
+  width: 88%;
+}
+.content {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+.content h1 {
+  font-size: 15pt;
+}
+.content hr {
+  background: rgb(219, 219, 219);
+  height: 1px;
+  border: 0;
+}
+/*aside css*/
+.mbti_categories {
+  width: 200px;
+}
+.mbti_categories h1 {
+  padding-bottom: 20px;
+  cursor: auto;
+  font-size: 18pt;
+}
+
+.mbti_categories >ul {
+	padding: 0;
+}
+.mbti_categories a{
+	color: rgb(150, 150, 150);
+}
+.mbti_categories li:hover {
+  color: black;
+  cursor: pointer;
+}
+.mbti_categories li {
+  color: gray;
+}
+
+.mbti_category{
+  font-size: 11pt;
+  height:30px;
+  padding:10px;
+}
+.mbti{
+	margin-bottom: 5px;
+	padding: 5px;
+}
+.mbti li{
+	color: gray;
+}
+.mbti ul {
+	padding:0;
+}
+.mbti.active {
+	color: black;
+}
+.category_list {
+	display: none;
+}
+.category_list.active {
+  display: block;
+}
+.mbti div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.mbti div img{
+	width: 15px;
+}
+/*정렬 기준 css*/
+.sort_by {
+  margin-bottom: 50px;
+}
+.sort_by ul {
+  display: flex;
+  padding-left: 0px;
+}
+.sort_by li {
+  font-size: 10pt;
+  margin-right: 40px;
+  cursor: pointer;
+  color: rgb(192, 192, 192);
+}
+
+/*상품정보*/
+.product_list{
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	gap:50px;
+}
+.view_img {
+  position: relative; /*하트 버튼의 부모태그*/
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+.product_img {
+  width: 100%;
+  height: 100%;
+}
+.wishlist_btn img {
+  width: 40px;
+}
+.wishlist_btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.product_info p {
+  margin: 5px;
+  font-size: 10pt;
+}
+.product_info p:nth-child(1) {
+ color: gray;
+}
+.product_info p:nth-child(3) {
+  font-weight: bold;
+}
+
+.active a{
+	color:black;
+}
+
+
