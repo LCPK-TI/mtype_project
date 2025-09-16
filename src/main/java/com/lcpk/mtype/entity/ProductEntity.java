@@ -51,8 +51,8 @@ public class ProductEntity {
 	@Column(name="PRODUCT_PRICE")
 	private int productPrice;
 	
-	@Column(name="PRODUCT_STOCK")
-	private int productStock;
+//	@Column(name="PRODUCT_STOCK")
+//	private int productStock;
 	
 	@Column(name="DETAIL_IMG_URL")
 	private String detailImgUrl;
@@ -64,4 +64,5 @@ public class ProductEntity {
     //product(1) productOption(n)
     @OneToMany(mappedBy="product") //cascade = CascadeType.ALL, orphanRemoval = true
     private List<ProductOptionEntity> productOptions = new ArrayList<>();
+
 }

@@ -23,7 +23,8 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-            	.requestMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll()  // 정적 리소스 허용	
+            	.requestMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll()  // 정적 리소스 허용
+            	.requestMatchers("/**").permitAll()
                 .requestMatchers("/sellers/login", "/sellers/signup", "/sellers/check-id").permitAll()
                 .requestMatchers("/sellers/index").hasRole("SELLER")
                 .anyRequest().authenticated()

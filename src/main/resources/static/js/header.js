@@ -66,31 +66,34 @@ document.addEventListener("DOMContentLoaded", function() {
 	closeSearchBtn.addEventListener("click", closeSearch);
 
 
-	const jwtToken = localStorage.getItem('jwt');
-	const loginLogoutImg = document.getElementById('login-logout-img');
-
-	if (loginLogoutImg) {
-		if (jwtToken) {
-			// 로그인 상태
-			loginLogoutImg.src = "/img/logout.png";
-			// 로그아웃
-			loginLogoutImg.addEventListener('click', function() {
-
-				localStorage.removeItem('jwt');
-				window.location.href = '/';
-
-			});
-
-		} else {
-			// 로그아웃 상태
-			loginLogoutImg.src = "/img/login.png";
-
-			loginLogoutImg.addEventListener('click', function() {
+	// 마이페이지 아이콘
+	const mypageIcon = document.getElementById('mypage-icon');
+	if (mypageIcon) {
+		mypageIcon.addEventListener('click', function() {
+			if (window.isUserLoggedIn) {
+				window.location.href = '/user/mypage';
+			} else {
+				alert('로그인이 필요합니다.');
 				window.location.href = '/user/login';
-			});
-		}
+			}
+		});
 	}
 
+	// 로그인 버튼
+	const loginBtn = document.getElementById('login-btn');
+	if (loginBtn) {
+		loginBtn.addEventListener('click', function() {
+			window.location.href = '/user/login';
+		});
+	}
+
+	// 로그아웃 버튼
+	const logoutBtn = document.getElementById('logout-btn');
+	if (logoutBtn) {
+		logoutBtn.addEventListener('click', function() {
+			window.location.href = '/user/logout';
+		});
+	}
 
 	/*기념일 클릭시 모달 */
 	const prvAnv = document.getElementById("preview_anniversary");
@@ -117,8 +120,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			anvModal.style.display = "none";
 		}
 	});
-
-});
 
 });
 

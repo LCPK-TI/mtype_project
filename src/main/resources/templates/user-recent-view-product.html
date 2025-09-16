@@ -52,21 +52,28 @@
 			<section class="recent_products">
 				<h2 class="page_title">최근 본 상품</h2>
 
-				<div class="products_grid">
-					<!--상품 반복-->
-					<div class="product_card">
-						<div class="product_img">
-							<img th:src="@{/img/product_img.png}" alt="상품이미지" />
-							<button class="wishlist_btn">
-								<img th:src="@{/img/.}" />
-							</button>
-						</div>
-						<div class="product_info">
-							<p class="store_name">스토어명</p>
-							<p class="product_name">상품명</p>
-							<p class="product_price">가격</p>
-						</div>
+				<div class="products_grid" th:if="${not #lists.isEmpty(products)}">
+
+					<div class="product_card" th:each="product : ${products}">
+						<a th:href="@{/product/{no}(no=${product.productNo})}">
+							<div class="product_img">
+								<img th:src="${product.thumbnailUrl}" th:alt="${product.productName}" />
+								<button class="wishlist_btn">
+									<img th:src="@{/img/heart_empty.png}" />
+								</button>
+							</div>
+							<div class="product_info">
+								<p class="store_name" th:text="${product.storeName}">스토어명</p>
+								<p class="product_name" th:text="${product.productName}">상품명</p>
+								<p class="product_price"
+									th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">가격</p>
+							</div>
+						</a>
 					</div>
+				</div>
+
+				<div class="products_grid" th:if="${#lists.isEmpty(products)}">
+					<p class="no_items">최근 본 상품이 없습니다.</p>
 				</div>
 				<p class="recent_desc">
 					※ 최근 본 상품 목록은 최대 20개의 상품만 저장되며, 20개를 초과한
@@ -76,6 +83,7 @@
 		</main>
 	</div>
 	<footer>footer</footer>
+	<!--<script th:src="@{/js/user-recent-view.js}"></script>-->
 </body>
 
 </html>

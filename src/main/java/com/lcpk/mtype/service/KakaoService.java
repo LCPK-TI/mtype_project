@@ -23,6 +23,8 @@ import com.lcpk.mtype.entity.YesOrNo;
 import com.lcpk.mtype.exception.WithdrawnUserException;
 import com.lcpk.mtype.repository.UserRepository;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -40,11 +42,21 @@ public class KakaoService {
 	private String KAKAO_REDIRECT_URI;
 	
 	@Transactional
-	public String kakaoLogin(String code) throws JsonProcessingException {
+	public void kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
 		String accessToken = getAccessToken(code);	// 인가코드로 access Token 요청
 		JsonNode userInfo = getUserInfo(accessToken);	// accessToken으로 사용자 정보 요청
 		User user = processKakaoUser(userInfo);	// 사용자 정보와 db 확인 => 회원가입 or 로그인
-		return jwtTokenProvider.createToken(user.getKakaoUserId()); // 로그인 처리 (JWT 생성)
+		
+		// 토큰 생성
+		String jwtToken = jwtTokenProvider.createToken(user.getKakaoUserId());
+		
+		// 쿠키 생성
+		Cookie cookie = new Cookie("jwtToken", jwtToken);
+		cookie.setPath("/");
+		cookie.setHttpOnly(true);
+		cookie.setMaxAge(60*60); // 쿠키 유효시간
+		
+		response.addCookie(cookie);
 	}
 	
 	private String getAccessToken(String code) throws JsonProcessingException {
