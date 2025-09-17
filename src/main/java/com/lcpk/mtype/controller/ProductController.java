@@ -53,4 +53,20 @@ public class ProductController {
 	public String best(Model model) {
 		return "product-best";
 	}
+	
+	// 키워드 검색 결과 응답용 API
+	@GetMapping("/api/search/products")
+	@ResponseBody
+	public ResponseEntity<Slice<ProductListDto>> searchProductsApi(@RequestParam("query") String query, Pageable pageable){
+		return ResponseEntity.ok(productService.searchProductsByKeyword(query, pageable));
+	}
+	
+	// 키워드 검색 결과 페이지
+	@GetMapping("/product/search")
+	public String searchProductPage(@RequestParam("query") String query, Pageable pageable, Model model) {
+		Slice<ProductListDto> products = productService.searchProductsByKeyword(query, pageable);
+		model.addAttribute("products", products);
+		model.addAttribute("query", query);
+		return "product-search";
+	}
 }

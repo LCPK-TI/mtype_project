@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				body: JSON.stringify({ keyword: keyword })
 			}).then(response => {
 				if (response.ok) {
-					window.location.href = `/product/search?query=${keyword}`;
+					window.location.href = `/product/search?query=${encodeURIComponent(keyword)}`;
 				}
 			});
 		}
