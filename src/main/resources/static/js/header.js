@@ -144,18 +144,24 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 		}
 	}
+	
+	// 검색창을 여는 함수
+	function showSearch() {
+	    searchModal.style.display = "block";
+	    document.body.classList.add("modal-open");
+	    loadSearchKeywords();
+	}
+	// 검색창을 닫는 함수
+	function closeSearch() {
+	    searchModal.style.display = "none";
+	    document.body.classList.remove("modal-open");
+	}
+	
 	// 검색 창 클릭 시
-	searchInput.addEventListener("click", function() {
-		searchModal.style.display = "block";
-		document.body.classList.add("modal-open");
-		loadSearchKeywords();
-	});
+	searchInput.addEventListener("click", showSearch);
 
 	// 닫기 버튼
-	closeSearchBtn.addEventListener("click", function() {
-		searchModal.style.display = "none";
-		document.body.classList.remove("modal-open");
-	});
+	closeSearchBtn.addEventListener("click", closeSearch);
 
 	// 검색 버튼 클릭
 	searchBtn.addEventListener('click', executeSearch);
@@ -166,6 +172,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 
+	// 검색모달 외부 클릭 시 닫기
+	window.addEventListener('click', (event) => {
+	    if (searchModal.style.display === 'block' &&
+	        !searchModal.contains(event.target) &&
+	        event.target !== searchInput) {
+	        
+	        closeSearch();
+	    }
+	});
+	
 	// 마이페이지 아이콘
 	const mypageIcon = document.getElementById('mypage-icon');
 	if (mypageIcon) {
@@ -220,6 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			anvModal.style.display = "none";
 		}
 	});
-
+	
 });
 
