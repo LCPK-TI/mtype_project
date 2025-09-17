@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+
+<link rel="stylesheet" th:href="@{/css/product-search.css}" />
+
+<body>
+	<div class="content">
+		<!--
+		<aside class="middle_categories">
+			<h1 th:text="${topCategory.categoryName}">상위 카테고리</h1>
+			<hr />
+			<ul>
+				<li th:each="sub: ${midCategories}"
+					th:classappend="${sub.categoryNo == clickedCategory.categoryNo or sub.categoryNo == clickedCategory.parentCategoryNo} ? 'active'">
+					<a th:href="@{/category/{no}(no=${sub.categoryNo})}" th:text="${sub.categoryName}"></a>
+				</li>
+			</ul>
+		</aside>
+		-->
+		
+		<main>
+			<!--
+			<nav class="bottom_categories">
+				<ul
+					th:if="${subCategories != null and !subCategories.isEmpty() and clickedCategory.parentCategoryNo != null}">
+					<li th:each="clickedsub : ${subCategories}"
+						th:classappend="${clickedsub.categoryNo == clickedCategory.categoryNo} ? 'active'">
+						<a th:href="@{/category/{no}(no=${clickedsub.categoryNo})}"
+							th:text="${clickedsub.categoryName}"></a>
+					</li>
+				</ul>
+			</nav>
+			-->
+			<div>
+				<h1>‘여름’의 검색결과</h1>
+			</div>
+			
+			<div class="sort_by">
+				<ul>
+					<li class="sort-option active" data-sort="productNo,desc">신상품순</li>
+					<li class="sort-option" data-sort="reviewCount,desc">리뷰 많은순</li>
+					<li class="sort-option" data-sort="salesCount,desc">판매순</li>
+					<li class="sort-option" data-sort="productPrice,asc">낮은 가격순</li>
+					<li class="sort-option" data-sort="productPrice,desc">높은 가격순</li>
+				</ul>
+			</div>
+
+			<div class="product_list">
+				<div class="product_card" th:each="product : ${products.content}">
+					<a th:href="@{/product/{no}(no=${product.productNo})}">
+						<div class="view_img">
+							<img class="product_img" th:src="${product.mainImageUrl}" alt="상품이미지" />
+							<button class="wishlist_btn">
+								<img th:src="@{/img/heart_empty.png}" />
+							</button>
+						</div>
+						<div class="product_info">
+							<p class="product_name" th:text="${product.productName}"></p>
+							<p class="product_price"
+								th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}"></p>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div id="scroll-trigger" style="height: 10px;"></div>
+		</main>
+	</div>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		const initialIsLast = /*[[${products.last}]]*/ false;
+		const initialPageNumber = /*[[${products.number}]]*/ 0;
+		const currentCategoryNo = /*[[${clickedCategory.categoryNo}]]*/ null;
+		/*]]>*/
+	</script>
+	<script th:src="@{/js/product-search.js}"></script>
+
+</body>
+
+</html>
