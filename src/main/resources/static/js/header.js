@@ -48,23 +48,82 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 	/*검색창 */
-	const closeSearchBtn = document.getElementById("search_footer");
+	const searchInput = document.getElementById("search");
+	const searchBtn = document.getElementById("search_btn");
 	const searchModal = document.getElementById("show_search");
-	const openSearchBtn = document.getElementById("search");
+	const closeSearchBtn = document.getElementById("search_footer");
+	const popularSearchContainer = document.getElementById("popular_search");
+	const recentSearchContainer = document.getElementById("recent_search");
 
-	function showSearch() {
+	// 검색창 열때마다 서버에서 검색어 데이터 불러옴
+	async function loadSearchKeywords() {
+		fetch('/api/search/popular')
+			.then(res => res.json())
+			.then(keywords => {
+				popularSearchContainer.innerHTML = '<div id="popular_header"><b>인기 검색어</b></div>';
+				keywords.forEach((keyword, index) => {
+					const rankDiv = document.createElement('div');
+					rankDiv.className = 'rank_search';
+					rankDiv.innerHTML = `<span>${index + 1}</span><span>${keyword}</span>`;
+					popularSearchContainer.appendChild(rankDiv);
+				});
+			});
+		// 최근 검색어
+		if (window.isUserLoggedIn) {
+			fetch('/api/search/recent')
+				.then(res => res.json())
+				.then(keywords => {
+					recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b><button>전체 삭제</button></div>';
+					keywords.forEach(keyword => {
+						const contentDiv = document.createElement('div');
+						contentDiv.className = 'search_content';
+						contentDiv.innerHTML = `<span>${keyword}</span><button>X</button>`;
+						recentSearchContainer.appendChild(contentDiv);
+					});
+				});
+		} else {
+			// 로그인 아닌 경우
+			recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b></div>' +
+				'<div class="search_content" style="color:gray; font-size:13px;">로그인 후 이용 가능합니다.</div>';
+		}
+	}
+	// 검색 버튼 또는 엔터를 눌렀을 때.
+	function executeSearch() {
+		const keyword = searchInput.value.trim();
+		if (keyword) {
+			// 검색어가 존재하는 경우
+			fetch('/api/search', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ keyword: keyword })
+			}).then(response => {
+				if (response.ok) {
+					window.location.href = `/product/search?query=${keyword}`;
+				}
+			});
+		}
+	}
+	// 검색 창 클릭 시
+	searchInput.addEventListener("click", function() {
 		searchModal.style.display = "block";
 		document.body.classList.add("modal-open");
-	}
+		loadSearchKeywords();
+	});
 
-	function closeSearch() {
-		document.getElementById("show_search").style.display = "none";
+	// 닫기 버튼
+	closeSearchBtn.addEventListener("click", function() {
+		searchModal.style.display = "none";
 		document.body.classList.remove("modal-open");
-	}
+	});
 
-	openSearchBtn.addEventListener("click", showSearch);
-	closeSearchBtn.addEventListener("click", closeSearch);
-
+	// 검색 버튼 클릭
+	searchBtn.addEventListener('click', executeSearch);
+	// 검색창에서 엔터 키
+	searchInput.addEventListener('keydown', function(event) {
+		if (event.key === 'Enter') {
+			executeSearch();
+		}
+	});
 
 	// 마이페이지 아이콘
 	const mypageIcon = document.getElementById('mypage-icon');
