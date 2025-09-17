@@ -6,10 +6,12 @@ import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lcpk.mtype.service.SearchService;
@@ -40,6 +42,20 @@ public class SearchController {
 	@GetMapping("/recent")
 	public ResponseEntity<List<String>> getRecentSearches(@CookieValue(name = "jwtToken", required = false) String token){
 		return ResponseEntity.ok(searchService.getRecentSearches(token));
+	}
+	
+	// 최근 검색어 개별 삭제
+	@DeleteMapping("/recent")
+	public ResponseEntity<Void> deleteRecentSearch(@CookieValue(name="jwtToken", required = false) String token, @RequestParam("keyword") String keyword){
+		searchService.deleteRecentSearch(token, keyword);
+		return ResponseEntity.ok().build();
+	}
+	
+	// 최근 검색어 전체 삭제
+	@DeleteMapping("/recent/all")
+	public ResponseEntity<Void> deleteAllRecentSearches(@CookieValue(name = "jwtToken", required = false) String token){
+		searchService.deleteAllRecentSearches(token);
+		return ResponseEntity.ok().build();
 	}
 	
 	// 인기 검색어 조회

@@ -50,6 +50,26 @@ public class SearchService {
 		return redisTemplate.opsForList().range(userKey, 0, MAX_SEARCH_COUNT-1);
 	}
 	
+	// 최근 검색어 개별 삭제
+	public void deleteRecentSearch(String token, String keyword) {
+		if(token == null && token.isEmpty()) return;
+		Long kakaoUserId = jwtTokenProvider.getKakaoUserIdFromToken(token);
+		String userKey = RECENT_SEARCH_KEY_PREFIX + kakaoUserId;
+		
+		//Redis 리스트에서 특정 키워드 찾아 삭제 (0은 일치항목 모두 삭제)
+		redisTemplate.opsForList().remove(userKey, 0, keyword);
+	}
+	
+	// 최근 검색어 전체 삭제
+	public void deleteAllRecentSearches(String token) {
+		if(token == null && token.isEmpty()) return;
+		Long kakaoUserId = jwtTokenProvider.getKakaoUserIdFromToken(token);
+		String userKey = RECENT_SEARCH_KEY_PREFIX + kakaoUserId;
+		
+		// 해당 사용자의 키 삭제
+		redisTemplate.delete(userKey);
+	}
+	
 	// 인기 검색어
 	// 검색어 count  1씩 증가
 	public void incrementPopularSearch(String keyword) {

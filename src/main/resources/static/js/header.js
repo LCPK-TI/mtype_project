@@ -78,16 +78,44 @@ document.addEventListener("DOMContentLoaded", function() {
 			fetch('/api/search/recent')
 				.then(res => res.json())
 				.then(keywords => {
-					recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b><button>전체 삭제</button></div>';
+					recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b><button id="delete-all-btn">전체 삭제</button></div>';
+					
+					// 전체 삭제
+					const deleteAllBtn = document.getElementById('delete-all-btn');
+					if(deleteAllBtn){
+						deleteAllBtn.addEventListener('click', () => {
+							if(confirm("최근 검색어를 모두 삭제하시겠습니까?")){
+								fetch('/api/search/recent/all', {method: 'DELETE'})
+									.then(response => {
+										if(response.ok){
+											loadSearchKeywords();
+										}
+									});
+							}
+						});
+					}
+					
 					keywords.forEach(keyword => {
 						const contentDiv = document.createElement('div');
 						contentDiv.className = 'search_content';
-						contentDiv.innerHTML = `<span>${keyword}</span><button>X</button>`;
+						contentDiv.innerHTML = `<span>${keyword}</span><button class="delete-one-btn">X</button>`;
 						
 						// 키워드에 클릭 이벤트
 						const keywordSpan = contentDiv.querySelector('span');
 						keywordSpan.style.cursor = 'pointer';
 						keywordSpan.addEventListener('click', () => executeSearch(keyword));
+						
+						// 최근 검색어 개별 삭제
+						const deleteOneBtn = contentDiv.querySelector('.delete-one-btn');
+						deleteOneBtn.addEventListener('click', () => {
+							const encodedKeyword = encodeURIComponent(keyword);
+							fetch(`/api/search/recent?keyword=${encodedKeyword}`, {method: 'DELETE'})
+								.then(response => {
+									if(response.ok){
+										loadSearchKeywords();
+									}
+								});
+						});
 						
 						recentSearchContainer.appendChild(contentDiv);
 					});
