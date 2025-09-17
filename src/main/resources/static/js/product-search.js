@@ -12,12 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (isLoading || (isLastPage && !clearExisting)) return; //이미 로딩중이면 실행안함. 마지막 페이지라면 추가 요청 안 함 (새로 요청할땐 제외)
 		isLoading = true;
 
-		// API URL을 동적으로 생성
-		let apiUrl = `/api/products?page=${page}&sort=${sort}`;
+		let apiUrl = `/api/search/products?page=${page}&sort=${sort}`;
 
-		// currentCategoryNo 변수에 값이 있을 때만 URL에 categoryId 파라미터를 추가
-		if (currentCategoryNo) {
-			apiUrl += `&categoryNo=${currentCategoryNo}`;
+		if (currentQuery) { // HTML에서 전달받은 currentQuery 변수 사용
+			// URL 파라미터가 깨지지 않도록 encodeURIComponent를 사용해주는 것이 안전
+			apiUrl += `&query=${encodeURIComponent(currentQuery)}`;
 		}
 
 		try {
@@ -30,13 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (clearExisting) {
 				productListContainer.innerHTML = '';
 			}
-			
+
 			//상품 카드 생성 & 추가
 			productSlice.content.forEach(product => {
 				const productCardHTML = createProductCardHTML(product);
 				productListContainer.insertAdjacentHTML('beforeend', productCardHTML);
 			});
-			
+
 			//상태 갱신
 			currentPage = productSlice.number;
 			isLastPage = productSlice.last;
@@ -80,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				currentSort = newSort;
 				currentPage = 0;
 				isLastPage = false;
-				fetchProducts(0, currentSort, true); 
+				fetchProducts(0, currentSort, true);
 			}
 		});
 	});
