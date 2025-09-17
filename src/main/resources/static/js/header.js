@@ -65,6 +65,11 @@ document.addEventListener("DOMContentLoaded", function() {
 					const rankDiv = document.createElement('div');
 					rankDiv.className = 'rank_search';
 					rankDiv.innerHTML = `<span>${index + 1}</span><span>${keyword}</span>`;
+					
+					// 키워드에 클릭 이벤트 추가
+					rankDiv.style.cursor = 'pointer';
+					rankDiv.addEventListener('click', () => executeSearch(keyword));
+					
 					popularSearchContainer.appendChild(rankDiv);
 				});
 			});
@@ -78,6 +83,12 @@ document.addEventListener("DOMContentLoaded", function() {
 						const contentDiv = document.createElement('div');
 						contentDiv.className = 'search_content';
 						contentDiv.innerHTML = `<span>${keyword}</span><button>X</button>`;
+						
+						// 키워드에 클릭 이벤트
+						const keywordSpan = contentDiv.querySelector('span');
+						keywordSpan.style.cursor = 'pointer';
+						keywordSpan.addEventListener('click', () => executeSearch(keyword));
+						
 						recentSearchContainer.appendChild(contentDiv);
 					});
 				});
@@ -88,17 +99,19 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 	// 검색 버튼 또는 엔터를 눌렀을 때.
-	function executeSearch() {
-		const keyword = searchInput.value.trim();
-		if (keyword) {
+	function executeSearch(keyword) {
+		// 파라미터로 넘어오는 keyword가 문자열인 경우 그대로 사용. 아닐 경우 검색창의 값 전송
+		const searchTerm = (typeof keyword === 'string') ? keyword : searchInput.value.trim();
+		
+		if (searchTerm) {
 			// 검색어가 존재하는 경우
 			fetch('/api/search', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ keyword: keyword })
+				body: JSON.stringify({ keyword: searchTerm })
 			}).then(response => {
 				if (response.ok) {
-					window.location.href = `/product/search?query=${keyword}`;
+					window.location.href = `/product/search?query=${encodeURIComponent(searchTerm)}`;
 				}
 			});
 		}
