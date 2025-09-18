@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	inquiryBtn.addEventListener("click", openInquiry);
 	cancelBtn.addEventListener("click", cancelWrite);
 
+
 	function addCardEventListeners(card) {
 		const qtySpan = card.querySelector(".qty");
 		const priceSpan = card.querySelector(".price");
@@ -140,6 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 		}
 	}
+
+
 	//페이지 하단의 총 가격 업데이하는 함수
 	function updateTotalPrice() {
 		let total = 0;
@@ -153,69 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		const totalEl = document.getElementById("total_price_amount");
 		if (totalEl) totalEl.textContent = total.toLocaleString() + "원";
 	}
-
-	//옵션 클릭시 추가
-	const optionSelect = document.getElementById("options");
-	const selectedContainer = document.querySelector(".selected_product");
-
-	optionSelect.addEventListener("change", () => {
-		const selectedOption = optionSelect.value;
-		if (!selectedOption) return;
-
-		//이미 선택된 옵션인지 체크
-		const existing = selectedContainer.querySelector(`[data-option='${selectedOption}']`);
-		if (existing) {
-			alert("이미 선택된 옵션");
-			return;
-		}
-
-		//새로운 선택 상품 요소 생성
-		const div = document.createElement("div");
-		div.classList.add("selected_product");
-		div.dataset.option = selectedOption;
-		div.innerHTML = `
-		<div class="selected_card">
-			<div class="selected_header">
-				<span>${selectedOption}</span>
-				<button class="remove_btn">X</button>
-			</div>
-			<div class="price_quantity">
-				<p class="price">가격</p>
-				<div class="quantity">
-					<table>
-						<tr>
-							<td><button class="minus">-</button></td>
-							<td><span class="qty">1</span></td>
-							<td><button class="plus">+</button>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-		`;
-		selectedContainer.appendChild(div);
-
-		//옵션 삭제
-		div.querySelector(".remove_btn").addEventListener("click", () => {
-			div.remove();
-			updateTotalPrice();
-		});
-
-		//수량 증가/감소
-		const qtySpan = div.querySelector(".qty");
-		div.querySelector(".plus").addEventListener("click", () => {
-			qtySpan.textContent = parseInt(qtySpan.textContent) + 1;
-			updateTotalPrice();
-		});
-		div.querySelector(".minus").addEventListener("click", () => {
-			let qty = parseInt(qtySpan.textContent);
-			if (qty > 1) qtySpan.textContent = qty - 1;
-			updateTotalPrice();
-		});
-
-		updateTotalPrice();
-	});
-
 	//옵션이 없는 상품 처리
 	const singleProductCard = document.getElementById("single_product_card");
 	if (singleProductCard) {
@@ -345,6 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			addCardEventListeners(card, sku);
 			updateTotalPrice();
 		}
+
 
 	}
 

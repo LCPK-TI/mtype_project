@@ -23,9 +23,8 @@ public class ProductDetailDto { // 상품 상세페이지용 dto
 	private final String mainImageUrl; // 대표 이미지
 	private final List<String> subImageUrls; // 나머지 서브 이미지 목록
 
-	private List<OptionGroup> optionGroups; // 옵션 정보. 화면에 옵션 버튼들을 그리기 위한 정보
-	private List<SkuInfo> skus; // sku 정보. js가 선택된 옵션 조합으로 최종 skuNo를 찾기 위한 역할
-
+	private List<OptionGroup> optionGroups; //옵션 정보. 화면에 옵션 버튼들을 그리기 위한 정보
+	private List<SkuInfo> skus; //sku 정보. js가 선택된 옵션 조합으로 최종 skuNo를 찾기 위한 역할
 	// 생성자는 모든 정보를 받아서 필드를 초기화합니다.
 	public ProductDetailDto(ProductEntity product, CategoryEntity topCategory, String mainImageUrl,
 			List<String> subImageUrls, List<OptionGroup> optionGroups, List<SkuInfo> skus) {
