@@ -11,4 +11,5 @@ public class SkuInfo {
 	private Long skuNo;
 	private int stock;
 	private List<Long> optionNumbers;
+	private List<Long> optionNos;
 }

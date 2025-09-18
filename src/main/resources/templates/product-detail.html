@@ -23,15 +23,7 @@
 			<!--오른쪽 상품 선택 주문관련 영역-->
 			<div class="right_content">
 				<div class="product_header">
-					<div class="product_info">
-						<a href="">스토어명 &gt;</a>
-						<!--상품명, 가격-->
-						<section class="product_summary">
-							<h3 class="product_title" th:text="${product.productName}">상품명</h3>
-							<p class="product_price"
-								th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</p>
-						</section>
-					</div>
+					<a href="">스토어명 &gt;</a>
 					<!--찜, 공유버튼-->
 					<div class="product_actions">
 						<button class="wishlist_btn">
@@ -42,6 +34,12 @@
 						</button>
 					</div>
 				</div>
+				<!--상품명, 가격-->
+				<div class="product_summary">
+					<h3 class="product_title" th:text="${product.productName}">상품명</h3>
+					<p class="product_price" th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격
+					</p>
+				</div>
 				<!--옵션 선택-->
 				<div class="product_options">
 					<!--옵션 그룹이 비어있지 않을 때만 실행-->
@@ -51,7 +49,7 @@
 							<!--옵션 선택 드롭다운-->
 							<select class="option_select" th:attr="data_group_index=${iterStat.index}">
 								<!--첫 번째 기본 안내 option-->
-								<option value="" selected disabled hidden>-- [[${group.categoryName}]] 선택 --</option>
+								<option value="" selected disabled>-- [[${group.categoryName}]] 선택 --</option>
 								<!--그룹 안의 실제 옵션들 반복-->
 								<option th:each="opt : ${group.options}" th:value="${opt.optionNo}"
 									th:text="${opt.optionName}"></option>
@@ -59,19 +57,29 @@
 						</div>
 					</th:block>
 					<!--옵션 그룹이 비어있을 때 수량 추가 -->
-					<div class="quantity" id="single_product_card" th:if="${#lists.isEmpty(product.optionGroups)}">
-						<table>
-							<tr>
-								<td><button class="minus">-</button></td>
-								<td><span class="qty">1</span></td>
-								<td><button class="plus">+</button></td>
-							</tr>
-						</table>
+					<div id="single_product_card" th:if="${#lists.isEmpty(product.optionGroups)}">
+						<div class="selected_header">
+							<span th:text="${product.productName}"></span>
+						</div>
+						<div class="selected_body">
+							<div class="price_quantity">
+								<div class="quantity">
+									<table>
+										<tr>
+											<td><button class="minus">-</button></td>
+											<td><span class="qty">1</span></td>
+											<td><button class="plus">+</button>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<span class="price"
+								th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</span>
+						</div>
 					</div>
 				</div>
 				<!--선택된 상품 옵션 여러개 선택할 경우 selected_product 개수 증가-->
 				<div class="selected_product">
-
 				</div>
 				<!--총 가격-->
 				<div class="total_price">
@@ -153,6 +161,7 @@
 				</nav>
 			</section>
 
+
 			<!--상품 문의-->
 			<section id="inquiry" class="tab_content">
 				<div class="inquiry_top">
@@ -216,7 +225,6 @@
 					</tr>
 				</table>
 			</section>
-		</section>
 	</main>
 	<!--장바구니 담기 성공 시 모달-->
 	<div id="cart_modal">
@@ -266,11 +274,8 @@
 	</div>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
-		// 'serverData' 라는 이름의 전역 객체를 만들어서,
-		// 서버에서 받은 SKU 목록, 기본 가격, 옵션 그룹 정보를 저장해둡니다.
-		// 이제 외부 JS 파일에서 이 'serverData' 객체를 마음껏 사용할 수 있습니다.
 		const serverData = {
-			skus: JSON.parse(/*[[${skusJson}]]*/ '[]'),
+			skus: JSON.parse(/*[[${skusJson}]]*/ '[]'), // SKU 목록 [{skuNo optionNos, stock}]
 			basePrice: /*[[${product.productPrice}]]*/ 0,
 			optionGroups: /*[[${product.optionGroups}]]*/[]
 		};

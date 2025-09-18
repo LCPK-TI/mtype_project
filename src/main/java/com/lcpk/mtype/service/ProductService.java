@@ -60,12 +60,11 @@ public class ProductService {
 
 		// 상품에 연결된 모든 SKU와 하위 옵션 정보들을 한번에 조회
 		List<ProductSkuEntity> skus = productSkuRepository.findAllWithDetailsByProductNo(productNo);
-
-		// 비즈니스 로직을 통해 DTO 가공
+    
 		List<SkuInfo> skuInfos = createSkuInfos(skus);
 		List<OptionGroup> optionGroups = createOptionGroups(skus);
 
-		return ProductDetailDto.from(product, topCategory, optionGroups, skuInfos);
+		return new ProductDetailDto(product, topCategory, optionGroups, skuInfos);
 	}
 
 	private List<SkuInfo> createSkuInfos(List<ProductSkuEntity> skus) {
@@ -76,8 +75,9 @@ public class ProductService {
 	}
 
 	
-	//SKU 엔티티 리스트를 OptionGroup DTO 리스트로 변환하여 화면에 뿌려줄 옵션 선택창의 구조
+	//SKU 엔티티 리스트를 OptionGroup DTO 리스트로 변환. 옵션 카테고리를 기준으로 옵션들을 그룹핑
 	private List<OptionGroup> createOptionGroups(List<ProductSkuEntity> skus) {
+    // 순서를 보장하기 위해 LinkedHashMap 사용
 		Map<String, Set<OptionInfo>> categoryMap = new LinkedHashMap<>();
 		skus.forEach(sku -> {
 			sku.getSkuOptions().forEach(skuOption -> {
@@ -87,15 +87,11 @@ public class ProductService {
 					return;
 
 				OptionCategoryEntity category = option.getOptionCategory();
-				categoryMap
-						.computeIfAbsent(category.getOptionCategoryNm(),
-								k -> new TreeSet<>(Comparator.comparing(OptionInfo::getOptionNo)))
-						.add(new OptionInfo(option.getOptionNo(), option.getOptionNm()));
-			});
-		});
+		return new ProductDetailDto(product, topCategory, optionGroups, skuInfos);
+	}
 
-		return categoryMap.entrySet().stream()
-				.map(entry -> new OptionGroup(entry.getKey(), new ArrayList<>(entry.getValue())))
-				.collect(Collectors.toList());
+	// 키워드 검색용 메소드
+	public Slice<ProductListDto> searchProductsByKeyword(String query, Pageable pageable) {
+		return productRepository.findByProductNameContaining(query, pageable);
 	}
 }

@@ -24,35 +24,26 @@ public class ProductDetailDto { // 상품 상세페이지용 dto
 	private final String mainImageUrl; // 대표 이미지
 	private final List<String> subImageUrls; // 나머지 서브 이미지 목록
 
-	private List<OptionGroup> optionGroups;
-	private List<SkuInfo> skus;
-
-	// 생성자는 모든 정보를 받아서 필드를 초기화합니다.
-	private ProductDetailDto(ProductEntity product, CategoryEntity topCategory, String mainImageUrl,
-			List<String> subImageUrls, List<OptionGroup> optionGroups, List<SkuInfo> skus) {
+	private List<OptionGroup> optionGroups; // 옵션 정보. 화면에 옵션 버튼들을 그리기 위한 정보
+	private List<SkuInfo> skus; // sku 정보. js가 선택된 옵션 조합으로 최종 skuNo를 찾기 위한 역할
+  
+	public ProductDetailDto(ProductEntity product, CategoryEntity topCategory, List<OptionGroup> optionGroups,
+			List<SkuInfo> skus) {
 		this.productNo = product.getProductNo();
 		this.productName = product.getProductName();
 		this.productPrice = product.getProductPrice();
 		this.detailImgUrl = product.getDetailImgUrl();
+
 		this.category = new CategoryDto(product.getCategory());
 		this.topCategory = new CategoryDto(topCategory);
-		this.mainImageUrl = mainImageUrl;
-		this.subImageUrls = subImageUrls;
+
+		// 이미지 리스트에서 대표 이미지와 서브 이미지를 분리
+		this.mainImageUrl = product.getImages().stream().filter(img -> "Y".equals(img.getIsMain()))
+				.map(ProductImgEntity::getImgUrl).findFirst().orElse(null); // 대표 이미지가 없을 경우 null
+
+		this.subImageUrls = product.getImages().stream().filter(img -> "N".equals(img.getIsMain()))
+				.map(ProductImgEntity::getImgUrl).collect(Collectors.toList());
 		this.optionGroups = optionGroups;
 		this.skus = skus;
-	}
-
-	public static ProductDetailDto from(ProductEntity product, CategoryEntity topCategory,
-			List<OptionGroup> optionGroups, List<SkuInfo> skus) {
-
-		// 이미지 분리 로직
-		Map<Boolean, List<String>> partitionedImages = product.getImages().stream()
-				.collect(Collectors.partitioningBy(img -> "Y".equals(img.getIsMain()),
-						Collectors.mapping(ProductImgEntity::getImgUrl, Collectors.toList())));
-		String mainImg = partitionedImages.get(true).stream().findFirst().orElse(null);
-		List<String> subImgs = partitionedImages.get(false);
-
-		// private 생성자를 통해 모든 정보를 담은 DTO 객체 생성
-		return new ProductDetailDto(product, topCategory, mainImg, subImgs, optionGroups, skus);
 	}
 }

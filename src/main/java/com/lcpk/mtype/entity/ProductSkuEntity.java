@@ -21,27 +21,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "PRODUCT_SKU_TB")
+@Table(name="PRODUCT_SKU_TB")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductSkuEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_sku_sq_generator")
-	@SequenceGenerator(name = "product_sku_sq_generator", sequenceName = "PRODUCT_SKU_SQ", allocationSize = 1)
-	@Column(name = "SKU_NO")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="productSku_seq_gen")
+	@SequenceGenerator(
+			name="productSku_seq_gen",
+			sequenceName="PRODUCT_SKU_SQ",
+			allocationSize=1)
+	@Column(name="SKU_NO")
 	private Long skuNo;
 
-	@Column(name = "STOCK", nullable = false)
-	private int stock;
+    @Column(name = "STOCK", nullable = false)
+    private int stock;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_NO", nullable = false)
+    private ProductEntity product;
 
-	// ProductSku(N) -> Product(1)
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PRODUCT_NO", nullable = false)
-	private ProductEntity product;
-
-	// ProductSku(1) -> SkuOption(N)
-	@OneToMany(mappedBy = "productSku", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<SkuOptionEntity> skuOptions = new ArrayList<>();
+    @OneToMany(mappedBy = "productSku", cascade = CascadeType.ALL)
+    private List<SkuOptionEntity> skuOptions = new ArrayList<>();
 }

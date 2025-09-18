@@ -48,24 +48,140 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 	/*검색창 */
-	const closeSearchBtn = document.getElementById("search_footer");
+	const searchInput = document.getElementById("search");
+	const searchBtn = document.getElementById("search_btn");
 	const searchModal = document.getElementById("show_search");
-	const openSearchBtn = document.getElementById("search");
+	const closeSearchBtn = document.getElementById("search_footer");
+	const popularSearchContainer = document.getElementById("popular_search");
+	const recentSearchContainer = document.getElementById("recent_search");
 
+	// 검색창 열때마다 서버에서 검색어 데이터 불러옴
+	async function loadSearchKeywords() {
+		fetch('/api/search/popular')
+			.then(res => res.json())
+			.then(keywords => {
+				popularSearchContainer.innerHTML = '<div id="popular_header"><b>인기 검색어</b></div>';
+				keywords.forEach((keyword, index) => {
+					const rankDiv = document.createElement('div');
+					rankDiv.className = 'rank_search';
+					rankDiv.innerHTML = `<span>${index + 1}</span><span>${keyword}</span>`;
+					
+					// 키워드에 클릭 이벤트 추가
+					rankDiv.style.cursor = 'pointer';
+					rankDiv.addEventListener('click', () => executeSearch(keyword));
+					
+					popularSearchContainer.appendChild(rankDiv);
+				});
+			});
+		// 최근 검색어
+		if (window.isUserLoggedIn) {
+			fetch('/api/search/recent')
+				.then(res => res.json())
+				.then(keywords => {
+					recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b><button id="delete-all-btn">전체 삭제</button></div>';
+					
+					// 전체 삭제
+					const deleteAllBtn = document.getElementById('delete-all-btn');
+					if(deleteAllBtn){
+						deleteAllBtn.addEventListener('click', () => {
+							if(confirm("최근 검색어를 모두 삭제하시겠습니까?")){
+								fetch('/api/search/recent/all', {method: 'DELETE'})
+									.then(response => {
+										if(response.ok){
+											loadSearchKeywords();
+										}
+									});
+							}
+						});
+					}
+					
+					keywords.forEach(keyword => {
+						const contentDiv = document.createElement('div');
+						contentDiv.className = 'search_content';
+						contentDiv.innerHTML = `<span>${keyword}</span><button class="delete-one-btn">X</button>`;
+						
+						// 키워드에 클릭 이벤트
+						const keywordSpan = contentDiv.querySelector('span');
+						keywordSpan.style.cursor = 'pointer';
+						keywordSpan.addEventListener('click', () => executeSearch(keyword));
+						
+						// 최근 검색어 개별 삭제
+						const deleteOneBtn = contentDiv.querySelector('.delete-one-btn');
+						deleteOneBtn.addEventListener('click', () => {
+							const encodedKeyword = encodeURIComponent(keyword);
+							fetch(`/api/search/recent?keyword=${encodedKeyword}`, {method: 'DELETE'})
+								.then(response => {
+									if(response.ok){
+										loadSearchKeywords();
+									}
+								});
+						});
+						
+						recentSearchContainer.appendChild(contentDiv);
+					});
+				});
+		} else {
+			// 로그인 아닌 경우
+			recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b></div>' +
+				'<div class="search_content" style="color:gray; font-size:13px;">로그인 후 이용 가능합니다.</div>';
+		}
+	}
+	// 검색 버튼 또는 엔터를 눌렀을 때.
+	function executeSearch(keyword) {
+		// 파라미터로 넘어오는 keyword가 문자열인 경우 그대로 사용. 아닐 경우 검색창의 값 전송
+		const searchTerm = (typeof keyword === 'string') ? keyword : searchInput.value.trim();
+		
+		if (searchTerm) {
+			// 검색어가 존재하는 경우
+			fetch('/api/search', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ keyword: searchTerm })
+			}).then(response => {
+				if (response.ok) {
+					window.location.href = `/product/search?query=${encodeURIComponent(searchTerm)}`;
+				}
+			});
+		}
+	}
+	
+	// 검색창을 여는 함수
 	function showSearch() {
-		searchModal.style.display = "block";
-		document.body.classList.add("modal-open");
+	    searchModal.style.display = "block";
+	    document.body.classList.add("modal-open");
+	    loadSearchKeywords();
 	}
-
+	// 검색창을 닫는 함수
 	function closeSearch() {
-		document.getElementById("show_search").style.display = "none";
-		document.body.classList.remove("modal-open");
+	    searchModal.style.display = "none";
+	    document.body.classList.remove("modal-open");
 	}
+	
+	// 검색 창 클릭 시
+	searchInput.addEventListener("click", showSearch);
 
-	openSearchBtn.addEventListener("click", showSearch);
+	// 닫기 버튼
 	closeSearchBtn.addEventListener("click", closeSearch);
 
+	// 검색 버튼 클릭
+	searchBtn.addEventListener('click', executeSearch);
+	// 검색창에서 엔터 키
+	searchInput.addEventListener('keydown', function(event) {
+		if (event.key === 'Enter') {
+			executeSearch();
+		}
+	});
 
+	// 검색모달 외부 클릭 시 닫기
+	window.addEventListener('click', (event) => {
+	    if (searchModal.style.display === 'block' &&
+	        !searchModal.contains(event.target) &&
+	        event.target !== searchInput) {
+	        
+	        closeSearch();
+	    }
+	});
+	
 	// 마이페이지 아이콘
 	const mypageIcon = document.getElementById('mypage-icon');
 	if (mypageIcon) {
@@ -120,6 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			anvModal.style.display = "none";
 		}
 	});
-
+	
 });
 
