@@ -45,4 +45,10 @@ public class ProductService {
         //Entity를 DTO로 변환하여 반환
         return new ProductDetailDto(product, topCategory);
     }
+	
+	
+	// 키워드 검색용 메소드
+	public Slice<ProductListDto> searchProductsByKeyword(String query, Pageable pageable){
+		return productRepository.findByProductNameContaining(query, pageable);
+	}
 }
