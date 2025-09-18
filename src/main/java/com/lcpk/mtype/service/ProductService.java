@@ -55,7 +55,7 @@ public class ProductService {
 		ProductEntity product = productRepository.findProductWithDetailsByProductNo(productNo)
 				.orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다. ID: " + productNo));
 
-		// 2. 최상위 부모 카테고리 조회
+		// 최상위 부모 카테고리 조회
 		CategoryEntity topCategory = categoryService.findTopParent(product.getCategory().getCategoryNo());
 		// 상품에 연결된 모든 SKU와 하위 옵션 정보들을 한번에 조회
 		List<ProductSkuEntity> skus = productSkuRepository.findAllWithDetailsByProductNo(productNo);
@@ -70,8 +70,7 @@ public class ProductService {
 	private List<SkuInfo> createSkuInfos(List<ProductSkuEntity> skus) {
 		return skus.stream()
 				.map(sku -> new SkuInfo(sku.getSkuNo(), sku.getStock(),
-						sku.getSkuOptions().stream().map(so -> so.getOption().getOptionNo()).sorted() // 프론트엔드에서 조합을 찾기
-																										// 쉽도록 정렬
+						sku.getSkuOptions().stream().map(so -> so.getOption().getOptionNo()).sorted() // 프론트엔드에서 조합을 찾기 쉽도록 정렬
 								.collect(Collectors.toList())))
 				.collect(Collectors.toList());
 	}

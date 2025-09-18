@@ -50,7 +50,7 @@ public class ProductController {
         String skusJson = objectMapper.writeValueAsString(productDto.getSkus());
         model.addAttribute("skusJson",skusJson);
         //DTO에 담긴 최상위 카테고리 ID로 View를 결정
-        if (productDto.getTopCategory().getCategoryNo() == BOOK_CATEGORY_NO) { // 3L은 상수로 관리하는 것이 더 좋습니다.
+        if (productDto.getTopCategory().getCategoryNo() == BOOK_CATEGORY_NO) { 
             return "book-detail";
         } else {
             return "product-detail";
