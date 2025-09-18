@@ -44,8 +44,6 @@ public class ProductController {
 
         //Model에 DTO를 추가
         model.addAttribute("product", productDto);
-        System.out.println("Main Image URL: " + productDto.getMainImageUrl());
-        System.out.println("Sub Image URLs: " + productDto.getSubImageUrls());
         
         //SKUS 목록을 JSON 문자열로 변환해서 따로 담아줌
         ObjectMapper objectMapper = new ObjectMapper();

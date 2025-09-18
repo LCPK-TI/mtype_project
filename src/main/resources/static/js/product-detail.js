@@ -97,8 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	function addCardEventListeners(card) {
 		const qtySpan = card.querySelector(".qty");
 		const priceSpan = card.querySelector(".price");
-		console.log("addCardEventListeners 함수가 받은 card 요소:", card);
-		console.log("card 안에서 .plus 버튼 찾기:", card.querySelector(".plus"));
 		//이 카드의 단가와 재고 결정
 		const skuNo = card.dataset.skuNo; //옵션카드는 skuNo가 있고, 단일 상품은 없음
 		const sku = skuNo ? serverData.skus.find(s => s.skuNo == skuNo) : null;
@@ -301,4 +299,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		})
 	});
+
+	//상세 사진 접었다 펴기
+	function moreDetail() {
+		document.querySelector(".detail_content").classList.remove("hidden");
+		document.querySelector(".detailMore").remove(); // 버튼 제거
+	}
+	document.getElementById("btnMore").addEventListener("click", moreDetail);
 });
