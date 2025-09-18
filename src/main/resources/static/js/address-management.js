@@ -1,16 +1,30 @@
-let addresses = [
-  { id: 1, name: "집",     receiver: "○○○", phone: "010-1234-5678",  addr1: "○○○○○ ○○○○ ○○○", addr2: "○동 ○○호", isDefault: true  },
-  { id: 2, name: "회사",   receiver: "○○○", phone: "02-987-6543",   addr1: "○○○○ ○○○ ○○○",   addr2: "○층 ○○",     isDefault: false },
-];
+// API 엔드포인트
+const API = "/api/addresses";
 
+// 화면에 쓰는 표준 모델
+let addresses = [];
+
+// 특수문자 이스케이프
 function esc(s){
   return String(s ?? "")
     .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
     .replaceAll('"',"&quot;").replaceAll("'","&#39;");
 }
-function nextId(){ return Math.max(0, ...addresses.map(a=>a.id)) + 1; }
 
-/* 주소 */
+// 서버 응답(엔티티/DTO 혼용) → 화면 모델로 정규화
+function normalize(it){
+  return {
+    id:        it.id        ?? it.addrNo,
+    name:      it.name      ?? it.addrName,
+    receiver:  it.receiver  ?? it.recipient,
+    phone:     it.phone     ?? it.reciPhone ?? "",
+    addr1:     it.addr1     ?? it.addrMain,
+    addr2:     it.addr2     ?? it.addrDetail ?? "",
+    isDefault: (it.isDefault ?? it.addrDefault) ? true : false
+  };
+}
+
+/* 템플릿 & 렌더 */
 function rowTemplate(a){
   return `
     <article class="address_card" data-id="${a.id}" aria-label="${esc(a.name)} 배송지">
@@ -23,24 +37,20 @@ function rowTemplate(a){
               ${a.isDefault ? '<span class="badge_default" aria-label="기본 배송지">기본배송지</span>' : ''}
             </dd>
           </div>
-
           <div class="info_item">
             <dt class="info_label">수령인</dt>
             <dd class="info_value">${esc(a.receiver)}</dd>
           </div>
-
           <div class="info_item">
             <dt class="info_label">연락처</dt>
             <dd class="info_value">${a.phone ? esc(a.phone) : '-'}</dd>
           </div>
-
           <div class="info_item">
             <dt class="info_label">주소</dt>
             <dd class="info_value">${esc(a.addr1)} ${esc(a.addr2)}</dd>
           </div>
         </dl>
       </div>
-
       <div class="address_actions">
         <button type="button" class="btn_small" data-action="edit" title="수정">수정</button>
         <button type="button" class="btn_small" data-action="remove" title="삭제">삭제</button>
@@ -56,7 +66,7 @@ function render(){
     : '<p style="color:#777; text-align:center; padding:2rem;">등록된 배송지가 없습니다. 우측 상단의 <b>배송지 추가</b> 버튼으로 등록하세요.</p>';
 }
 
-/* 열기, 닫기 */
+/* 다이얼로그 */
 const dialog     = document.getElementById("address_dialog");
 const form       = document.getElementById("address_form");
 const formTitle  = document.getElementById("dialog_title");
@@ -66,13 +76,13 @@ function openDialog(mode, data){
   formTitle.textContent = (mode === "edit") ? "배송지 수정" : "배송지 추가";
 
   if(mode === "edit" && data){
-    form.id.value        = data.id;
-    form.name.value      = data.name ?? "";
-    form.receiver.value  = data.receiver ?? "";
-    form.phone.value     = data.phone ?? "";
-    form.addr1.value     = data.addr1 ?? "";
-    form.addr2.value     = data.addr2 ?? "";
-    form.isDefault.checked = !!data.isDefault;
+    form.id.value           = data.id;
+    form.name.value         = data.name ?? "";
+    form.receiver.value     = data.receiver ?? "";
+    form.phone.value        = data.phone ?? "";
+    form.addr1.value        = data.addr1 ?? "";
+    form.addr2.value        = data.addr2 ?? "";
+    form.isDefault.checked  = !!data.isDefault;
   }else{
     form.id.value = "";
     form.isDefault.checked = false;
@@ -83,17 +93,61 @@ function openDialog(mode, data){
 }
 function closeDialog(){ dialog.close(); }
 
-document.querySelector(".btn_primary").addEventListener("click", ()=> openDialog("create"));
+document.querySelector(".btn_primary")
+  .addEventListener("click", ()=> openDialog("create"));
 document.getElementById("btn_close").addEventListener("click", closeDialog);
 document.getElementById("btn_cancel").addEventListener("click", closeDialog);
 
-/* 수정,삭제 */
-document.querySelector(".address_list").addEventListener("click", (e)=>{
+/* 서버 연동 */
+async function load(){
+  const res = await fetch(API, { headers: { "Accept":"application/json" }});
+  if(!res.ok) { console.error("목록 조회 실패", res.status); return; }
+  const data = await res.json();
+  addresses = (Array.isArray(data) ? data : []).map(normalize);
+  render();
+}
+
+async function saveToServer(data){
+  const url = data.id ? `${API}/${data.id}` : API;
+  const method = data.id ? "PUT" : "POST";
+  const payload = {
+    name: data.name,
+    receiver: data.receiver,
+    phone: data.phone,
+    addr1: data.addr1,
+    addr2: data.addr2,
+    isDefault: data.isDefault
+  };
+  const res = await fetch(url, {
+    method,
+    headers: { "Content-Type":"application/json", "Accept":"application/json" },
+    body: JSON.stringify(payload)
+  });
+  if(!res.ok){
+    const msg = await res.text().catch(()=> "");
+    alert(`저장 실패 (${res.status})\n${msg}`);
+    return false;
+  }
+  return true;
+}
+
+async function removeFromServer(id){
+  const res = await fetch(`${API}/${id}`, { method: "DELETE" });
+  if(!res.ok){
+    const msg = await res.text().catch(()=> "");
+    alert(`삭제 실패 (${res.status})\n${msg}`);
+    return false;
+  }
+  return true;
+}
+
+/* 목록: 수정/삭제 버튼 */
+document.querySelector(".address_list").addEventListener("click", async (e)=>{
   const btn = e.target.closest(".btn_small");
   if(!btn) return;
 
-  const row  = e.target.closest(".address_card");
-  const id   = Number(row?.dataset.id);
+  const row = e.target.closest(".address_card");
+  const id  = Number(row?.dataset.id);
   const item = addresses.find(a => a.id === id);
   if(!item) return;
 
@@ -101,21 +155,18 @@ document.querySelector(".address_list").addEventListener("click", (e)=>{
     openDialog("edit", item);
   }else if(btn.dataset.action === "remove"){
     if(confirm("배송지를 삭제할까요?")){
-      addresses = addresses.filter(a => a.id !== id);
-      if(!addresses.some(a => a.isDefault) && addresses.length){
-        addresses[0].isDefault = true;
-      }
-      render();
+      const ok = await removeFromServer(id);
+      if(ok) await load();
     }
   }
 });
 
 /* 저장 */
-form.addEventListener("submit", (e)=>{
+form.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
   const data = {
-    id: form.id.value ? Number(form.id.value) : nextId(),
+    id: form.id.value ? Number(form.id.value) : null,
     name: form.name.value.trim(),
     receiver: form.receiver.value.trim(),
     phone: form.phone.value.trim(),
@@ -129,25 +180,20 @@ form.addEventListener("submit", (e)=>{
     return;
   }
 
-  if(data.isDefault){
-    addresses = addresses.map(a => ({ ...a, isDefault: a.id === data.id }));
-  }
-
-  const idx = addresses.findIndex(a => a.id === data.id);
-  if(idx >= 0) addresses[idx] = { ...addresses[idx], ...data };
-  else addresses.push(data);
+  const ok = await saveToServer(data);
+  if(!ok) return;
 
   closeDialog();
-  render();
+  await load(); // 서버 데이터로 다시 그리기
 });
 
-/* 다음 우편번호(Postcode) 연결 */
-document.getElementById("btn_search_address").addEventListener("click", openPostcode);
+/* 다음 우편번호(Postcode) */
+const btnSearch = document.getElementById("btn_search_address");
+if (btnSearch) btnSearch.addEventListener("click", openPostcode);
 
 function openPostcode(){
-  // 스크립트 로드 확인
   if(!(window.daum && window.daum.Postcode)){
-    alert("우편번호 스크립트가 아직 로드되지 않았습니다.");
+    alert("우편번호 스크립트를 로드하세요.");
     return;
   }
   new daum.Postcode({
@@ -156,10 +202,8 @@ function openPostcode(){
       form.addr1.value = addr || "";
       form.addr2.focus();
     }
-  }).open({
-    q: form.addr1?.value || ''   // 기존 입력이 있으면 기본 검색어로
-  });
+  }).open({ q: form.addr1?.value || "" });
 }
 
-/* 초기 렌더 */
-document.addEventListener("DOMContentLoaded", render);
+/* 최초 로드 */
+document.addEventListener("DOMContentLoaded", load);
