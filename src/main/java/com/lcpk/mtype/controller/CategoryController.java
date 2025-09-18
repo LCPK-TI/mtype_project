@@ -26,7 +26,6 @@ public class CategoryController {
     @GetMapping("/category/{categoryNo}")
     public String productListPage(
             @PathVariable(name="categoryNo") Long categoryNo,
-            // Pageable을 파라미터로 직접 받고 기본값을 설정하는 것이 더 깔끔합니다.
             @PageableDefault(size = 20, sort = "productNo", direction = Sort.Direction.DESC) Pageable pageable,
             Model model
     ) {

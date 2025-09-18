@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(SkuOptionId.class) // 복합키 클래스 지정
+@IdClass(SkuOptionNo.class) // 복합키 클래스 지정
 public class SkuOptionEntity {
 	@Id // 복합키 1
     @ManyToOne(fetch = FetchType.LAZY)

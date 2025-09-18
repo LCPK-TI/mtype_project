@@ -60,7 +60,7 @@ public class ProductService {
 
 		// 상품에 연결된 모든 SKU와 하위 옵션 정보들을 한번에 조회
 		List<ProductSkuEntity> skus = productSkuRepository.findAllWithDetailsByProductNo(productNo);
-    
+
 		List<SkuInfo> skuInfos = createSkuInfos(skus);
 		List<OptionGroup> optionGroups = createOptionGroups(skus);
 
@@ -69,25 +69,34 @@ public class ProductService {
 
 	private List<SkuInfo> createSkuInfos(List<ProductSkuEntity> skus) {
 		return skus.stream()
-				.map(sku -> new SkuInfo(sku.getSkuNo(), sku.getStock(),  sku.getSkuOptions()
-						.stream().map(so -> so.getOption().getOptionNo()).sorted().collect(Collectors.toList())))
+				.map(sku -> new SkuInfo(sku.getSkuNo(), sku.getStock(), sku.getSkuOptions().stream()
+						.map(so -> so.getOption().getOptionNo()).sorted().collect(Collectors.toList())))
 				.collect(Collectors.toList());
 	}
 
-	
-	//SKU 엔티티 리스트를 OptionGroup DTO 리스트로 변환. 옵션 카테고리를 기준으로 옵션들을 그룹핑
+	// SKU 엔티티 리스트를 OptionGroup DTO 리스트로 변환. 옵션 카테고리를 기준으로 옵션들을 그룹핑
 	private List<OptionGroup> createOptionGroups(List<ProductSkuEntity> skus) {
-    // 순서를 보장하기 위해 LinkedHashMap 사용
+		// 순서를 보장하기 위해 LinkedHashMap 사용
 		Map<String, Set<OptionInfo>> categoryMap = new LinkedHashMap<>();
+
 		skus.forEach(sku -> {
 			sku.getSkuOptions().forEach(skuOption -> {
 				OptionEntity option = skuOption.getOption();
-				// 기본 옵션은 화면에 노출할 필요가 없으므로 건너뜀
-				if ("DEFAULT".equals(option.getOptionCode()))
-					return;
-
 				OptionCategoryEntity category = option.getOptionCategory();
-		return new ProductDetailDto(product, topCategory, optionGroups, skuInfos);
+
+				// '기본 옵션'은 화면에 노출할 필요가 없으므로 건너뛴다.
+				if ("DEFAULT".equals(option.getOptionCode())) {
+					return;
+				}
+				categoryMap
+						.computeIfAbsent(category.getOptionCategoryNm(),
+								k -> new TreeSet<>(Comparator.comparing(OptionInfo::getOptionNo)))
+						.add(new OptionInfo(option.getOptionNo(), option.getOptionNm()));
+			});
+		});
+		return categoryMap.entrySet().stream()
+				.map(entry -> new OptionGroup(entry.getKey(), new ArrayList<>(entry.getValue())))
+				.collect(Collectors.toList());
 	}
 
 	// 키워드 검색용 메소드
