@@ -31,7 +31,10 @@ public class OptionEntity {
 
     @Column(name = "OPTION_NM", length = 20)
     private String optionNm;
-
+    
+    @Column(name = "OPTION_CODE")
+    private String optionCode;
+    
     // Option(N) OptionCategory(1)
     // 옵션은 반드시 카테고리가 있어야 하므로 nullable = false
     @ManyToOne(fetch = FetchType.LAZY)

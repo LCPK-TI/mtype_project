@@ -2,244 +2,285 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
 
-    <link rel="stylesheet" th:href="@{/css/product-detail.css}" />
-    <script type="text/javascript" th:src="@{/js/product-detail.js}"></script>
-  <body>
-    
-    <main>
-      <div class="top_content">
-        <!--왼쪽 상품이미지 영역-->
-        <div class="left_content">
-          <!--대표 이미지-->
-          <img id="thumbnail" th:src="${product.mainImageUrl}" />
-          <!--왼쪽 아래 후보 이미지들 영역-->
-          <div class="bottom_imgs">
-            <!--후보 이미지1-->
-			<img th:src="${product.mainImageUrl}" />
-            <img th:each="img : ${product.subImageUrls}"
-				th:src="${img}" />
-          </div>
-        </div>
-        <!--오른쪽 상품 선택 주문관련 영역-->
-        <div class="right_content">
-          <div class="product_header">
-            <div class="product_info">
-              <a href="">스토어명 &gt;</a>
-              <!--상품명, 가격-->
-              <section class="product_summary">
-                <h3 class="product_title" th:text="${product.productName}">상품명</h3>
-                <p class="product_price" th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</p>
-              </section>
-            </div>
-            <!--찜, 공유버튼-->
-            <div class="product_actions">
-              <button class="wishlist_btn">
-                <img th:src="@{/img/wishlist.png}" width="40px" />
-              </button>
-              <button class="share_btn">
-                <img th:src="@{/img/share_logo.png}" width="40px" />
-              </button>
-            </div>
-          </div>
-          <!--옵션 선택-->
-          <div class="product_options">
-            <select id="options">
-              <option selected disabled hidden>옵션을 선택하세요.</option>
-              <option>옵션1</option>
-              <option>옵션2</option>
-            </select>
-          </div>
-          <!--선택된 상품 옵션 여러개 선택할 경우 selected_product 개수 증가-->
-          <div class="selected_product">
-            
-          </div>
-          <!--총 가격-->
-          <div class="total_price">
-            <p>총 상품 금액</p>
-            <b>0,000원</b>
-          </div>
-          <!--구매 버튼 영역-->
-          <div class="order_btns">
-            <button id="cart_btn">장바구니</button>
-            <button id="gift_btn">선물하기</button>
-            <button id="buy_btn">바로구매</button>
-          </div>
-        </div>
-      </div>
-      <section id="middle_content">
-        <!--탭 메뉴-->
-        <nav id="navbar_detail">
-          <ul>
-            <!--현재 영역의 navbar 밑에 선긋기 위한 active 사용-->
-            <!--js로 li 클릭시 navbar active 추가해줘야함-->
-            <li class="active"><a href="#detail">상세 정보</a></li>
-            <li><a href="#review">상품 리뷰 ooo</a></li>
-            <li><a href="#inquiry">상품 문의</a></li>
-          </ul>
-        </nav>
-        <!--상세 정보-->
-        <section id="detail" class="tab_content">
-          <div class="detail_content">
-            <!--상품 상세 이미지 넣을 영역-->
-            <img id="detail_img" th:src="${product.detailImgUrl}" />
-          </div>
-        </section>
-        <!--리뷰 영역-->
-        <section id="review" class="tab_content">
-          <div class="review_count">
-            <h2>리뷰(ooo)</h2>
-            <span class="rating">★★★★☆</span>
-          </div>
+<link rel="stylesheet" th:href="@{/css/product-detail.css}" />
+<script type="text/javascript" th:src="@{/js/product-detail.js}"></script>
 
-          <!--리뷰 썸네일-->
-          <div class="review_thumbnails">
-            <img th:src="@{/img/product_img.png}" alt="리뷰이미지1" />
-            <img th:src="@{/img/product_img.png}" alt="리뷰이미지2" />
-            <img th:src="@{/img/product_img.png}" alt="리뷰이미지3" />
-            <img th:src="@{/img/product_img.png}" alt="리뷰이미지4" />
-            <img th:src="@{/img/product_img.png}" alt="리뷰이미지5" />
-            <button class="more_btn">더보기</button>
-          </div>
-          <!--리뷰 리스트-->
-          <ul class="review_list">
-            <li>
-              <div class="review_header">
-                <span class="stars">★★★★☆</span>
-                <span class="user_id">아이디(se***)</span>
-                <span class="date">작성일</span>
-              </div>
-              <div class="review_content">
-                <div class="review_left">
-                  <p class="option">옵션</p>
-                  <p class="review_text">리뷰 내용</p>
-                </div>
-                <div class="review_right">
-                  <img th:src="@{/img/product_img.png}" />
-                </div>
-              </div>
-            </li>
-          </ul>
-          <!--페이지네이션 데이터 값에 따라 동적으로 변경해야함-->
-          <nav class="pagination">
-            <a href="#">&lt;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">…</a>
-            <a href="#">4</a>
-            <a href="#">&gt;</a>
-          </nav>
-        </section>
+<body>
 
-        <!--상품 문의-->
-        <section id="inquiry" class="tab_content">
-          <div class="inquiry_top">
-            <h2>상품 문의</h2>
-            <button id="inquiry_btn">문의 작성</button>
-          </div>
-          <!--문의 목록-->
-          <ul>
-            <li>
-              <div class="inquiry_header">
-                <span class="user_id">아이디(se***)</span>
-                <span class="date">작성일</span>
-                <span class="answer">응답 여부</span>
-              </div>
-              <div class="inquiry_content">
-                <p>문의 내용</p>
-              </div>
-            </li>
-          </ul>
-          <!--문의 작성 시 모달-->
-          <div id="write_inquiry">
-            <strong>문의 작성</strong>
-            <form>
-              <div id="inquiry_title">
-                <input type="text" placeholder="제목을 입력하세요" />
-              </div>
-              <div id="inquiry_text">
-                <input type="text" placeholder="문의하실 내용을 입력하세요." />
-              </div>
-              <div id="inquiry_publicity">
-                <input type="checkbox" name="publicity" value="private" />비공개
-              </div>
+	<main>
+		<div class="top_content">
+			<!--왼쪽 상품이미지 영역-->
+			<div class="left_content">
+				<!--대표 이미지-->
+				<img id="thumbnail" th:src="${product.mainImageUrl}" />
+				<!--왼쪽 아래 후보 이미지들 영역-->
+				<div class="bottom_imgs">
+					<!--후보 이미지1-->
+					<img th:src="${product.mainImageUrl}" />
+					<img th:each="img : ${product.subImageUrls}" th:src="${img}" />
+				</div>
+			</div>
+			<!--오른쪽 상품 선택 주문관련 영역-->
+			<div class="right_content">
+				<div class="product_header">
+					<a href="">스토어명 &gt;</a>
+					<!--찜, 공유버튼-->
+					<div class="product_actions">
+						<button class="wishlist_btn">
+							<img th:src="@{/img/wishlist.png}" width="40px" />
+						</button>
+						<button class="share_btn">
+							<img th:src="@{/img/share_logo.png}" width="40px" />
+						</button>
+					</div>
+				</div>
+				<!--상품명, 가격-->
+				<div class="product_summary">
+					<h3 class="product_title" th:text="${product.productName}">상품명</h3>
+					<p class="product_price" th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격
+					</p>
+				</div>
+				<!--옵션 선택-->
+				<div class="product_options">
+					<!--옵션 그룹이 비어있지 않을 때만 실행-->
+					<th:block th:if="${not #lists.isEmpty(product.optionGroups)}">
+						<!--옵션 그룹을 하나씩 반복-->
+						<div th:each="group, iterStat : ${product.optionGroups}">
+							<!--옵션 선택 드롭다운-->
+							<select class="option_select" th:attr="data_group_index=${iterStat.index}">
+								<!--첫 번째 기본 안내 option-->
+								<option value="" selected disabled>-- [[${group.categoryName}]] 선택 --</option>
+								<!--그룹 안의 실제 옵션들 반복-->
+								<option th:each="opt : ${group.options}" th:value="${opt.optionNo}"
+									th:text="${opt.optionName}"></option>
+							</select>
+						</div>
+					</th:block>
+					<!--옵션 그룹이 비어있을 때 수량 추가 -->
+					<div id="single_product_card" th:if="${#lists.isEmpty(product.optionGroups)}">
+						<div class="selected_header">
+							<span th:text="${product.productName}"></span>
+						</div>
+						<div class="selected_body">
+							<div class="price_quantity">
+								<div class="quantity">
+									<table>
+										<tr>
+											<td><button class="minus">-</button></td>
+											<td><span class="qty">1</span></td>
+											<td><button class="plus">+</button>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<span class="price"
+								th:text="${#numbers.formatInteger(product.productPrice,3,'COMMA')+'원'}">가격</span>
+						</div>
+					</div>
+				</div>
+				<!--선택된 상품 옵션 여러개 선택할 경우 selected_product 개수 증가-->
+				<div class="selected_product">
+				</div>
+				<!--총 가격-->
+				<div class="total_price">
+					<p>총 상품 금액</p>
+					<b id="total_price_amount">0,000원</b>
+				</div>
+				<!--구매 버튼 영역-->
+				<div class="order_btns">
+					<button id="cart_btn">장바구니</button>
+					<button id="gift_btn">선물하기</button>
+					<button id="buy_btn">바로구매</button>
+				</div>
+			</div>
+		</div>
+		<section id="middle_content">
+			<!--탭 메뉴-->
+			<nav id="navbar_detail">
+				<ul>
+					<!--현재 영역의 navbar 밑에 선긋기 위한 active 사용-->
+					<!--js로 li 클릭시 navbar active 추가해줘야함-->
+					<li class="active"><a href="#detail">상세 정보</a></li>
+					<li><a href="#review">상품 리뷰 ooo</a></li>
+					<li><a href="#inquiry">상품 문의</a></li>
+				</ul>
+			</nav>
+			<!--상세 정보-->
+			<section id="detail" class="tab_content">
+				<div class="detail_content hidden">
+					<!--상품 상세 이미지 넣을 영역-->
+					<img id="detail_img" th:src="${product.detailImgUrl}" />
+				</div>
+				<div class="detailMore">
+					<button id="btnMore">상품정보 펼쳐보기</button>
+				</div>
+			</section>
+			<!--리뷰 영역-->
+			<section id="review" class="tab_content">
+				<div class="review_count">
+					<h2>리뷰(ooo)</h2>
+					<span class="rating">★★★★☆</span>
+				</div>
 
-              <div id="inquiry_btns">
-                <button type="button" id="cancel_inquiry">취소</button>
-                <button type="submit" id="register_inquiry">문의 등록</button>
-              </div>
-            </form>
-          </div>
-        </section>
+				<!--리뷰 썸네일-->
+				<div class="review_thumbnails">
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지1" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지2" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지3" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지4" />
+					<img th:src="@{/img/product_img.png}" alt="리뷰이미지5" />
+					<button class="more_btn">더보기</button>
+				</div>
+				<!--리뷰 리스트-->
+				<ul class="review_list">
+					<li>
+						<div class="review_header">
+							<span class="stars">★★★★☆</span>
+							<span class="user_id">아이디(se***)</span>
+							<span class="date">작성일</span>
+						</div>
+						<div class="review_content">
+							<div class="review_left">
+								<p class="option">옵션</p>
+								<p class="review_text">리뷰 내용</p>
+							</div>
+							<div class="review_right">
+								<img th:src="@{/img/product_img.png}" />
+							</div>
+						</div>
+					</li>
+				</ul>
+				<!--페이지네이션 데이터 값에 따라 동적으로 변경해야함-->
+				<nav class="pagination">
+					<a href="#">&lt;</a>
+					<a href="#">1</a>
+					<a href="#">2</a>
+					<a href="#">…</a>
+					<a href="#">4</a>
+					<a href="#">&gt;</a>
+				</nav>
+			</section>
 
-        <!--판매자 정보-->
-        <section id="seller_info">
-          <h2>판매자 정보</h2>
-          <table>
-            <colgroup>
-              <col style="width: 20%" />
-              <col style="width: 80%" />
-            </colgroup>
-            <tr id="store_name">
-              <td>상호명</td>
-              <td>(주)OOOO</td>
-            </tr>
-            <tr id="store_number">
-              <td>사업자등록번호</td>
-              <td>OOO-OO-OOOO</td>
-            </tr>
-            <tr id="store_rep">
-              <td>대표자</td>
-              <td>홍길동</td>
-            </tr>
-          </table>
-        </section>
-      </section>
-    </main>
-    <!--장바구니 담기 성공 시 모달-->
-    <div id="cart_modal">
-      <div class="modal_text">
-        <p>장바구니에 추가하였습니다.</p>
-        <p>장바구니로 이동하시겠습니까?</p>
-      </div>
-      <div class="modal_btn">
-        <button class="cancel">취소</button>
-        <button class="moveto_cart">확인</button>
-      </div>
-    </div>
-    <!--옵션 미선택 시 장바구니,구매,선물 실패 모달-->
-    <div id="failed_cart">
-      <div class="modal_text">
-        <p>옵션을 선택해주세요</p>
-      </div>
-      <div class="modal_btn">
-        <button id="ok">확인</button>
-      </div>
-    </div>
-    <!--선물하기 클릭 시-->
-    <div id="gift_modal">
-      <span>선물하기</span>
-      <div class="modal_text">
-        <p>
-          친구에게 보낼 선물이 고민될 땐 <br />선물 꾸러미로 담아<br />
-          친구가 선택할 수 있게 해보세요!
-        </p>
-      </div>
-      <div class="modal_btn">
-        <button id="cart_gift">선물 꾸러미 담기</button>
-        <button id="to_gift">바로 보내기</button>
-      </div>
-    </div>
-    <!--선뭂 장바구니 담기 성공 시 모달-->
-    <div id="giftcart_modal">
-      <div class="modal_text">
-        <p>
-          선물 꾸러미에 추가하였습니다.<br />선물 꾸러미로 이동하시겠습니까?
-        </p>
-      </div>
-      <div class="modal_btn">
-        <button class="cancel">취소</button>
-        <button class="moveto_cart">확인</button>
-      </div>
-    </div>
-  </body>
+
+			<!--상품 문의-->
+			<section id="inquiry" class="tab_content">
+				<div class="inquiry_top">
+					<h2>상품 문의</h2>
+					<button id="inquiry_btn">문의 작성</button>
+				</div>
+				<!--문의 목록-->
+				<ul>
+					<li>
+						<div class="inquiry_header">
+							<span class="user_id">아이디(se***)</span>
+							<span class="date">작성일</span>
+							<span class="answer">응답 여부</span>
+						</div>
+						<div class="inquiry_content">
+							<p>문의 내용</p>
+						</div>
+					</li>
+				</ul>
+				<!--문의 작성 시 모달-->
+				<div id="write_inquiry">
+					<strong>문의 작성</strong>
+					<form>
+						<div id="inquiry_title">
+							<input type="text" placeholder="제목을 입력하세요" />
+						</div>
+						<div id="inquiry_text">
+							<input type="text" placeholder="문의하실 내용을 입력하세요." />
+						</div>
+						<div id="inquiry_publicity">
+							<input type="checkbox" name="publicity" value="private" />비공개
+						</div>
+
+						<div id="inquiry_btns">
+							<button type="button" id="cancel_inquiry">취소</button>
+							<button type="submit" id="register_inquiry">문의 등록</button>
+						</div>
+					</form>
+				</div>
+			</section>
+
+			<!--판매자 정보-->
+			<section id="seller_info">
+				<h2>판매자 정보</h2>
+				<table>
+					<colgroup>
+						<col style="width: 20%" />
+						<col style="width: 80%" />
+					</colgroup>
+					<tr id="store_name">
+						<td>상호명</td>
+						<td>(주)OOOO</td>
+					</tr>
+					<tr id="store_number">
+						<td>사업자등록번호</td>
+						<td>OOO-OO-OOOO</td>
+					</tr>
+					<tr id="store_rep">
+						<td>대표자</td>
+						<td>홍길동</td>
+					</tr>
+				</table>
+			</section>
+	</main>
+	<!--장바구니 담기 성공 시 모달-->
+	<div id="cart_modal">
+		<div class="modal_text">
+			<p>장바구니에 추가하였습니다.</p>
+			<p>장바구니로 이동하시겠습니까?</p>
+		</div>
+		<div class="modal_btn">
+			<button class="cancel">취소</button>
+			<button class="moveto_cart">확인</button>
+		</div>
+	</div>
+	<!--옵션 미선택 시 장바구니,구매,선물 실패 모달-->
+	<div id="failed_cart">
+		<div class="modal_text">
+			<p>옵션을 선택해주세요</p>
+		</div>
+		<div class="modal_btn">
+			<button id="ok">확인</button>
+		</div>
+	</div>
+	<!--선물하기 클릭 시-->
+	<div id="gift_modal">
+		<span>선물하기</span>
+		<div class="modal_text">
+			<p>
+				친구에게 보낼 선물이 고민될 땐 <br />선물 꾸러미로 담아<br />
+				친구가 선택할 수 있게 해보세요!
+			</p>
+		</div>
+		<div class="modal_btn">
+			<button id="cart_gift">선물 꾸러미 담기</button>
+			<button id="to_gift">바로 보내기</button>
+		</div>
+	</div>
+	<!--선뭂 장바구니 담기 성공 시 모달-->
+	<div id="giftcart_modal">
+		<div class="modal_text">
+			<p>
+				선물 꾸러미에 추가하였습니다.<br />선물 꾸러미로 이동하시겠습니까?
+			</p>
+		</div>
+		<div class="modal_btn">
+			<button class="cancel">취소</button>
+			<button class="moveto_cart">확인</button>
+		</div>
+	</div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		const serverData = {
+			skus: JSON.parse(/*[[${skusJson}]]*/ '[]'), // SKU 목록 [{skuNo optionNos, stock}]
+			basePrice: /*[[${product.productPrice}]]*/ 0,
+			optionGroups: /*[[${product.optionGroups}]]*/[]
+		};
+		/*]]>*/
+	</script>
+</body>
+
 </html>
