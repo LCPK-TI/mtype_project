@@ -60,7 +60,6 @@ public class ProductController {
 	public String best(Model model) {
 		return "product-best";
 	}
-}
 	// 키워드 검색 결과 응답용 API
 	@GetMapping("/api/search/products")
 	@ResponseBody

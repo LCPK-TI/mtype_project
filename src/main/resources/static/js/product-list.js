@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	//상품 카드 생성
 	const createProductCardHTML = (product) => {
 		const formattedPrice = product.productPrice.toLocaleString('ko-KR');
-		// DTO 필드명(productNo, productName, productPrice)에 맞게 수정
 		return `
             <div class="product_card">
                 <a href="/product/${product.productNo}">

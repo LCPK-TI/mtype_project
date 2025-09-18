@@ -22,7 +22,6 @@ public class PortOneService {
 	@Value("${portone.api.secret}")
 	private String apiSecret;
 
-	// ✅ RestTemplate은 매번 생성하는 것보다 Bean으로 등록하거나 멤버 변수로 두는 것이 좋습니다.
 	private final RestTemplate restTemplate = new RestTemplate();
 	private static final String BASE_URL = "https://api.iamport.io/v2";
 
@@ -39,7 +38,6 @@ public class PortOneService {
 
 		ResponseEntity<JsonNode> response = restTemplate.exchange(url, HttpMethod.POST, entity, JsonNode.class);
 
-		// ✅ V2 응답 구조에 맞게 수정하고, 불필요한 코드를 삭제했습니다.
 		return response.getBody().get("accessToken").asText();
 	}
 
@@ -55,11 +53,10 @@ public class PortOneService {
 		HttpEntity<Void> entity = new HttpEntity<>(headers);
 		ResponseEntity<JsonNode> response = restTemplate.exchange(url, HttpMethod.GET, entity, JsonNode.class);
 
-		// ✅ V2 응답에서는 주요 정보가 'data' 객체 안에 있습니다.
 		JsonNode data = response.getBody().get("data");
 
 		String name = data.get("name").asText();
-		String birthday = data.get("birth").asText(); // ✅ 필드 이름이 birth 입니다.
+		String birthday = data.get("birth").asText();
 		String phone = data.get("phone").asText();
 
 		return new VerifyResponse(name, birthday, phone);
