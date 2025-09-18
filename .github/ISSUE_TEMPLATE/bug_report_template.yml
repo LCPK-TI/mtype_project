@@ -1,0 +1,37 @@
+name: "🐞 Bug Report"
+description: "버그 발생 시 작성해주세요"
+title: "[BUG] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: textarea
+    attributes:
+      label: "🐞 버그 설명"
+      description: "어떤 문제가 발생했는지 간단히 적어주세요."
+      placeholder: "ex) 상품 상세 페이지에서 장바구니 버튼 클릭 시 반응 없음"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "✅ 재현 방법"
+      description: "버그를 재현하기 위한 단계별 설명"
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "📸 스크린샷/에러 로그"
+      description: "가능하다면 스크린샷이나 콘솔 에러 로그를 첨부해주세요."
+      placeholder: "이미지 Drag & Drop 가능"
+
+  - type: input
+    attributes:
+      label: "💻 환경"
+      description: "버그가 발생한 환경을 알려주세요."
+      placeholder: "예: Windows 11 / Chrome 120 / v1.2.3"
