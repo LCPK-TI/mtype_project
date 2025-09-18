@@ -43,7 +43,7 @@ public class ProductService {
         CategoryEntity topCategory = categoryService.findTopParent(product.getCategory().getCategoryNo());
         
         //Entity를 DTO로 변환하여 반환
-        return new ProductDetailDto(product, topCategory);
+        return new ProductDetailDto(product, topCategory, null, null, null, null);
     }
 	
 	
