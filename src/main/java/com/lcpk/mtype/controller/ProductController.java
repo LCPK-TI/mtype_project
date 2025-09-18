@@ -44,7 +44,7 @@ public class ProductController {
 
         //Model에 DTO를 추가
         model.addAttribute("product", productDto);
-        
+    
         //SKUS 목록을 JSON 문자열로 변환해서 따로 담아줌
         ObjectMapper objectMapper = new ObjectMapper();
         String skusJson = objectMapper.writeValueAsString(productDto.getSkus());
@@ -60,6 +60,7 @@ public class ProductController {
 	public String best(Model model) {
 		return "product-best";
 	}
+}
 	// 키워드 검색 결과 응답용 API
 	@GetMapping("/api/search/products")
 	@ResponseBody

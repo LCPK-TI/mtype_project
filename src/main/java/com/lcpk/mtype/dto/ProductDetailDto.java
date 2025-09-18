@@ -1,6 +1,7 @@
 package com.lcpk.mtype.dto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.lcpk.mtype.entity.CategoryEntity;
@@ -25,6 +26,7 @@ public class ProductDetailDto { // 상품 상세페이지용 dto
 
 	private List<OptionGroup> optionGroups; // 옵션 정보. 화면에 옵션 버튼들을 그리기 위한 정보
 	private List<SkuInfo> skus; // sku 정보. js가 선택된 옵션 조합으로 최종 skuNo를 찾기 위한 역할
+  
 	public ProductDetailDto(ProductEntity product, CategoryEntity topCategory, List<OptionGroup> optionGroups,
 			List<SkuInfo> skus) {
 		this.productNo = product.getProductNo();

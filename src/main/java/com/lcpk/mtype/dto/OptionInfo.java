@@ -9,6 +9,7 @@ public class OptionInfo {
 	private Long optionNo;
 	private String optionName;
 
+	// hashCode, equals 오버라이드 필요 (Set에서 중복 제거를 위해)
 	@Override
 	public int hashCode() {
 		return optionNo.hashCode();

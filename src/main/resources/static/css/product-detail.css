@@ -198,6 +198,7 @@ main {
 	width: 100%;
 }
 
+
 .product_header {
 	width: 100%;
 	display: flex;
@@ -697,9 +698,11 @@ body.modal-open {
 	overflow: hidden;
 }
 
-/*상품상세이미지*/
 /*상세정보 더보기 */
-
+#detail {
+	height: auto;
+}
+  
 .detail_content.hidden {
 	height: 400px;
 	overflow: hidden;

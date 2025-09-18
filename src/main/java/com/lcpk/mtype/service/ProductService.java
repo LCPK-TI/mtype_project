@@ -51,53 +51,43 @@ public class ProductService {
 	}
 
 	public ProductDetailDto getProductDetail(Long productNo) {
-		// Repository의 fetch join 쿼리를 호출하여 ProductEntity를 조회
+		// 상품 기본 정보와 연관 엔티티들을 FetchJoin으로 한번에 조회
 		ProductEntity product = productRepository.findProductWithDetailsByProductNo(productNo)
-				.orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다. ID: " + productNo));
+				.orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다: " + productNo));
 
-		// 최상위 부모 카테고리 조회
+		// 상품의 최상위 카테고리 조회
 		CategoryEntity topCategory = categoryService.findTopParent(product.getCategory().getCategoryNo());
+
 		// 상품에 연결된 모든 SKU와 하위 옵션 정보들을 한번에 조회
 		List<ProductSkuEntity> skus = productSkuRepository.findAllWithDetailsByProductNo(productNo);
-		// 비즈니스 로직을 통해 DTO 가공
+    
 		List<SkuInfo> skuInfos = createSkuInfos(skus);
 		List<OptionGroup> optionGroups = createOptionGroups(skus);
 
 		return new ProductDetailDto(product, topCategory, optionGroups, skuInfos);
 	}
 
-	// SKU 엔티티 리스트를 SkuInfo DTO 리스트로 변환
 	private List<SkuInfo> createSkuInfos(List<ProductSkuEntity> skus) {
 		return skus.stream()
-				.map(sku -> new SkuInfo(sku.getSkuNo(), sku.getStock(),
-						sku.getSkuOptions().stream().map(so -> so.getOption().getOptionNo()).sorted() // 프론트엔드에서 조합을 찾기 쉽도록 정렬
-								.collect(Collectors.toList())))
+				.map(sku -> new SkuInfo(sku.getSkuNo(), sku.getStock(),  sku.getSkuOptions()
+						.stream().map(so -> so.getOption().getOptionNo()).sorted().collect(Collectors.toList())))
 				.collect(Collectors.toList());
 	}
 
+	
 	//SKU 엔티티 리스트를 OptionGroup DTO 리스트로 변환. 옵션 카테고리를 기준으로 옵션들을 그룹핑
 	private List<OptionGroup> createOptionGroups(List<ProductSkuEntity> skus) {
-		// 순서를 보장하기 위해 LinkedHashMap 사용
+    // 순서를 보장하기 위해 LinkedHashMap 사용
 		Map<String, Set<OptionInfo>> categoryMap = new LinkedHashMap<>();
-
 		skus.forEach(sku -> {
 			sku.getSkuOptions().forEach(skuOption -> {
 				OptionEntity option = skuOption.getOption();
-				OptionCategoryEntity category = option.getOptionCategory();
-
-				// '기본 옵션'은 화면에 노출할 필요가 없으므로 건너뛴다.
-				if ("DEFAULT".equals(option.getOptionCode())) {
+				// 기본 옵션은 화면에 노출할 필요가 없으므로 건너뜀
+				if ("DEFAULT".equals(option.getOptionCode()))
 					return;
-				}
-				categoryMap
-						.computeIfAbsent(category.getOptionCategoryNm(),
-								k -> new TreeSet<>(Comparator.comparing(OptionInfo::getOptionNo)))
-						.add(new OptionInfo(option.getOptionNo(), option.getOptionNm()));
-			});
-		});
-		return categoryMap.entrySet().stream()
-				.map(entry -> new OptionGroup(entry.getKey(), new ArrayList<>(entry.getValue())))
-				.collect(Collectors.toList());
+
+				OptionCategoryEntity category = option.getOptionCategory();
+		return new ProductDetailDto(product, topCategory, optionGroups, skuInfos);
 	}
 
 	// 키워드 검색용 메소드

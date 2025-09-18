@@ -287,23 +287,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	}
 
-
 	//사진 후보 클릭하여 사진 크게 띄우기
 	const thumbnail = document.getElementById("thumbnail");
 	const bottomImgs = document.querySelectorAll(".bottom_imgs img");
 
 	bottomImgs.forEach(img => {
 		img.addEventListener("click", () => {
-			//클릭한 이미지의 src를 대표이미지에 적용
+      //클릭한 이미지의 src를 대표이미지에 적용
 			thumbnail.src = img.src;
-
-		})
+		});
 	});
 
-	//상세 사진 접었다 펴기
+	//상세정보 더보기 
 	function moreDetail() {
+		//이미지의 부모 div에서 'hidden' 클래스 제거
 		document.querySelector(".detail_content").classList.remove("hidden");
-		document.querySelector(".detailMore").remove(); // 버튼 제거
+
+		//더보기 버튼 제거
+		document.querySelector(".detailMore").remove();
 	}
 	document.getElementById("btnMore").addEventListener("click", moreDetail);
 });
+		
