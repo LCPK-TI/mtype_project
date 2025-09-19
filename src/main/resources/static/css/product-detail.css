@@ -169,7 +169,8 @@ main {
 .top_content {
 	display: flex;
 	gap: 5%;
-	border-bottom: 1px solid rgb(219, 219, 219);
+
+	margin-bottom: 5%;
 }
 
 /*왼쪽 위 상품 이미지 영역 css*/
@@ -178,10 +179,14 @@ main {
 	width: 1000px;
 }
 
-.left_content>img {
+#thumbnail {
 	width: 90%;
-	aspect-ratio: auto 1 / 1;
+	aspect-ratio: 1 / 1;
 }
+#bookThumbnail{
+	width: 70%;
+}
+
 
 .bottom_imgs {
 	margin-top: 3%;
@@ -191,8 +196,12 @@ main {
 
 .bottom_imgs img {
 	width: 20%;
+	aspect-ratio: 1 / 1;
+	border: 1px solid transparent; /*hover 선 생성 시 레이아웃 변화 방지*/
 }
-
+.bottom_imgs img:hover{
+	border:1px solid black;	
+}
 /*오른쪽 위 상품 정보, 옵션 선택 구매 영역 css*/
 .right_content {
 	width: 100%;
@@ -351,6 +360,8 @@ main {
 	border-bottom: 1px solid #ccc;
 	height: 50px;
 	z-index: 1000;
+	line-height: 50px;
+	border-top: 1px solid rgb(219, 219, 219);
 }
 
 #navbar_detail ul {
@@ -702,7 +713,7 @@ body.modal-open {
 #detail {
 	height: auto;
 }
-  
+
 .detail_content.hidden {
 	height: 400px;
 	overflow: hidden;
@@ -722,7 +733,7 @@ body.modal-open {
 	text-align: center;
 }
 
-.detail_content.hidden:after{
+.detail_content.hidden:after {
 	content: '';
 	position: absolute;
 	bottom: 0;

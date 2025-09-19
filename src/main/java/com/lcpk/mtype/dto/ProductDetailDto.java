@@ -17,7 +17,7 @@ public class ProductDetailDto { // 상품 상세페이지용 dto
 	private final String productName;
 	private final int productPrice;
 	private final String detailImgUrl;
-
+	private final SellerDto seller;
 	private final CategoryDto category; // 상품의 카테고리 정보
 	private final CategoryDto topCategory; // 최상위 카테고리 정보
 
@@ -33,7 +33,7 @@ public class ProductDetailDto { // 상품 상세페이지용 dto
 		this.productName = product.getProductName();
 		this.productPrice = product.getProductPrice();
 		this.detailImgUrl = product.getDetailImgUrl();
-
+		this.seller = new SellerDto(product.getSeller());
 		this.category = new CategoryDto(product.getCategory());
 		this.topCategory = new CategoryDto(topCategory);
 
