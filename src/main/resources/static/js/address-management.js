@@ -1,17 +1,14 @@
-// API 엔드포인트
 const API = "/api/addresses";
 
-// 화면에 쓰는 표준 모델
 let addresses = [];
 
-// 특수문자 이스케이프
 function esc(s){
   return String(s ?? "")
     .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
     .replaceAll('"',"&quot;").replaceAll("'","&#39;");
 }
 
-// 서버 응답(엔티티/DTO 혼용) → 화면 모델로 정규화
+// 서버 응답
 function normalize(it){
   return {
     id:        it.id        ?? it.addrNo,
@@ -24,7 +21,6 @@ function normalize(it){
   };
 }
 
-/* 템플릿 & 렌더 */
 function rowTemplate(a){
   return `
     <article class="address_card" data-id="${a.id}" aria-label="${esc(a.name)} 배송지">
@@ -66,7 +62,7 @@ function render(){
     : '<p style="color:#777; text-align:center; padding:2rem;">등록된 배송지가 없습니다. 우측 상단의 <b>배송지 추가</b> 버튼으로 등록하세요.</p>';
 }
 
-/* 다이얼로그 */
+//다이얼로그 
 const dialog     = document.getElementById("address_dialog");
 const form       = document.getElementById("address_form");
 const formTitle  = document.getElementById("dialog_title");
@@ -98,7 +94,7 @@ document.querySelector(".btn_primary")
 document.getElementById("btn_close").addEventListener("click", closeDialog);
 document.getElementById("btn_cancel").addEventListener("click", closeDialog);
 
-/* 서버 연동 */
+// 서버 연동 
 async function load(){
   const res = await fetch(API, { headers: { "Accept":"application/json" }});
   if(!res.ok) { console.error("목록 조회 실패", res.status); return; }
@@ -141,7 +137,7 @@ async function removeFromServer(id){
   return true;
 }
 
-/* 목록: 수정/삭제 버튼 */
+// 목록/수정/삭제 
 document.querySelector(".address_list").addEventListener("click", async (e)=>{
   const btn = e.target.closest(".btn_small");
   if(!btn) return;
@@ -161,7 +157,7 @@ document.querySelector(".address_list").addEventListener("click", async (e)=>{
   }
 });
 
-/* 저장 */
+// 저장
 form.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
@@ -187,7 +183,7 @@ form.addEventListener("submit", async (e)=>{
   await load(); // 서버 데이터로 다시 그리기
 });
 
-/* 다음 우편번호(Postcode) */
+// 우편번호
 const btnSearch = document.getElementById("btn_search_address");
 if (btnSearch) btnSearch.addEventListener("click", openPostcode);
 
@@ -205,5 +201,5 @@ function openPostcode(){
   }).open({ q: form.addr1?.value || "" });
 }
 
-/* 최초 로드 */
+// 최초 로드 
 document.addEventListener("DOMContentLoaded", load);

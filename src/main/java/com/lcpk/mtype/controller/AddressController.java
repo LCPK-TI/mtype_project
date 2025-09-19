@@ -19,38 +19,41 @@ public class AddressController {
     private final AddressService service;
     private static final long FIXED_USER_NO = 2L;
 
-    /* 페이지(뷰) 라우트 */
     @GetMapping("/addresses")
     public String addressPage() {
         return "address-management";
     }
 
-    /* API (JSON) */
-    @GetMapping("/api/addresses") @ResponseBody
+    // API 
+    @GetMapping("/api/addresses") 
+    @ResponseBody
     public List<AddressEntity> list() {
         return service.list(FIXED_USER_NO);
     }
 
-    @PostMapping("/api/addresses") @ResponseBody
+    @PostMapping("/api/addresses") 
+    @ResponseBody
     public ResponseEntity<AddressEntity> create(@Valid @RequestBody AddressReq req) {
         AddressEntity saved = service.create(FIXED_USER_NO, req.toEntity());
         return ResponseEntity.created(URI.create("/api/addresses/" + saved.getAddrNo()))
                              .body(saved);
     }
 
-    @PutMapping("/api/addresses/{addrNo}") @ResponseBody
-    public AddressEntity update(@PathVariable("addrNo") Long addrNo,   // ← 이름 명시
+    @PutMapping("/api/addresses/{addrNo}") 
+    @ResponseBody
+    public AddressEntity update(@PathVariable("addrNo") Long addrNo,  
                                 @Valid @RequestBody AddressReq req) {
         return service.update(FIXED_USER_NO, addrNo, req.toEntity());
     }
 
-    @DeleteMapping("/api/addresses/{addrNo}") @ResponseBody
-    public ResponseEntity<Void> delete(@PathVariable("addrNo") Long addrNo) { // ← 이름 명시
+    @DeleteMapping("/api/addresses/{addrNo}") 
+    @ResponseBody
+    public ResponseEntity<Void> delete(@PathVariable("addrNo") Long addrNo) { 
         service.delete(FIXED_USER_NO, addrNo);
         return ResponseEntity.noContent().build();
     }
 
-    /** 요청 DTO */
+  
     public record AddressReq(
             @NotBlank String name,
             @NotBlank String receiver,

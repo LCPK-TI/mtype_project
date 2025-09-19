@@ -23,14 +23,13 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressEntity create(Long userNo, AddressEntity src) {
-        // userNo 주입
         src.setUserNo(userNo);
 
-        // 새 항목을 기본배송지로 지정하면 기존 기본을 해제(앱이 INSERT 한 번만 해도 되게)
+        // 새 배송지를 기본배송지로 지정하면 기존 기본을 해제(INSERT 한 번만 해도 되게)
         if (src.isAddrDefault()) {
             unsetDefault(userNo);
         }
-        // 첫 등록이면 자동 기본 지정
+        // 처음 배송지 등록이면 자동 기본배송지 지정
         if (!src.isAddrDefault() && repo.findByUserNoAndAddrDefaultTrue(userNo).isEmpty()) {
             src.setAddrDefault(true);
         }
@@ -65,7 +64,7 @@ public class AddressServiceImpl implements AddressService {
         boolean wasDefault = row.isAddrDefault();
         repo.delete(row);
 
-        // 기본을 지웠다면 남은 것 중 하나를 기본으로
+        // 기본 배송지 삭제시 남은 배송지 중 하나를 기본배송지
         if (wasDefault) {
             List<AddressEntity> rest = repo.findByUserNoOrderByAddrDefaultDescAddrNoDesc(userNo);
             if (!rest.isEmpty()) rest.get(0).setAddrDefault(true);

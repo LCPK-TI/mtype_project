@@ -9,7 +9,7 @@ import lombok.*;
 public class AddressEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)   // Oracle 12c+ IDENTITY 사용
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   
     @Column(name = "ADDR_NO")
     private Long addrNo;
 
