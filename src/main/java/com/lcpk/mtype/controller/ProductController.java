@@ -14,59 +14,82 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lcpk.mtype.dto.BookDetailDto;
+import com.lcpk.mtype.dto.BookListDto;
 import com.lcpk.mtype.dto.ProductDetailDto;
 import com.lcpk.mtype.dto.ProductListDto;
+import com.lcpk.mtype.service.BookService;
 import com.lcpk.mtype.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
-
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
 	private static final Logger log = LoggerFactory.getLogger(ProductController.class);
 	private final ProductService productService;
+	private final BookService bookService;
 	private static final long BOOK_CATEGORY_NO = 3L;
+
 	// JSON 데이터를 응답하는 API 메서드
 	@GetMapping("/api/products")
 	@ResponseBody
-	public ResponseEntity<Slice<ProductListDto>> getProductsApi(@RequestParam(value="categoryNo", required = false) Long categoryNo,
-			Pageable pageable) {
+	public ResponseEntity<Slice<ProductListDto>> getProductsApi(
+			@RequestParam(value = "categoryNo", required = false) Long categoryNo, Pageable pageable) {
 		Slice<ProductListDto> productSlice = productService.getProductList(categoryNo, pageable);
 		return ResponseEntity.ok(productSlice); // JSON 데이터를 반환
 	}
 
+	@GetMapping("/api/books")
+	@ResponseBody
+	public ResponseEntity<Slice<BookListDto>> getBooksApi(
+			@RequestParam(value = "categoryNo", required = false) Long categoryNo, Pageable pageable) {
+		Slice<BookListDto> bookSlice = bookService.getBookList(categoryNo, pageable);
+		return ResponseEntity.ok(bookSlice); // JSON 데이터를 반환
+	}
+
 //	 상품 상세 페이지
 	@GetMapping("/product/{productNo}")
-	public String getProductPage(@PathVariable("productNo") Long productNo, Model model) throws JsonProcessingException {
-        // Service를 호출하여 DTO를 받음(상품명, 옵션그룹, SKU 목록 등)
-        ProductDetailDto productDto = productService.getProductDetail(productNo);
+	public String getProductPage(@PathVariable("productNo") Long productNo, Model model)
+			throws JsonProcessingException {
+		// Service를 호출하여 DTO를 받음(상품명, 옵션그룹, SKU 목록 등)
+		ProductDetailDto productDto = productService.getProductDetail(productNo);
+		// Model에 DTO를 추가
+		model.addAttribute("product", productDto);
+		System.out.println(productDto.getSeller().getBusinessNm());
+		// SKUS 목록을 JSON 문자열로 변환해서 따로 담아줌
+		ObjectMapper objectMapper = new ObjectMapper();
+		String skusJson = objectMapper.writeValueAsString(productDto.getSkus());
+		model.addAttribute("skusJson", skusJson);
 
-        //Model에 DTO를 추가
-        model.addAttribute("product", productDto);
-    
-        //SKUS 목록을 JSON 문자열로 변환해서 따로 담아줌
-        ObjectMapper objectMapper = new ObjectMapper();
-        String skusJson = objectMapper.writeValueAsString(productDto.getSkus());
-        model.addAttribute("skusJson",skusJson);
-        //DTO에 담긴 최상위 카테고리 ID로 View를 결정
-        if (productDto.getTopCategory().getCategoryNo() == BOOK_CATEGORY_NO) { 
-            return "book-detail";
-        } else {
-            return "product-detail";
-        }
-    }
+		return "product-detail";
+	}
+
+//	 상품 상세 페이지
+	@GetMapping("/book/{isbn}")
+	public String getBookPage(@PathVariable("isbn") Long isbn, Model model){
+		// Service를 호출하여 DTO를 받음
+		BookDetailDto bookDto = bookService.getBookDetail(isbn);
+
+		// Model에 DTO를 추가
+		model.addAttribute("product", bookDto);
+
+		return "book-detail";
+	}
+
 	@GetMapping("/best")
 	public String best(Model model) {
 		return "product-best";
 	}
+
 	// 키워드 검색 결과 응답용 API
 	@GetMapping("/api/search/products")
 	@ResponseBody
-	public ResponseEntity<Slice<ProductListDto>> searchProductsApi(@RequestParam("query") String query, Pageable pageable){
+	public ResponseEntity<Slice<ProductListDto>> searchProductsApi(@RequestParam("query") String query,
+			Pageable pageable) {
 		return ResponseEntity.ok(productService.searchProductsByKeyword(query, pageable));
 	}
-	
+
 	// 키워드 검색 결과 페이지
 	@GetMapping("/product/search")
 	public String searchProductPage(@RequestParam("query") String query, Pageable pageable, Model model) {

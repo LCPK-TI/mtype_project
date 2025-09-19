@@ -1,7 +1,17 @@
 package com.lcpk.mtype.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "SELLER_TB")
@@ -10,7 +20,6 @@ public class SellerEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seller_seq")
 	@SequenceGenerator(name = "seller_seq", sequenceName = "SELLER_SQ", allocationSize = 1)
-
 	@Column(name = "SELLER_NO")
 	private Long sellerNo;
 
@@ -55,6 +64,9 @@ public class SellerEntity {
 	
 	@Column(name = "SELLER_ROLE", length = 20)
 	private String role = "SELLER";
+	
+	@OneToMany(mappedBy = "seller")
+    private List<ProductEntity> products = new ArrayList<>();
 	
 	// 기본 생성자
 	public SellerEntity() {

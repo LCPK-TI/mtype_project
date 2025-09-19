@@ -38,10 +38,10 @@ public class ProductEntity {
 	@JoinColumn(name = "CATEGORY_NO")
 	private CategoryEntity category;
 
-	// Seller(스토어)와의 관계 추가
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "SELLER_NO")
-//    private Seller seller;
+	// Seller(스토어)와의 관계 추가 (상품 여러개 스토어 하나)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SELLER_NO")
+    private SellerEntity seller;
 
 	@Column(name = "PRODUCT_NM")
 	private String productName;
