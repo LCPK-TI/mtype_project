@@ -1,0 +1,62 @@
+.seller-container {
+	text-align: center;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.seller-text {
+	text-align: center;
+	font-size: 30px;
+	color: black;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+#seller-id,
+#seller-pw {
+	display: block;
+	margin: auto;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	width: 35%;
+	padding: 15px 20px;
+	margin-bottom: 10px;
+}
+
+#login {
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	width: 20%;
+	padding: 10px;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+.registration,
+.select-id,
+.reset-pw {
+	display: inline-block;
+	color: #929292;
+	text-decoration: none;
+	font-size: x-small;
+}
+
+.registration {
+	margin-right: 10px;
+}
+
+.select-id {
+	margin-left: 35px;
+}
+
+.reset-pw {
+	margin-left: 10px;
+}
+
+.group {
+	margin-bottom: 100px;
+}

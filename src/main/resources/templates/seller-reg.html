@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/seller-reg.css}">
+
+<body>
+	<main>
+		<div class="seller-container">
+			<section>
+				<div class="seller-text">
+					<h1>판매자 회원가입</h1>
+				</div>
+			</section>
+
+			<!-- 회원가입 폼 -->
+			<form class="total-form" th:action="@{/sellers/signup}" th:method="post" th:object="${sellerEntity}" onsubmit="return validateAgreement()">
+				<section>
+					<div class="reg-form">
+						<span>아이디</span>
+						<input type="text" th:field="*{sellerId}" id="reg-id" name="sellerId" placeholder="아이디를 입력해주세요"
+							required />
+						<button type="button" onclick="checkDuplicateId()">중복확인</button>
+					</div>
+
+					<div class="reg-form">
+						<span>비밀번호</span>
+						<input type="password" th:field="*{sellerPw}" id="reg-pw" placeholder="비밀번호를 입력해주세요" required />
+					</div>
+					<p>영문자, 숫자, 특수문자 조합 8~12자</p>
+
+					<div class="reg-form">
+						<span>비밀번호 확인</span>
+						<input type="password" id="check-pw" name="checkPw" placeholder="비밀번호를 다시 입력해주세요" />
+					</div>
+
+					<div class="reg-form">
+						<span>대표자명</span>
+						<input type="text" th:field="*{sellerNm}" id="ceo-name" placeholder="대표자 이름을 입력해주세요" required />
+					</div>
+
+					<div class="reg-form">
+						<span>전화번호</span>
+						<input type="text" th:field="*{sellerTel}" id="phone" placeholder="전화번호를 입력해주세요" required />
+					</div>
+
+					<div class="reg-form">
+						<span>이메일</span>
+						<input type="text" id="email" th:field="*{sellerEmail}" placeholder="이메일 주소를 입력해주세요" required />
+					</div>
+
+					<div class="reg-form">
+						<span>사업자번호</span>
+						<input type="text" th:field="*{businessNo}" id="business-number" placeholder="사업자번호를 입력해주세요"
+							required />
+					</div>
+
+					<div class="reg-form">
+						<span>상호명</span>
+						<input type="text" th:field="*{businessNm}" id="business-name" placeholder="상호명을 입력해주세요"
+							required />
+					</div>
+
+					<div class="reg-form">
+						<div class="address-group">
+							<span>사업장 소재지</span>
+							<input type="text" th:field="*{businessAddr}" id="business-address"
+								placeholder="도로명 주소를 입력해주세요" required readonly />
+							<button type="button" id="search-address" onclick="execDaumPostcode()">주소조회</button>
+						</div>
+						<input type="text" th:field="*{businessDetailAddr}" id="business-detail-address"
+							placeholder="상세주소를 입력해주세요" required />
+					</div>
+				</section>
+
+				<!-- 개인정보 동의 -->
+				<section class="agree-form">
+					<h3 class="agreement-header">개인정보보호를 위한 이용자 동의서</h3>
+
+					<div class="agreement-group">
+						<div class="agreement-check">
+							필수 개인정보 수집 및 이용에 동의합니다.
+							<input type="checkbox" id="agree" name="agree" />
+							<label for="agree">동의</label>
+						</div>
+
+						<div class="agreement-content">
+							<p class="detail-content">
+								MTYPE(이하 “회사”라 함)는 개인정보를 중요시하며,
+								「개인정보보호법」에 따라 거래 상담 요청자의 개인정보를 수집 및
+								이용하고 있습니다. <br />
+								상담요청자는 본 동의서에 동의하지 않을 경우, 서비스를 이용할 수
+								없음을 알려드립니다.
+							</p>
+
+							<p><strong>1. 개인정보 수집 및 이용 목적</strong></p>
+
+							<ol>
+								<li>
+									입점상담 및 거래 관련 고지사항 전달 등 사업관련 의사소통 확보
+								</li>
+								<li>입점 시 전자계약 시스템 이용을 위한 로그인 정보 연동</li>
+								<li>기타 원활한 양질의 서비스 제공</li>
+							</ol>
+
+							<p><strong>2. 수집하는 개인정보의 항목</strong></p>
+
+							<ul>
+								<li>
+									이름, 이메일주소, 담당자 정보(휴대전화번호), 아이디, 비밀번호
+								</li>
+							</ul>
+
+							<p><strong>3. 개인정보의 보유 및 이용기간</strong></p>
+							<ul>
+								<li class="list-end">
+									답변완료 처리로부터 90일 보관 후 파기<br />
+									(단, 회사와의 거래가 지속되는 경우 거래 종료 시 까지)
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="agreement-notice">
+						※ 귀하는 상품업체/제휴문의 등록을 위한 회원가입 시 (필수)개인정보
+						수집·이용에 동의하지 않을 수 있으나, 동의를 거부 할 경우 회원가입이
+						불가합니다.
+					</div>
+				</section>
+				<button type="submit" class="reg-btn">회원가입 및 입점신청</button>
+			</form>
+		</div>
+	</main>
+
+	<!-- 비밀번호 제한을 어길 시 경고창 -->
+	<script th:if="${error != null}" th:inline="javascript">
+		alert('[[${error}]]');
+	</script>
+
+	<!-- 아이디 중복체크 -->
+	<script>
+		function checkDuplicateId() {
+			const sellerId = document.getElementById("reg-id").value;
+			if (!sellerId) {
+				alert("아이디를 입력해주세요.");
+				return;
+			}
+
+			fetch(`/sellers/check-id?sellerId=` + encodeURIComponent(sellerId))
+				.then(response => response.json())
+				.then(data => {
+					if (data.duplicate) {
+						alert("이미 사용 중인 아이디입니다.");
+					} else {
+						alert("사용 가능한 아이디입니다.");
+					}
+				})
+				.catch(error => {
+					console.error("중복 확인 오류:", error);
+					alert("중복 확인 중 오류가 발생했습니다.");
+				});
+		}
+	</script>
+
+	<!-- 우편번호 찾기 -->>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+		function execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete: function (data) {
+					// 도로명 주소 또는 지번 주소 중 선택
+					var fullAddr = data.roadAddress ? data.roadAddress : data.jibunAddress;
+					document.getElementById("business-address").value = fullAddr;
+					document.getElementById("business-detail-address").focus();
+				}
+			}).open();
+		}
+	</script>
+
+	<!-- 동의 체크 유효성 검사 -->
+	<script>
+		function validateAgreement() {
+			console.log("validateAgreement 실행됨");
+			const agreeChecked = document.getElementById("agree").checked;
+			if (!agreeChecked) {
+				alert("개인정보 수집 및 이용에 동의하셔야 회원가입이 가능합니다.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+</body>
+
+</html>

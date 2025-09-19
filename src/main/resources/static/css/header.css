@@ -99,80 +99,73 @@ header h1 {
 }
 
 /*카테고리 클릭 시*/
-#cate_btn{
+#cate_btn {
 	cursor: pointer;
 }
+
 #show_categories {
 	position: absolute;
 	display: none;
 	top: 71px;
 	width: 100%;
-	border-bottom: 1px solid rgb(219, 219, 219);
-	padding-bottom: 10px;
 	background: white;
+	padding-left: 10%;
 }
 
+/* 전체 메뉴 컨테이너 */
 .category_menu {
-	padding-left: 5%;
 	display: flex;
-	font-size: 10pt;
 }
 
-.category_menu li {
-	align-items: center;
-	display: flex;
-	font-size: 12pt;
-	line-height: 100%;
-	justify-content: space-between;
+/* 카테고리 목록 기본 스타일 초기화 */
+.category_menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
 }
 
-.category_menu span {
-	font-size: 20pt;
-}
-
-/* 왼쪽 카테고리 */
+/* 메인 카테고리 목록 */
 #main_category {
-	width: 15%;
-	list-style: none;
-	padding: 0;
-	margin: 0;
+	border-right: 1px solid #eee;
+	
 }
 
-#main_category a {
-	width: 100%;
-	padding: 10px;
-	cursor: pointer;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-#main_category li {
-	line-height: 40px;
-	padding: 10px;
-	cursor: pointer;
-	height: 40px;
-}
-/* 오른쪽 서브카테고리 */
-#sub_category {
-	width: 70%;
-	list-style: none;
-	padding: 0;
-	margin: 0;
+/* 카테고리 항목(li)과 링크(a) 스타일 */
+.category_menu li a {
+	display: block;
+	margin:0;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 10%;
+	color: #333;
 }
 
-#sub_category li {
-	line-height: 40px;
-	padding: 10px;
-	cursor: pointer;
-	height: 40px;
+/* 메인 카테고리에 마우스를 올리거나 활성화됐을 때의 스타일 */
+#main_category li.active {
+	background-color: #f5f5f5;
 }
 
-#sub_category a {
-	color: gray;
+#main_category li.active a {
+	font-weight: bold;
+	color: #000;
 }
 
-#sub_category a:hover {
-	color: black;
+/* 서브 카테고리 목록 */
+.sub_category_list {
+	display: none;
+
+}
+
+/* active 클래스가 붙은 서브 카테고리 목록만 보여주기 */
+.sub_category_list.active {
+	display: block;
+}
+
+/* 서브 카테고리 목록의 각 항목(li)에 마우스를 올렸을 때(hover), 그 안의 링크(a) 스타일 변경 */
+.sub_category_list li:hover a {
+	color: #000;
+	font-weight: bold;
 }
 
 /*검색어 모달*/
@@ -277,7 +270,7 @@ header h1 {
 #navbar_anniversary {
 	position: relative;
 	display: flex;
-	width:400px;
+	width: 400px;
 	height: 100%;
 	align-items: center;
 
@@ -289,13 +282,17 @@ header h1 {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	gap:3%;	
+	gap: 3%;
 	cursor: pointer;
 }
-#preview_anniversary p,#preview_anniversary b{
 
- 	flex: 0 0 auto;  /* 내용 크기만큼만 차지 */
+#preview_anniversary p,
+#preview_anniversary b {
+
+	flex: 0 0 auto;
+	/* 내용 크기만큼만 차지 */
 }
+
 #navbar_anniversary p:nth-child(2) {
 	color: gray;
 }
@@ -315,7 +312,7 @@ header h1 {
 
 #navbar_anniversary img {
 	width: 15px;
-		height: 15px;
+	height: 15px;
 
 }
 
@@ -361,7 +358,8 @@ header h1 {
 	height: 100%;
 	width: 100%;
 }
-.anniverary_left span{
+
+.anniverary_left span {
 	font-size: 10pt;
 }
 
@@ -374,9 +372,9 @@ header h1 {
 }
 
 .anniverary_left span:nth-child(1) {
-	border-radius:6px;
+	border-radius: 6px;
 	padding: 0 10px;
-	background:rgb(248, 248, 248);
+	background: rgb(248, 248, 248);
 	color: rgb(0, 0, 0);
 	border: 1px solid rgb(219, 219, 219);
 }
@@ -394,7 +392,7 @@ header h1 {
 }
 
 .anniverary_right button {
-	border-radius:6px;
+	border-radius: 6px;
 	margin-top: 10px;
 	background: rgb(0, 0, 0);
 	color: white;

@@ -3,98 +3,214 @@ document.addEventListener("DOMContentLoaded", function() {
 	/*카테고리*/
 	const cateBtn = document.getElementById("cate_btn");
 	const cateModal = document.getElementById("show_categories");
-	const mainItems = document.querySelectorAll("#main_category li");
-	const subItems = document.querySelectorAll("#sub_category li");
+	const mainCategoryItems = document.querySelectorAll('#main_category li');
+	const subCategoryLists = document.querySelectorAll('#sub_category_wrapper .sub_category_list');
 
-	function showCategory() {
-		cateModal.style.display = "block";
-		//모달 열릴 때 첫번째 부모 카테고리의 서브 보여주기
-		const defaultTarget = 1;
+	function activateCategory(selectedItem) {
+		// 1. 모든 메뉴를 일단 비활성화 상태로 초기화
+		mainCategoryItems.forEach(i => i.classList.remove('active'));
+		subCategoryLists.forEach(list => list.classList.remove('active'));
 
-		subItems.forEach((sub) => {
-			sub.style.display =
-				sub.getAttribute("data-parent") == defaultTarget ? "block" : "none";
-		});
+		// 2. 선택된 메인 카테고리가 있다면 활성화
+		if (selectedItem) {
+			selectedItem.classList.add('active');
 
-		// 메인 아이템 배경 초기화 후 "첫번째 부모 카테고리" 강조
-		mainItems.forEach((i) => (i.style.backgroundColor = ""));
-		const defaultItem = document.querySelector(
-			'#main_category li[data-sub="1"]'
-		);
-		if (defaultItem) {
-			defaultItem.style.backgroundColor = "#f2f2f2";
+			const categoryNo = selectedItem.dataset.categoryNo;
+			const correspondingSubList = document.querySelector(`.sub_category_list[data-parent-no="${categoryNo}"]`);
+
+			// 3. 해당하는 서브 카테고리 목록이 있으면 활성화
+			if (correspondingSubList) {
+				correspondingSubList.classList.add('active');
+			}
 		}
 	}
 
-	cateBtn.addEventListener("click", showCategory);
-	mainItems.forEach((item) => {
-		item.addEventListener("mouseenter", () => {
-			const target = item.getAttribute("data-sub");
+	// 카테고리 버튼 클릭 시 모달을 열고 첫 번째 메뉴를 활성화하는 함수
+	function showCategory(event) {
+		cateModal.style.display = 'block';
 
-			subItems.forEach((sub) => {
-				if (sub.getAttribute("data-parent") == target) {
-					sub.style.display = "block";
-				} else {
-					sub.style.display = "none";
-				}
-			});
-			// 모든 mainItems 배경 초기화
-			mainItems.forEach((i) => (i.style.backgroundColor = ""));
-			// 현재 마우스 올린 아이템 배경색 변경
-			item.style.backgroundColor = "#f2f2f2"; // 원하는 색으로 변경
-		});
+		// 첫 번째 메인 카테고리 아이템을 찾습니다.
+		const firstMainCategory = document.querySelector('#main_category li:first-child');
 
-		// 마우스 떠나면 배경 초기화
-		item.addEventListener("mouseleave", () => {
-			item.style.backgroundColor = "";
+		// 첫 번째 아이템을 활성화합니다.
+		activateCategory(firstMainCategory);
+	}
+
+	// 카테고리 버튼에 클릭 이벤트 연결
+	cateBtn.addEventListener('click', showCategory);
+
+	// 각 메인 카테고리 항목에 마우스 오버 이벤트 연결
+	mainCategoryItems.forEach(item => {
+		item.addEventListener('mouseover', () => {
+			// 마우스를 올린 아이템을 활성화합니다.
+			activateCategory(item);
 		});
 	});
 
 	/*검색창 */
-	const closeSearchBtn = document.getElementById("search_footer");
+	const searchInput = document.getElementById("search");
+	const searchBtn = document.getElementById("search_btn");
 	const searchModal = document.getElementById("show_search");
-	const openSearchBtn = document.getElementById("search");
+	const closeSearchBtn = document.getElementById("search_footer");
+	const popularSearchContainer = document.getElementById("popular_search");
+	const recentSearchContainer = document.getElementById("recent_search");
 
-	function showSearch() {
-		searchModal.style.display = "block";
-		document.body.classList.add("modal-open");
-	}
-
-	function closeSearch() {
-		document.getElementById("show_search").style.display = "none";
-		document.body.classList.remove("modal-open");
-	}
-
-	openSearchBtn.addEventListener("click", showSearch);
-	closeSearchBtn.addEventListener("click", closeSearch);
-
-	
-	const jwtToken = localStorage.getItem('jwt');
-	const loginLogoutImg = document.getElementById('login-logout-img');
-	
-	if(loginLogoutImg){
-		if(jwtToken){
-			// 로그인 상태
-			loginLogoutImg.src = "/img/logout.png";
-			// 로그아웃
-			loginLogoutImg.addEventListener('click', function(){
-				
-					localStorage.removeItem('jwt');
-					window.location.href='/';
-				
+	// 검색창 열때마다 서버에서 검색어 데이터 불러옴
+	async function loadSearchKeywords() {
+		fetch('/api/search/popular')
+			.then(res => res.json())
+			.then(keywords => {
+				popularSearchContainer.innerHTML = '<div id="popular_header"><b>인기 검색어</b></div>';
+				keywords.forEach((keyword, index) => {
+					const rankDiv = document.createElement('div');
+					rankDiv.className = 'rank_search';
+					rankDiv.innerHTML = `<span>${index + 1}</span><span>${keyword}</span>`;
+					
+					// 키워드에 클릭 이벤트 추가
+					rankDiv.style.cursor = 'pointer';
+					rankDiv.addEventListener('click', () => executeSearch(keyword));
+					
+					popularSearchContainer.appendChild(rankDiv);
+				});
 			});
-			
-		}else{
-			// 로그아웃 상태
-			loginLogoutImg.src = "/img/login.png";
-			
-			loginLogoutImg.addEventListener('click', function(){
-				window.location.href = '/user/login';
+		// 최근 검색어
+		if (window.isUserLoggedIn) {
+			fetch('/api/search/recent')
+				.then(res => res.json())
+				.then(keywords => {
+					recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b><button id="delete-all-btn">전체 삭제</button></div>';
+					
+					// 전체 삭제
+					const deleteAllBtn = document.getElementById('delete-all-btn');
+					if(deleteAllBtn){
+						deleteAllBtn.addEventListener('click', () => {
+							if(confirm("최근 검색어를 모두 삭제하시겠습니까?")){
+								fetch('/api/search/recent/all', {method: 'DELETE'})
+									.then(response => {
+										if(response.ok){
+											loadSearchKeywords();
+										}
+									});
+							}
+						});
+					}
+					
+					keywords.forEach(keyword => {
+						const contentDiv = document.createElement('div');
+						contentDiv.className = 'search_content';
+						contentDiv.innerHTML = `<span>${keyword}</span><button class="delete-one-btn">X</button>`;
+						
+						// 키워드에 클릭 이벤트
+						const keywordSpan = contentDiv.querySelector('span');
+						keywordSpan.style.cursor = 'pointer';
+						keywordSpan.addEventListener('click', () => executeSearch(keyword));
+						
+						// 최근 검색어 개별 삭제
+						const deleteOneBtn = contentDiv.querySelector('.delete-one-btn');
+						deleteOneBtn.addEventListener('click', () => {
+							const encodedKeyword = encodeURIComponent(keyword);
+							fetch(`/api/search/recent?keyword=${encodedKeyword}`, {method: 'DELETE'})
+								.then(response => {
+									if(response.ok){
+										loadSearchKeywords();
+									}
+								});
+						});
+						
+						recentSearchContainer.appendChild(contentDiv);
+					});
+				});
+		} else {
+			// 로그인 아닌 경우
+			recentSearchContainer.innerHTML = '<div id="search_header"><b>최근 검색어</b></div>' +
+				'<div class="search_content" style="color:gray; font-size:13px;">로그인 후 이용 가능합니다.</div>';
+		}
+	}
+	// 검색 버튼 또는 엔터를 눌렀을 때.
+	function executeSearch(keyword) {
+		// 파라미터로 넘어오는 keyword가 문자열인 경우 그대로 사용. 아닐 경우 검색창의 값 전송
+		const searchTerm = (typeof keyword === 'string') ? keyword : searchInput.value.trim();
+		
+		if (searchTerm) {
+			// 검색어가 존재하는 경우
+			fetch('/api/search', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ keyword: searchTerm })
+			}).then(response => {
+				if (response.ok) {
+					window.location.href = `/product/search?query=${encodeURIComponent(searchTerm)}`;
+				}
 			});
 		}
 	}
 	
+	// 검색창을 여는 함수
+	function showSearch() {
+	    searchModal.style.display = "block";
+	    document.body.classList.add("modal-open");
+	    loadSearchKeywords();
+	}
+	// 검색창을 닫는 함수
+	function closeSearch() {
+	    searchModal.style.display = "none";
+	    document.body.classList.remove("modal-open");
+	}
 	
+	// 검색 창 클릭 시
+	searchInput.addEventListener("click", showSearch);
+
+	// 닫기 버튼
+	closeSearchBtn.addEventListener("click", closeSearch);
+
+	// 검색 버튼 클릭
+	searchBtn.addEventListener('click', executeSearch);
+	// 검색창에서 엔터 키
+	searchInput.addEventListener('keydown', function(event) {
+		if (event.key === 'Enter') {
+			executeSearch();
+		}
+	});
+
+	// 검색모달 외부 클릭 시 닫기
+	window.addEventListener('click', (event) => {
+	    if (searchModal.style.display === 'block' &&
+	        !searchModal.contains(event.target) &&
+	        event.target !== searchInput) {
+	        
+	        closeSearch();
+	    }
+	});
+	
+	// 마이페이지 아이콘
+	const mypageIcon = document.getElementById('mypage-icon');
+	if (mypageIcon) {
+		mypageIcon.addEventListener('click', function() {
+			if (window.isUserLoggedIn) {
+				window.location.href = '/user/mypage';
+			} else {
+				alert('로그인이 필요합니다.');
+				window.location.href = '/user/login';
+			}
+		});
+	}
+
+	// 로그인 버튼
+	const loginBtn = document.getElementById('login-btn');
+	if (loginBtn) {
+		loginBtn.addEventListener('click', function() {
+			window.location.href = '/user/login';
+		});
+	}
+
+	// 로그아웃 버튼
+	const logoutBtn = document.getElementById('logout-btn');
+	if (logoutBtn) {
+		logoutBtn.addEventListener('click', function() {
+			window.location.href = '/user/logout';
+		});
+	}
+
 	/*기념일 클릭시 모달 */
 	const prvAnv = document.getElementById("preview_anniversary");
 	const anvModal = document.getElementById("anniversary_modal");
@@ -109,21 +225,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 	// 외부 클릭시 모달 닫히게
-	document.addEventListener("click", (e) => {
-		const isClickCateInside =
-			cateModal.contains(e.target) || cateBtn.contains(e.target);
-		const isClickSearchInside =
-			searchModal.contains(e.target) || openSearchBtn.contains(e.target);
-		const isClickAnniInside =
-			anvModal.contains(e.target) || prvAnv.contains(e.target);
-		if (!isClickCateInside) {
+	document.addEventListener("click", function(event) {
+		if (!cateModal.contains(event.target) && !cateBtn.contains(event.target)) {
 			cateModal.style.display = "none";
 		}
-		if (!isClickSearchInside) {
+		if (!searchModal.contains(event.target) && !openSearchBtn.contains(event.target)) {
 			searchModal.style.display = "none";
 		}
-		if (!isClickAnniInside) {
+		if (!anvModal.contains(event.target) && !prvAnv.contains(event.target)) {
 			anvModal.style.display = "none";
 		}
 	});
-	});
+	
+});
+

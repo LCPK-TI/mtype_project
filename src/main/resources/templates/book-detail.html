@@ -3,7 +3,7 @@
 	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
 
 <link rel="stylesheet" th:href="@{/css/product-detail.css}" />
-<script type="text/javascript" th:src="@{/js/product-detail.js}"></script>
+<script type="text/javascript" th:src="@{/js/book-detail.js}"></script>
 
 <body>
 
@@ -12,18 +12,21 @@
 			<!--왼쪽 상품이미지 영역-->
 			<div class="left_content">
 				<!--대표 이미지-->
-				<img th:src="@{/img/product_img.png}" />
+				<img id="bookThumbnail" th:src="${product.imgUrl}" />
 			</div>
 			<!--오른쪽 상품 선택 주문관련 영역-->
 			<div class="right_content">
 				<div class="product_header">
 					<div class="product_info">
-						<a href="">스토어명 &gt;</a>
+						<a th:text="${product.publisher}+' &gt;'" href="">출판사명</a>
 						<!--상품명, 가격-->
 						<section class="product_summary">
-							<h1 class="product_title">상품명</h1>
-							<p class="book_info">저자 | 출판사 | 출판일</p>
-							<p class="product_price">0,000원</p>
+							<h1 class="product_title" th:text="${product.title}">도서명</h1>
+							<p class="book_info"
+								th:text="${product.author + ' | ' + #dates.format(product.pubDate,'yyyy년 MM월 dd일')}">저자
+								| 출판사 | 출판일</p>
+							<p class="product_price"
+								th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">0,000원</p>
 						</section>
 					</div>
 					<!--찜, 공유버튼-->
@@ -37,19 +40,23 @@
 					</div>
 				</div>
 				<!--수량-->
-				<div class="quantity">
-					<table>
-						<tr>
-							<td><button>-</button></td>
-							<td>1</td>
-							<td><button>+</button></td>
-						</tr>
-					</table>
+				<div class="selected_body">
+					<div class="price_quantity">
+						<div class="quantity">
+							<table>
+								<tr>
+									<td><button class="minus">-</button></td>
+									<td><span class="qty">1</span></td>
+									<td><button class="plus">+</button>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
 				<!--총 가격-->
 				<div class="total_price">
 					<p>총 상품 금액</p>
-					<b>0,000원</b>
+					<b id="total_price_amount" th:text="${#numbers.formatInteger(product.price,3,'COMMA')+'원'}">가격</b>
 				</div>
 				<!--구매 버튼 영역-->
 				<div class="order_btns">
@@ -73,21 +80,21 @@
 			<!--상세 정보-->
 			<section id="detail" class="tab_content">
 				<div class="book_des">
-					<h3>책 소개</h3>
+					<h2>책 소개</h2>
 					<hr>
-					<div>책소개글</div>
+					<div th:text="${product.description}">책소개글</div>
 				</div>
 				<div class="book_contents">
-					<h3>목차</h3>
+					<h2>목차</h2>
 					<hr>
-					<div>목차글</div>
+					<div th:text="${product.contents}" style="white-space: pre-line;">목차글</div>
 				</div>
 				<div class="author_intro">
-					<h3>작가 소개</h3>
+					<h2>작가 소개</h2>
 					<hr>
 					<div class="author_profile">
-						<h4>작가명</h4>
-						<div>작가소개글</div>
+						<h4 th:text="${product.author}">작가명</h4>
+						<div th:text="${product.author_intro}">작가소개글</div>
 					</div>
 				</div>
 			</section>
@@ -98,15 +105,6 @@
 					<span class="rating">★★★★☆</span>
 				</div>
 
-				<!--리뷰 썸네일-->
-				<div class="review_thumbnails">
-					<img th:src="@{/img/product_img.png}" alt="리뷰이미지1" />
-					<img th:src="@{/img/product_img.png}" alt="리뷰이미지2" />
-					<img th:src="@{/img/product_img.png}" alt="리뷰이미지3" />
-					<img th:src="@{/img/product_img.png}" alt="리뷰이미지4" />
-					<img th:src="@{/img/product_img.png}" alt="리뷰이미지5" />
-					<button class="more_btn">더보기</button>
-				</div>
 				<!--리뷰 리스트-->
 				<ul class="review_list">
 					<li>
@@ -117,11 +115,7 @@
 						</div>
 						<div class="review_content">
 							<div class="review_left">
-								<p class="option">옵션</p>
 								<p class="review_text">리뷰 내용</p>
-							</div>
-							<div class="review_right">
-								<img th:src="@{/img/product_img.png}" />
 							</div>
 						</div>
 					</li>
@@ -178,28 +172,6 @@
 				</div>
 			</section>
 
-			<!--판매자 정보-->
-			<section id="seller_info">
-				<h2>판매자 정보</h2>
-				<table>
-					<colgroup>
-						<col style="width: 20%" />
-						<col style="width: 80%" />
-					</colgroup>
-					<tr id="store_name">
-						<td>상호명</td>
-						<td>(주)OOOO</td>
-					</tr>
-					<tr id="store_number">
-						<td>사업자등록번호</td>
-						<td>OOO-OO-OOOO</td>
-					</tr>
-					<tr id="store_rep">
-						<td>대표자</td>
-						<td>홍길동</td>
-					</tr>
-				</table>
-			</section>
 		</section>
 	</main>
 	<!--장바구니 담기 성공 시 모달-->
@@ -248,6 +220,14 @@
 			<button class="moveto_cart">확인</button>
 		</div>
 	</div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		const serverData = {
+			stock: /*[[${product.stock}]]*/ 0,
+			price : /*[[${product.price}]]*/ 0
+		};
+		/*]]>*/
+	</script>
 </body>
 
 </html>

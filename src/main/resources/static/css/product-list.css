@@ -94,6 +94,9 @@ main {
   width: 100%;
   height: 100%;
 }
+.book_img{
+	width: 98%;
+}
 .wishlist_btn img {
   width: 40px;
 }
@@ -119,3 +122,11 @@ main {
 .active a{
 	color:black;
 }
+.active li{
+	color:black;
+}
+li.active {
+	color: black;
+}
+
+
