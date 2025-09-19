@@ -1,19 +1,17 @@
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <title>친구의 위시리스트</title>
-  <link rel="stylesheet" href="./wishlist.css" />
-</head>
+<!DOCTYPE html> <!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/wishlist.css}">
+
 <body>
   <main class="page">
     <h1 class="page_title">위시리스트</h1>
     
     <nav class="tabs" aria-label="위시리스트 탭">
-      <form action="./wishlist_mine.html" method="get">
+      <form action="./wishlist-mine.html" method="get">
         <button type="submit" class="tab"> 위시리스트</button>
       </form>
-      <form action="./wishlist_friends.html" method="get">
+      <form action="./wishlist-friends.html" method="get">
         <button type="submit" class="tab is_active" aria-current="page">친구의 위시리스트</button>
       </form>
     </nav>

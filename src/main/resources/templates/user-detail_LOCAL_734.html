@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTYPE</title>
+    <!-- <link rel="stylesheet" href="css/user-mypage-template-basicCss.css" />
+    <link rel="stylesheet" href="css/user-detail.css" /> -->
+    <link
+      rel="stylesheet"
+	  th:href="@{/css/user-mypage-template-basicCss.css}"
+    />
+    <link rel="stylesheet" th:href="@{/css/user-detail.css}" />
+  </head>
+  <body>
+    <header>header</header>
+    <div class="layout_middle_mypage">
+      <aside class="side_mypage">
+        <div><b>이름</b>님<br />안녕하세요</div>
+
+        <!--마이페이지 메뉴 (세로)-->
+        <nav>
+          <ul>
+            <li>
+              <b>나의 쇼핑정보</b>
+              <ul>
+                <li><a href="#">주문배송조회</a></li>
+                <li><a href="#">취소/교환/반품 내역</a></li>
+                <li><a href="#">상품 리뷰</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>선물함</b>
+              <ul>
+                <li><a href="#">나의 선물함</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>나의 정보</b>
+              <ul>
+                <li><a href="#">회원정보 수정</a></li>
+                <li><a href="#">배송지 관리</a></li>
+                <li><a href="#">기념일 관리</a></li>
+                <li><a href="#">적립 내역</a></li>
+              </ul>
+            </li>
+            <li>
+              <b>고객센터</b>
+              <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">상품 Q&A 내역</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main_mypage">
+        <section class="member_info">
+          <h2 class="page_title">회원정보</h2>
+
+          <div class="info_list">
+            <div class="info">
+              <span class="info_label">이름</span>
+              <span class="info_value">홍길동</span>
+            </div>
+            <div class="info phone_info">
+              <span class="info_label">전화번호</span>
+              <input
+                type="tel"
+                class="info_input phone"
+                value="010-1234-5678"
+                readonly
+              />
+              <button type="button" class="btn_info_edit input_toggle">
+                본인인증
+              </button>
+            </div>
+            <div class="info email_info">
+              <span class="info_label">이메일</span>
+              <input
+                type="email"
+                class="info_input email"
+                value="hong@mtype.com"
+                readonly
+              />
+              <button type="button" class="btn_info_edit input_toggle">
+                이메일 변경
+              </button>
+            </div>
+            <div class="info">
+              <span class="info_label">생년월일</span>
+              <span class="info_value">1994.02.04</span>
+            </div>
+            <div class="info_addr">
+              <span class="info_label">주소</span>
+              <div class="addr_input">
+                <div class="addr_postcode">
+                  <input
+                    type="text"
+                    class="info_input postcode"
+                    value="12321"
+                    readonly
+                  />
+                  <button type="button" class="btn_info_edit btn_postcode">
+                    우편번호 검색
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  class="info_input addr1"
+                  value="서울 강남구 도곡로 112"
+                  readonly
+                />
+                <input
+                  type="text"
+                  class="info_input addr2"
+                  value="서한빌딩 3층 테크브루"
+                  readonly
+                />
+                <button
+                  type="button"
+                  class="btn_info_edit btn_chg_addr"
+                  disabled
+                >
+                  주소 변경
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="user_delete">
+            <button type="button" class="btn_user_delete">회원 탈퇴하기</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer>footer</footer>
+
+    <!-- <script src="js/user-detail.js"></script> -->
+    <script th:src="@{/js/user-detail.js}"></script>
+  </body>
+</html>

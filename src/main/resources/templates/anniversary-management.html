@@ -1,10 +1,8 @@
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <title>기념일 관리</title>
-  <link rel="stylesheet" href="./anniversary_management.css" />
-</head>
+<!DOCTYPE html> <!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/anniversary-management.css}">
+
 <body>
   <main class="page" aria-labelledby="page_title">
     <h1 id="page_title" class="page_title">기념일 관리</h1>
@@ -239,6 +237,7 @@
   </section>
 
   <!-- 스크립트 -->
-  <script src="./anniversary_management.js"></script>
+  <script type="text/javascript" th:src="@{/js/anniversary-management.js}"></script>
+
 </body>
 </html>

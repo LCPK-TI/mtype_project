@@ -1,10 +1,7 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <title>상품 Q&A 내역</title>
-    <link rel="stylesheet" href="./qa.css" />
-  </head>
+<!DOCTYPE html> <!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/qa.css}">
   <body>
     <main class="page" aria-labelledby="page_title">
       <h1 id="page_title" class="page_title">상품 Q&A 내역</h1>
@@ -109,6 +106,6 @@
       </div>
     </div>
 
-    <script src="./qa.js" defer></script>
+	<script type="text/javascript" th:src="@{/js/qa.js}"></script>
   </body>
 </html>

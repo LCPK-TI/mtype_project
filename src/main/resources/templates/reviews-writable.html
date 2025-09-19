@@ -1,19 +1,17 @@
-  <!doctype html>
-  <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <title>작성 가능한 리뷰</title>
-    <link rel="stylesheet" href="./reviews.css" />
-  </head>
+<!DOCTYPE html> <!-- Default Layout Import-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/defaultLayoutChatbot}" layout:fragment="Content">
+<link rel="stylesheet" th:href="@{/css/reviews.css}">
+
   <body>
     <main class="page" aria-labelledby="page_title">
       <h1 id="page_title" class="page_title">리뷰</h1>
 
       <nav class="tabs" aria-label="리뷰 탭">
-        <form action="./reviews_writable.html" method="get">
+        <form action="./reviews-writable.html" method="get">
           <button type="submit" class="tab is_active" aria-current="page">작성 가능한 리뷰</button>
         </form>
-        <form action="./reviews_mine.html" method="get">
+        <form action="./reviews-mine.html" method="get">
           <button type="submit" class="tab">나의 리뷰</button>
         </form>
       </nav>
@@ -111,6 +109,8 @@
       </div>
     </div>
   </div>
-  <script src="./reviews_modal.js" defer></script>
+  
+  <script type="text/javascript" th:src="@{/js/reviews-modal.js}"></script>
+
   </body>
   </html>
