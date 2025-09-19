@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lcpk.mtype.dto.RecentViewDto;
+import com.lcpk.mtype.dto.VerifyRequest;
 import com.lcpk.mtype.service.RecentViewService;
 import com.lcpk.mtype.service.UserService;
 
@@ -100,5 +101,13 @@ public class UserController {
 		
 		model.addAttribute("products", recentProducts);
 		return "user-recent-view-product";
+	}
+	
+	// 본인인증 완료 후 사용자 정보 업데이트
+	@PostMapping("/api/user/verify")
+	@ResponseBody
+	public ResponseEntity<String> verifyAndUpdateUser(@CookieValue(name="jwtToken", required=true) String token, @RequestBody VerifyRequest request){
+		userService.updateUserWithVerification(token, request.getIdentityVerificationId());
+		return ResponseEntity.ok("본인인증이 완료었습니다.");
 	}
 }
