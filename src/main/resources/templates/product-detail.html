@@ -23,7 +23,7 @@
 			<!--오른쪽 상품 선택 주문관련 영역-->
 			<div class="right_content">
 				<div class="product_header">
-					<a href="">스토어명 &gt;</a>
+					<a href="" th:text="${product.getSeller().getBusinessNm()}">스토어명 &gt;</a>
 					<!--찜, 공유버튼-->
 					<div class="product_actions">
 						<button class="wishlist_btn">
