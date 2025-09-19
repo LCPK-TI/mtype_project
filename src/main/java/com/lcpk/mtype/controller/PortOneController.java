@@ -1,4 +1,4 @@
-package com.lcpk.mtype.controller;
+/*package com.lcpk.mtype.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,3 +24,4 @@ public class PortOneController {
         return portOneService.getIdentityVerificationInfo(request.getIdentityVerificationId());
     }
 }
+*/

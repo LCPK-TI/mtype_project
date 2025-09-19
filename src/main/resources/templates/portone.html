@@ -6,6 +6,10 @@
 
 <body>
 	<button id="portone">본인인증</button>
+	<script th:inline="javascript">
+		const portoneStoreId = /*[[${portoneStoreId}]]*/;
+		const portoneChannelKey = /*[[${portoneChannelKey}]]*/;
+	</script>
 	<script type="text/javascript" th:src="@{/js/portone.js}"></script>
 </body>
 
